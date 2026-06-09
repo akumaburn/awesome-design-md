@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by Dell (1996)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #f2f2f2;
+    --canvas: #141414;
+    --frame-ink: #f2f2f2;
+    --dell-red: #ff5a64;
+    --dell-yellow: #ffd34d;
+    --dell-purple: #b07ce0;
+    --link: #6fa8ff;
+    --tint-olive: #b8b34a;
+    --tint-sage: #c4ccaa;
+    --tint-salmon: #e69a9a;
+    --tint-peach: #efaa80;
+    --tint-lime: #cfdfb9;
+    --tint-sky: #b0c8d6;
+    --tint-steel: #bccacf;
+    --tint-periwinkle: #aab6ec;
+    --gray-soft: #b3b3b3;
+    --nav-bg: #f2f2f2;
+    --panel: #1f1f1f;
+    --font-display: 'Arial Black', 'Archivo Black', Helvetica, Arial, sans-serif;
+    --font-ui: Helvetica, Arial, sans-serif;
+    --font-body: 'Times New Roman', Times, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--frame-ink);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 400; line-height: 1.4;
+    letter-spacing: 0;
+  }
+  /* the literal page frame (light border on dark canvas) */
+  .page-frame { background: var(--canvas); padding: 0; }
+
+  /* NAV (top-banner: inverted to light strip in dark mode) */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 16px; min-height: 48px; gap: 12px; flex-wrap: wrap;
+    background: var(--nav-bg);
+  }
+  .nav-brand { font-family: var(--font-ui); font-size: 16px; font-weight: 700; color: #141414; text-decoration: none; text-transform: uppercase; letter-spacing: 0; }
+  .nav-links { display: flex; gap: 16px; list-style: none; }
+  .nav-links a { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: #141414; text-decoration: none; text-transform: uppercase; }
+  .nav-links a:hover { color: #a37c00; }
+  .nav-cta {
+    display: inline-block; background: var(--dell-yellow); color: #141414;
+    padding: 4px 8px; border-radius: 0; border: 1px solid #141414;
+    font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: #ffdf80; }
+
+  /* DARK MODE BADGE */
+  .dark-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: #f2f2f2; color: #141414;
+    font-family: var(--font-ui); font-size: 11px; font-weight: 700; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 0; border: 1px solid #141414;
+  }
+
+  /* HERO */
+  .hero { padding: 48px 16px; text-align: center; background: var(--tint-olive); border-bottom: 8px solid var(--frame-ink); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 900; line-height: 1.0; text-transform: uppercase;
+    letter-spacing: 0; color: #141414; margin-bottom: 16px;
+  }
+  .hero p { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.4; color: #141414; max-width: 600px; margin: 0 auto 20px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--frame-ink); color: var(--canvas);
+    padding: 6px 16px; border-radius: 0; border: 1px solid var(--frame-ink);
+    font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-blue:hover { background: var(--dell-red); color: #141414; }
+  .btn-outline {
+    display: inline-block; background: #141414; color: #f2f2f2;
+    padding: 6px 16px; border-radius: 0;
+    border: 1px solid #141414;
+    font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-outline:hover { background: var(--dell-yellow); color: #141414; }
+
+  /* SECTIONS */
+  .section { padding: 40px 16px; max-width: 800px; margin: 0 auto; }
+  .section-label { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: var(--dell-red); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0; }
+  .section-title { font-family: var(--font-display); font-size: 36px; font-weight: 900; line-height: 1.0; text-transform: uppercase; letter-spacing: 0; margin-bottom: 24px; color: var(--ink); }
+  .section-divider { border: none; border-top: 8px solid var(--frame-ink); margin: 0; }
+
+  /* DARK SECTION (inverted = light strip in dark mode) */
+  .section-dark { background: #f2f2f2; color: #141414; padding: 40px 16px; }
+  .section-dark .section-inner { max-width: 800px; margin: 0 auto; }
+  .section-dark .section-label { color: #c2151f; }
+  .section-dark .section-title { color: #141414; }
+
+  /* TINTED SECTION */
+  .section-gray { background: var(--panel); padding: 40px 16px; border-top: 8px solid var(--frame-ink); border-bottom: 8px solid var(--frame-ink); }
+  .section-gray .section-inner { max-width: 800px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 0; margin-bottom: 16px; border-left: 1px solid var(--frame-ink); border-top: 1px solid var(--frame-ink); }
+  .color-swatch { border-radius: 0; overflow: hidden; background: var(--panel); border-right: 1px solid var(--frame-ink); border-bottom: 1px solid var(--frame-ink); }
+  .color-swatch-block { height: 72px; width: 100%; border-bottom: 1px solid var(--frame-ink); }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-family: var(--font-ui); font-size: 13px; font-weight: 700; margin-bottom: 2px; color: var(--ink); }
+  .color-swatch-hex { font-family: var(--font-body); font-size: 12px; color: var(--gray-soft); }
+  .color-swatch-role { font-family: var(--font-body); font-size: 11px; color: var(--gray-soft); margin-top: 3px; }
+  .color-group-label { font-family: var(--font-ui); font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--ink); margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--frame-ink); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: var(--font-ui); font-size: 12px; font-weight: 700; color: var(--gray-soft); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--gray-soft); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--frame-ink); color: var(--canvas);
+    padding: 6px 16px; border-radius: 0; border: 1px solid var(--frame-ink);
+    font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: var(--dell-yellow); color: #141414;
+    padding: 4px 8px; border-radius: 0; border: 1px solid var(--frame-ink);
+    font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 9999px;
+    background: var(--dell-red); color: #141414; border: 2px solid var(--frame-ink);
+    font-family: var(--font-ui); font-size: 11px; font-weight: 700; cursor: pointer;
+  }
+
+  /* CARDS (ribbon cards) */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--tint-sage); border: 1px solid var(--frame-ink); border-radius: 0; padding: 0; overflow: hidden; }
+  .card .ribbon-title { background: #141414; border-bottom: 1px solid var(--frame-ink); padding: 6px 12px; }
+  .card .ribbon-body { padding: 12px 16px; }
+  .card h3 { font-family: var(--font-ui); font-size: 14px; font-weight: 700; text-transform: uppercase; line-height: 1.2; margin: 0; color: #f2f2f2; }
+  .card p { font-family: var(--font-body); font-size: 14px; color: #141414; line-height: 1.4; }
+  .card-link { font-family: var(--font-body); font-size: 14px; color: #0000a8; text-decoration: underline; margin-top: 12px; display: inline-block; }
+  .card-link:hover { color: #7a0008; }
+
+  .card-dark .ribbon-title { background: #141414; }
+  .card-dark h3 { color: #f2f2f2; }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-family: var(--font-ui); font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+  .form-input {
+    width: 100%; background: var(--panel); color: var(--ink);
+    border: 1px solid var(--frame-ink); padding: 4px 6px; border-radius: 0;
+    font-family: var(--font-body); font-size: 14px; outline: none;
+    letter-spacing: 0;
+  }
+  .form-input:focus { border-color: var(--dell-red); box-shadow: 0 0 0 2px var(--dell-red); }
+  .form-input--focus { border-color: var(--dell-red); box-shadow: 0 0 0 2px var(--dell-red); }
+  .form-input--error { border-color: var(--dell-red); box-shadow: 0 0 0 2px rgba(255,90,100,0.4); background: #3a1c1f; }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--panel); color: var(--ink);
+    border: 1px solid var(--frame-ink); padding: 4px 6px; border-radius: 0;
+    font-family: var(--font-body); font-size: 14px; resize: vertical; outline: none;
+  }
+  .form-state-label { font-family: var(--font-ui); font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gray-soft); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--dell-red); border-radius: 0; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: var(--font-ui); font-size: 11px; font-weight: 700; color: var(--gray-soft); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); border: 1px solid var(--frame-ink); margin-bottom: 6px; }
+  .radius-label { font-family: var(--font-ui); font-size: 11px; font-weight: 700; color: var(--gray-soft); }
+  .radius-context { font-family: var(--font-body); font-size: 10px; color: var(--gray-soft); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .elevation-card { background: var(--panel); border: 1px solid var(--frame-ink); border-radius: 0; padding: 24px; text-align: center; }
+  .elevation-label { font-family: var(--font-ui); font-size: 14px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+  .elevation-desc { font-family: var(--font-ui); font-size: 11px; font-weight: 700; color: var(--gray-soft); }
+
+  /* FOOTER */
+  .footer { padding: 16px; text-align: center; background: var(--canvas); border-top: 1px solid var(--frame-ink); font-family: var(--font-body); font-size: 11px; color: var(--ink); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .nav-links { display: none; }
+    .section { padding: 32px 16px; }
+    .section-dark { padding: 32px 16px; }
+    .section-gray { padding: 32px 16px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page-frame">
+
+<nav class="nav">
+  <span class="nav-brand">Dell (1996)</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Buy a Dell</a>
+</nav>
+<div class="dark-badge">Dark Mode</div>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by Dell (1996)</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value from the catalog-era Dell.com home page, visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Build Your Own</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand &amp; Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ff5a64"></div><div class="color-swatch-info"><div class="color-swatch-name">Dell Red</div><div class="color-swatch-hex">#ff5a64</div><div class="color-swatch-role">CTA panel + phone number only</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffd34d"></div><div class="color-swatch-info"><div class="color-swatch-name">Dell Yellow</div><div class="color-swatch-hex">#ffd34d</div><div class="color-swatch-role">BUY a DELL tab, NEW! bursts</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#b07ce0"></div><div class="color-swatch-info"><div class="color-swatch-name">Dell Purple</div><div class="color-swatch-hex">#b07ce0</div><div class="color-swatch-role">Sticker wordmark stripe</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#6fa8ff"></div><div class="color-swatch-info"><div class="color-swatch-name">Link Blue</div><div class="color-swatch-hex">#6fa8ff</div><div class="color-swatch-role">Classic anchors (brightened)</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface &amp; Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f2f2"></div><div class="color-swatch-info"><div class="color-swatch-name">Frame Ink</div><div class="color-swatch-hex">#f2f2f2</div><div class="color-swatch-role">Page frame, banner, hairlines</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#141414"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas</div><div class="color-swatch-hex">#141414</div><div class="color-swatch-role">Page surface, title bars</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f2f2"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink</div><div class="color-swatch-hex">#f2f2f2</div><div class="color-swatch-role">Body text, headings</div></div></div>
+  </div>
+
+  <div class="color-group-label">Ribbon-Card Tint Family</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#b8b34a"></div><div class="color-swatch-info"><div class="color-swatch-name">Olive</div><div class="color-swatch-hex">#b8b34a</div><div class="color-swatch-role">Dimension eyebrow block</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#c4ccaa"></div><div class="color-swatch-info"><div class="color-swatch-name">Sage</div><div class="color-swatch-hex">#c4ccaa</div><div class="color-swatch-role">Latitude Notebooks body</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e69a9a"></div><div class="color-swatch-info"><div class="color-swatch-name">Salmon</div><div class="color-swatch-hex">#e69a9a</div><div class="color-swatch-role">OptiPlex GX Series body</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#efaa80"></div><div class="color-swatch-info"><div class="color-swatch-name">Peach</div><div class="color-swatch-hex">#efaa80</div><div class="color-swatch-role">Dimension + OptiPlex Gs body</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#cfdfb9"></div><div class="color-swatch-info"><div class="color-swatch-name">Lime</div><div class="color-swatch-hex">#cfdfb9</div><div class="color-swatch-role">OptiPlex G Series body</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#b0c8d6"></div><div class="color-swatch-info"><div class="color-swatch-name">Sky</div><div class="color-swatch-hex">#b0c8d6</div><div class="color-swatch-role">Dellware ribbon body</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#bccacf"></div><div class="color-swatch-info"><div class="color-swatch-name">Steel</div><div class="color-swatch-hex">#bccacf</div><div class="color-swatch-role">Dimension XPS Pro body</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#aab6ec"></div><div class="color-swatch-info"><div class="color-swatch-name">Periwinkle</div><div class="color-swatch-hex">#aab6ec</div><div class="color-swatch-role">PowerEdge Server body</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:36px; font-weight:900; line-height:1.0; letter-spacing:0; text-transform:uppercase;">Dimension Desktops</div><div class="type-meta">Display -- 36px / 900 / 1.0 / 0 / Arial Black</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:900; line-height:1.05; letter-spacing:0; text-transform:uppercase;">Sub-Page Hero</div><div class="type-meta">Heading 1 -- 24px / 900 / 1.05 / 0 / Arial Black</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-ui); font-size:16px; font-weight:700; line-height:1.2; letter-spacing:0; text-transform:uppercase;">Build Your Own Computer. Online.</div><div class="type-meta">Heading 2 -- 16px / 700 / 1.2 / 0 / Helvetica</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-ui); font-size:14px; font-weight:700; line-height:1.2; letter-spacing:0; text-transform:uppercase;">OptiPlex GX Pro</div><div class="type-meta">Heading 3 -- 14px / 700 / 1.2 / 0 / Helvetica</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-body); font-size:14px; font-weight:400; line-height:1.4; letter-spacing:0;">Body -- Reliable PCs for high-performance computing, configured to order and backed by award-winning service and support teams.</div><div class="type-meta">Body -- 14px / 400 / 1.4 / 0 / Times New Roman</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-body); font-size:12px; font-weight:400; line-height:1.4; letter-spacing:0;">Body Small -- This site is best viewed with browser versions 3.0 and higher.</div><div class="type-meta">Body Small -- 12px / 400 / 1.4 / 0 / Times New Roman</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-body); font-size:11px; font-weight:400; line-height:1.35; letter-spacing:0;">Caption -- Copyright 1996 Dell Computer Corporation. All rights reserved. (Terms of Use)</div><div class="type-meta">Caption -- 11px / 400 / 1.35 / 0 / Times New Roman</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-ui); font-size:12px; font-weight:700; line-height:1.0; letter-spacing:0; text-transform:uppercase;">Buy a Dell &middot; New!</div><div class="type-meta">Button -- 12px / 700 / 1.0 / 0 / Helvetica</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-ui); font-size:12px; font-weight:700; line-height:1.0; letter-spacing:0; text-transform:uppercase;">Find &middot; Home &middot; Online Store &middot; Service</div><div class="type-meta">UI Label -- 12px / 700 / 1.0 / 0 / Helvetica</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-body); font-size:14px; font-weight:400; line-height:1.4; letter-spacing:0; color:var(--link); text-decoration:underline;">Link -- Read more from Dell's service and support teams</div><div class="type-meta">Link -- 14px / 400 / 1.4 / 0 / Times New Roman</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Order Now</a><div class="button-label">Primary (Light)</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Learn More</a><div class="button-label">Secondary (Dark)</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Configure</a><div class="button-label">Light Fill</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Buy a Dell</a><div class="button-label">Yellow Sticker</div></div>
+    <div class="button-item"><button class="btn-media">NEW!</button><div class="button-label">Seal / Burst</div></div>
+    <div class="button-item"><span style="display:inline-block; background:transparent; color:var(--link); font-family:var(--font-body); font-size:14px; text-decoration:underline;">Copyright &gt;</span><div class="button-label">Text Link</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Ribbon Cards on White</h2>
+  <div class="card-grid">
+    <div class="card card-dark" style="background:#aab6ec;">
+      <div class="ribbon-title"><h3>PowerEdge Servers</h3></div>
+      <div class="ribbon-body">
+        <p>Reliable PCs for high-performance computing. Configure your server to order, price it, and ship it direct from the factory.</p>
+        <a class="card-link" href="#">Learn more &gt;</a>
+      </div>
+    </div>
+    <div class="card card-dark" style="background:#b0c8d6;">
+      <div class="ribbon-title"><h3>Dellware</h3></div>
+      <div class="ribbon-body">
+        <p>Thousands of brand-name software titles and peripherals, bundled and shipped alongside your new Dell system.</p>
+        <a class="card-link" href="#">Learn more &gt;</a>
+      </div>
+    </div>
+    <div class="card card-dark" style="background:#bccacf;">
+      <div class="ribbon-title"><h3>Dimension XPS Pro</h3></div>
+      <div class="ribbon-body">
+        <p>The most powerful desktop Dimension ever. Built for the demanding professional who refuses to compromise on speed.</p>
+        <a class="card-link" href="#">Learn more &gt;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Ribbon Cards on Panel</h2>
+  <div class="card-grid">
+    <div class="card" style="background:#e69a9a;">
+      <div class="ribbon-title"><h3>OptiPlex GX Series</h3></div>
+      <div class="ribbon-body">
+        <p>Managed corporate desktops engineered for stable, repeatable deployment across the enterprise fleet.</p>
+        <a class="card-link" href="#">Learn more &gt;</a>
+      </div>
+    </div>
+    <div class="card" style="background:#efaa80;">
+      <div class="ribbon-title"><h3>Dimension Desktops</h3></div>
+      <div class="ribbon-body">
+        <p>Affordable performance for the home and small office, configured exactly the way you want it.</p>
+        <a class="card-link" href="#">Learn more &gt;</a>
+      </div>
+    </div>
+    <div class="card" style="background:#cfdfb9;">
+      <div class="ribbon-title"><h3>OptiPlex G Series</h3></div>
+      <div class="ribbon-body">
+        <p>Entry-level managed desktops with the reliability and direct-from-factory value Dell is known for.</p>
+        <a class="card-link" href="#">Learn more &gt;</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Search Catalog</label><input class="form-input" type="text" placeholder="Enter a product name"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Order Number</label><input class="form-input form-input--focus" type="text" value="DELL-1996"><div class="form-state-label">Focus (red ring)</div></div>
+  <div class="form-group"><label class="form-label">ZIP Code</label><input class="form-input form-input--error" type="text" value="abc"><div class="form-state-label">Error (red ring)</div></div>
+  <div class="form-group"><label class="form-label">Configuration Notes</label><textarea class="form-textarea" placeholder="Tell us how to build your system..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:2px"></div><div class="spacing-value">2</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:6px"></div><div class="spacing-value">6</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:10px"></div><div class="spacing-value">10</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:20px"></div><div class="spacing-value">20</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:40px"></div><div class="spacing-value">40</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:0px"></div><div class="radius-label">0px</div><div class="radius-context">Universal default (none)</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px; background:#ff5a64;"></div><div class="radius-label">9999px</div><div class="radius-context">Award seals only (full)</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:none;"><div class="elevation-label">0: Flush</div><div class="elevation-desc">No shadow, no border</div></div>
+    <div class="elevation-card" style="border:1px solid #f2f2f2;"><div class="elevation-label">1: Hairline</div><div class="elevation-desc">1px solid frame-ink</div></div>
+    <div class="elevation-card" style="border:8px solid #f2f2f2;"><div class="elevation-label">2: Frame</div><div class="elevation-desc">8px solid frame-ink</div></div>
+    <div class="elevation-card" style="background:#ffd34d; color:#141414; border:1px solid #f2f2f2; box-shadow:2px 2px 0 #f2f2f2;"><div class="elevation-label">3: Bevel</div><div class="elevation-desc">Hard 2px GIF shadow</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</div>
+</body>
+</html>

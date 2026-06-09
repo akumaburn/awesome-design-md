@@ -1,6 +1,6 @@
-# Binance Inspired Design System
+# Slack Inspired Design System
 
-[DESIGN.md](./DESIGN.md) extracted from the public Binance website. This is not the official design system. Colors, fonts, and spacing may not be 100% accurate. But it's a good starting point for building something similar.
+[DESIGN.md](./DESIGN.md) extracted from the public Slack website. This is not the official design system. Colors, fonts, and spacing may not be 100% accurate. But it's a good starting point for building something similar.
 
 ## Files
 
@@ -10,7 +10,7 @@
 | `preview.html` | Interactive design token catalog (light) |
 | `preview-dark.html` | Interactive design token catalog (dark) |
 
-Use [DESIGN.md](./DESIGN.md) to use as a reference for AI agents (Claude, Cursor, Stitch) to generate UI that looks like the Binance design language.
+Use [DESIGN.md](./DESIGN.md) to use as a reference for AI agents (Claude, Cursor, Stitch) to generate UI that looks like the Slack design language.
 
 ## Preview
 

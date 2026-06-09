@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by Mastercard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141413;
+    --charcoal: #262627;
+    --canvas-cream: #f3f0ee;
+    --lifted-cream: #fcfbfa;
+    --white: #ffffff;
+    --soft-bone: #f4f4f4;
+    --whisper-cream: #e8e2da;
+    --signal-orange: #cf4500;
+    --light-signal: #f37338;
+    --clay-brown: #9a3a0a;
+    --slate-gray: #696969;
+    --granite: #555555;
+    --dust-taupe: #d1cdc7;
+    --link-blue: #3860be;
+    --mc-red: #eb001b;
+    --mc-yellow: #f79e1b;
+    --border-soft: rgba(20,20,19,0.12);
+    --shadow-nav: rgba(0,0,0,0.04) 0px 4px 24px 0px;
+    --shadow-card: rgba(0,0,0,0.08) 0px 24px 48px 0px;
+    --shadow-feature: rgba(0,0,0,0.25) 0px 70px 110px 0px;
+    --nav-bg: rgba(255,255,255,0.9);
+    --font-display: 'MarkForMC', 'Sofia Sans', Arial, sans-serif;
+    --font-text: 'MarkForMC', 'Sofia Sans', Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas-cream);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 16px; font-weight: 450; line-height: 1.4;
+    letter-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 64px;
+    background: var(--nav-bg);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    box-shadow: var(--shadow-nav);
+  }
+  .nav-brand { font-size: 16px; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.48px; }
+  .nav-links { display: flex; gap: 48px; list-style: none; }
+  .nav-links a { font-size: 16px; font-weight: 500; color: var(--ink); text-decoration: none; letter-spacing: -0.48px; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--signal-orange); }
+  .nav-cta {
+    display: inline-block; background: var(--ink); color: var(--canvas-cream);
+    padding: 6px 24px; border-radius: 20px; font-size: 16px; font-weight: 500;
+    letter-spacing: -0.32px; text-decoration: none; border: 1.5px solid var(--ink);
+    transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero { padding: 96px 48px 80px; text-align: center; background: var(--canvas-cream); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 64px; font-weight: 500; line-height: 1;
+    letter-spacing: -1.28px; color: var(--ink); margin-bottom: 24px;
+  }
+  .hero p { font-size: 16px; font-weight: 450; line-height: 1.4; letter-spacing: normal; color: var(--slate-gray); max-width: 560px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--ink); color: var(--canvas-cream);
+    padding: 12px 32px; border-radius: 20px; border: 1.5px solid var(--ink);
+    font-family: var(--font-text); font-size: 16px; font-weight: 500;
+    letter-spacing: -0.32px; text-decoration: none; cursor: pointer; transition: opacity 0.15s;
+  }
+  .btn-blue:hover { opacity: 0.85; }
+  .btn-outline {
+    display: inline-block; background: var(--white); color: var(--ink);
+    padding: 12px 32px; border-radius: 20px;
+    border: 1.5px solid var(--ink);
+    font-family: var(--font-text); font-size: 16px; font-weight: 450;
+    letter-spacing: -0.32px; text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-outline:hover { background: var(--soft-bone); }
+
+  /* SECTIONS */
+  .section { padding: 96px 48px; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 14px; font-weight: 700; color: var(--ink); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.56px; }
+  .section-label::before { content: "\2022 "; color: var(--signal-orange); }
+  .section-title { font-family: var(--font-display); font-size: 36px; font-weight: 500; line-height: 1.22; letter-spacing: -0.72px; margin-bottom: 40px; }
+  .section-divider { border: none; border-top: 1px solid var(--border-soft); margin: 0; }
+
+  /* DARK SECTION (full-width, ink) */
+  .section-dark { background: var(--ink); color: var(--canvas-cream); padding: 96px 48px; }
+  .section-dark .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--canvas-cream); }
+  .section-dark .section-title { color: var(--canvas-cream); }
+
+  /* LIFTED-CREAM SECTION */
+  .section-gray { background: var(--lifted-cream); padding: 96px 48px; }
+  .section-gray .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 20px; overflow: hidden; background: var(--white); box-shadow: 0 0 0 1px var(--border-soft); }
+  .color-swatch-block { height: 80px; width: 100%; }
+  .color-swatch-info { padding: 12px 16px; }
+  .color-swatch-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; letter-spacing: -0.28px; color: var(--ink); }
+  .color-swatch-hex { font-size: 12px; color: var(--slate-gray); font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
+  .color-swatch-role { font-size: 11px; color: var(--slate-gray); margin-top: 4px; }
+  .color-group-label { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: 0.56px; text-transform: uppercase; margin: 32px 0 12px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border-soft); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--slate-gray); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 450; color: var(--slate-gray); margin-top: 10px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--signal-orange); color: var(--white);
+    padding: 8px 30px; border-radius: 24px; border: none;
+    font-family: var(--font-text); font-size: 13px; font-weight: 400;
+    letter-spacing: 0.13px; text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: var(--white); color: var(--clay-brown);
+    padding: 6px 24px; border-radius: 20px; border: 1.5px solid var(--clay-brown);
+    font-family: var(--font-text); font-size: 16px; font-weight: 450;
+    letter-spacing: -0.32px; text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--white); color: var(--ink); border: 1px solid var(--ink);
+    font-size: 20px; cursor: pointer;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card { background: var(--lifted-cream); border-radius: 40px; padding: 40px 32px; transition: box-shadow 0.3s; }
+  .card:hover { box-shadow: var(--shadow-card); }
+  .card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.48px; line-height: 1.2; margin-bottom: 12px; }
+  .card p { font-size: 16px; color: var(--slate-gray); line-height: 1.4; letter-spacing: normal; }
+  .card-link { font-size: 16px; font-weight: 500; color: var(--ink); text-decoration: none; margin-top: 16px; display: inline-block; letter-spacing: -0.32px; }
+  .card-link:hover { color: var(--signal-orange); }
+
+  .card-dark { background: var(--charcoal); color: var(--canvas-cream); }
+  .card-dark h3 { color: var(--canvas-cream); }
+  .card-dark p { color: rgba(243,240,238,0.7); }
+  .card-dark .card-link { color: var(--light-signal); }
+
+  /* FORMS */
+  .form-group { margin-bottom: 24px; max-width: 420px; }
+  .form-label { display: block; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.56px; text-transform: uppercase; }
+  .form-input {
+    width: 100%; background: var(--white); color: var(--ink);
+    border: 1px solid var(--border-soft); padding: 12px 24px; border-radius: 999px;
+    font-family: var(--font-text); font-size: 16px; font-weight: 450; outline: none;
+    letter-spacing: normal; transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--signal-orange); box-shadow: 0 0 0 3px rgba(207,69,0,0.2); }
+  .form-input--focus { border-color: var(--signal-orange); box-shadow: 0 0 0 3px rgba(207,69,0,0.2); }
+  .form-input--error { border-color: var(--mc-red); box-shadow: 0 0 0 3px rgba(235,0,27,0.2); }
+  .form-textarea {
+    width: 100%; min-height: 96px; background: var(--white); color: var(--ink);
+    border: 1px solid var(--border-soft); padding: 16px 24px; border-radius: 24px;
+    font-family: var(--font-text); font-size: 16px; font-weight: 450; resize: vertical; outline: none;
+    letter-spacing: normal;
+  }
+  .form-state-label { font-size: 11px; color: var(--slate-gray); margin-top: 6px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--signal-orange); border-radius: 6px; margin-bottom: 8px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--slate-gray); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 72px; height: 72px; background: var(--ink); margin-bottom: 8px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--slate-gray); }
+  .radius-context { font-size: 10px; color: var(--slate-gray); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+  .elevation-card { background: var(--white); border-radius: 40px; padding: 28px; text-align: center; }
+  .elevation-label { font-size: 14px; font-weight: 500; letter-spacing: -0.28px; margin-bottom: 6px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--slate-gray); }
+
+  /* FOOTER */
+  .footer { padding: 48px; text-align: center; background: var(--ink); font-size: 14px; color: rgba(243,240,238,0.7); letter-spacing: normal; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 40px; }
+    .nav-links { display: none; }
+    .nav { padding: 0 20px; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .hero { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">Mastercard</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">For business</a>
+</nav>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by Mastercard</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value — visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Learn more</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Primary</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#141413"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink Black</div><div class="color-swatch-hex">#141413</div><div class="color-swatch-role">Primary CTAs, headlines, footer</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#eb001b"></div><div class="color-swatch-info"><div class="color-swatch-name">Mastercard Red</div><div class="color-swatch-hex">#eb001b</div><div class="color-swatch-role">Brand mark only</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f79e1b"></div><div class="color-swatch-info"><div class="color-swatch-name">Mastercard Yellow</div><div class="color-swatch-hex">#f79e1b</div><div class="color-swatch-role">Brand mark only</div></div></div>
+  </div>
+
+  <div class="color-group-label">Secondary & Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#cf4500"></div><div class="color-swatch-info"><div class="color-swatch-name">Signal Orange</div><div class="color-swatch-hex">#cf4500</div><div class="color-swatch-role">Consent / legal actions, eyebrow dot</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f37338"></div><div class="color-swatch-info"><div class="color-swatch-name">Light Signal Orange</div><div class="color-swatch-hex">#f37338</div><div class="color-swatch-role">Orbital arcs, active indicators</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#9a3a0a"></div><div class="color-swatch-info"><div class="color-swatch-name">Clay Brown</div><div class="color-swatch-hex">#9a3a0a</div><div class="color-swatch-role">Secondary link-style buttons</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface & Background</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f3f0ee; border-bottom:1px solid var(--border-soft)"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Cream</div><div class="color-swatch-hex">#f3f0ee</div><div class="color-swatch-role">Default body canvas</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#fcfbfa; border-bottom:1px solid var(--border-soft)"></div><div class="color-swatch-info"><div class="color-swatch-name">Lifted Cream</div><div class="color-swatch-hex">#fcfbfa</div><div class="color-swatch-role">Nested raised sections</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid var(--border-soft)"></div><div class="color-swatch-info"><div class="color-swatch-name">White</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Nav pill, modals, satellite CTA</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f4f4f4; border-bottom:1px solid var(--border-soft)"></div><div class="color-swatch-info"><div class="color-swatch-name">Soft Bone</div><div class="color-swatch-hex">#f4f4f4</div><div class="color-swatch-role">Cool-gray subregions</div></div></div>
+  </div>
+
+  <div class="color-group-label">Neutrals & Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#262627"></div><div class="color-swatch-info"><div class="color-swatch-name">Charcoal</div><div class="color-swatch-hex">#262627</div><div class="color-swatch-role">Softer black text alternate</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#696969"></div><div class="color-swatch-info"><div class="color-swatch-name">Slate Gray</div><div class="color-swatch-hex">#696969</div><div class="color-swatch-role">Muted secondary text</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#555555"></div><div class="color-swatch-info"><div class="color-swatch-name">Granite</div><div class="color-swatch-hex">#555555</div><div class="color-swatch-role">Inline body accents, links</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#d1cdc7; border-bottom:1px solid var(--border-soft)"></div><div class="color-swatch-info"><div class="color-swatch-name">Dust Taupe</div><div class="color-swatch-hex">#d1cdc7</div><div class="color-swatch-role">Whisper / disabled text</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#3860be"></div><div class="color-swatch-info"><div class="color-swatch-name">Link Blue</div><div class="color-swatch-hex">#3860be</div><div class="color-swatch-role">Inline links, info callouts</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e8e2da; border-bottom:1px solid var(--border-soft)"></div><div class="color-swatch-info"><div class="color-swatch-name">Whisper Cream</div><div class="color-swatch-hex">#e8e2da</div><div class="color-swatch-role">Ghost watermark headlines</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:64px; font-weight:500; line-height:1; letter-spacing:-1.28px;">Hero Headline</div><div class="type-meta">H1 (hero) -- 64px / 500 / 64px / -1.28px / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:36px; font-weight:500; line-height:1.22; letter-spacing:-0.72px;">Section Heading</div><div class="type-meta">H2 (section) -- 36px / 500 / 44px / -0.72px / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:500; line-height:1.2; letter-spacing:-0.48px;">Card Title</div><div class="type-meta">H3 (card title) -- 24px / 500 / 28.8px / -0.48px / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:700; line-height:1.3;">Subhead Label</div><div class="type-meta">H4 (subhead) -- 14px / 700 / 18.2px / normal / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:700; line-height:1; letter-spacing:0.56px; text-transform:uppercase; color:var(--ink);"><span style="color:var(--signal-orange);">&bull;</span> SERVICES</div><div class="type-meta">Eyebrow (H5) -- 14px / 700 / 14px / 0.56px / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:450; line-height:1.4;">Body -- Mastercard's body copy runs at the signature 450 weight, softer than 500 yet firmer than 400, giving editorial paragraphs their warm reading tone.</div><div class="type-meta">Body paragraph -- 16px / 450 / 22.4px / normal / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1; letter-spacing:-0.48px;">Nav link / Button label</div><div class="type-meta">Nav / Button -- 16px / 500 / 16px / -0.48px / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:450; line-height:1.43;">Footer link -- Lighter weight on the dark footer for airier density.</div><div class="type-meta">Footer link -- 14px / 450 / 20px / normal / MarkForMC</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:13px; font-weight:700; line-height:1; letter-spacing:0.56px; text-transform:uppercase; color:var(--slate-gray);">Footer Column Header</div><div class="type-meta">Footer column header -- 13px / 700 / 14px / 0.56px / MarkForMC</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Learn more</a><div class="button-label">Primary Ink Pill</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Explore</a><div class="button-label">Outlined Pill</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Accept all</a><div class="button-label">Consent Orange</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Cookie details</a><div class="button-label">Clay Link</div></div>
+    <div class="button-item"><button class="btn-media" aria-label="satellite">&#8594;</button><div class="button-label">Satellite</div></div>
+    <div class="button-item"><span style="display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; background:transparent; color:var(--ink); border-radius:50%; border:1px solid var(--ink); font-size:16px;">&#9654;</span><div class="button-label">Icon Circle</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Ink Background</h2>
+  <div class="card-grid">
+    <div class="card card-dark">
+      <h3>Services</h3>
+      <p>Insights and tools that help businesses grow with confidence, from fraud protection to data-driven decisioning.</p>
+      <a class="card-link" href="#">Learn more &#8594;</a>
+    </div>
+    <div class="card card-dark" style="box-shadow: var(--shadow-card);">
+      <h3>Solutions</h3>
+      <p>Payment technology that connects people, banks, merchants, and governments across more than 200 markets worldwide.</p>
+      <a class="card-link" href="#">Learn more &#8594;</a>
+    </div>
+    <div class="card card-dark">
+      <h3>Innovation</h3>
+      <p>From tokenization to open banking, building the rails for the next decade of secure, seamless commerce.</p>
+      <a class="card-link" href="#">Learn more &#8594;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Lifted Cream</h2>
+  <div class="card-grid">
+    <div class="card" style="background:#ffffff;">
+      <h3>For you</h3>
+      <p>Everyday tools, offers, and protections designed to make spending simpler and safer wherever life takes you.</p>
+      <a class="card-link" href="#">Learn more &#8594;</a>
+    </div>
+    <div class="card" style="background:#ffffff; box-shadow: var(--shadow-card);">
+      <h3>For business</h3>
+      <p>Solutions that help companies of every size accept payments, manage risk, and reach new customers.</p>
+      <a class="card-link" href="#">Learn more &#8594;</a>
+    </div>
+    <div class="card" style="background:#ffffff;">
+      <h3>For the world</h3>
+      <p>Programs and partnerships advancing financial inclusion and sustainability across communities everywhere.</p>
+      <a class="card-link" href="#">Learn more &#8594;</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="text" placeholder="name@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Search</label><input class="form-input form-input--focus" type="text" value="contactless payments"><div class="form-state-label">Focus (orange ring)</div></div>
+  <div class="form-group"><label class="form-label">Card number</label><input class="form-input form-input--error" type="text" value="5555 4444 3333"><div class="form-state-label">Error (red ring)</div></div>
+  <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell us how we can help..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:64px"></div><div class="spacing-value">64</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:96px"></div><div class="spacing-value">96</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:128px"></div><div class="spacing-value">128</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:6px"></div><div class="radius-label">6px</div><div class="radius-context">Micro chips</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:20px"></div><div class="radius-label">20px</div><div class="radius-context">Body CTAs</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:24px"></div><div class="radius-label">24px</div><div class="radius-context">Consent pill</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:40px"></div><div class="radius-label">40px</div><div class="radius-context">Hero / stadium</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:50%"></div><div class="radius-label">50%</div><div class="radius-context">Circular portrait</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:999px"></div><div class="radius-label">999px</div><div class="radius-context">Nav / full pill</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:1px solid var(--border-soft);"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No shadow, on cream</div></div>
+    <div class="elevation-card" style="box-shadow:rgba(0,0,0,0.04) 0px 4px 24px 0px;"><div class="elevation-label">Level 1: Nav Pill</div><div class="elevation-desc">0 4px 24px / 0.04</div></div>
+    <div class="elevation-card" style="box-shadow:rgba(0,0,0,0.08) 0px 24px 48px 0px;"><div class="elevation-label">Level 2: Card Halo</div><div class="elevation-desc">0 24px 48px / 0.08</div></div>
+    <div class="elevation-card" style="box-shadow:rgba(0,0,0,0.25) 0px 70px 110px 0px;"><div class="elevation-label">Level 3: Feature</div><div class="elevation-desc">0 70px 110px / 0.25</div></div>
+    <div class="elevation-card" style="background:var(--ink); color:var(--canvas-cream);"><div class="elevation-label" style="color:var(--canvas-cream);">Ink Surface</div><div class="elevation-desc" style="color:rgba(243,240,238,0.5);">#141413 footer</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

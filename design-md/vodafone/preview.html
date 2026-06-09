@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by Vodafone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #e60000;
+    --on-primary: #ffffff;
+    --ink: #25282b;
+    --body-text: #7e7e7e;
+    --mute: #bebebe;
+    --canvas: #ffffff;
+    --canvas-soft: #f2f2f2;
+    --on-dark: #ffffff;
+    --border-hairline: #25282b;
+    --shadow-card: none;
+    --nav-bg: #25282b;
+    --font-display: 'Vodafone', 'Vodafone Rg', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-text: 'Vodafone', 'Vodafone Rg', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 18px; font-weight: 400; line-height: 1.56;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 56px;
+    background: var(--nav-bg);
+  }
+  .nav-brand { font-size: 16px; font-weight: 800; color: var(--on-dark); text-decoration: none; letter-spacing: 0; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.85); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: #ffffff; }
+  .nav-cta {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 8px 24px; border-radius: 60px; font-size: 16px; font-weight: 400;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.9; }
+
+  /* HERO */
+  .hero { padding: 96px 32px 80px; text-align: left; background: var(--ink); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 96px; font-weight: 800; line-height: 0.9;
+    letter-spacing: -1px; color: var(--on-dark); margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero p { font-size: 22px; font-weight: 300; line-height: 1.3; letter-spacing: 0; color: rgba(255,255,255,0.85); max-width: 640px; margin: 0 0 32px; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 12px 24px; border-radius: 60px; border: 1px solid var(--primary);
+    font-family: var(--font-text); font-size: 18px; font-weight: 400;
+    text-decoration: none; cursor: pointer; transition: opacity 0.15s;
+  }
+  .btn-blue:hover { opacity: 0.9; }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--on-dark);
+    padding: 12px 24px; border-radius: 60px;
+    border: 1px solid var(--on-dark);
+    font-family: var(--font-text); font-size: 18px; font-weight: 400;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 16px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0; }
+  .section-title { font-family: var(--font-display); font-size: 40px; font-weight: 300; line-height: 1.1; letter-spacing: 0; margin-bottom: 32px; color: var(--ink); }
+  .section-divider { border: none; border-top: 1px solid #e5e5e5; margin: 0; }
+
+  /* DARK SECTION (full-width) */
+  .section-dark { background: var(--ink); color: var(--on-dark); padding: 64px 32px; }
+  .section-dark .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--primary); }
+  .section-dark .section-title { color: var(--on-dark); }
+
+  /* SOFT SECTION */
+  .section-gray { background: var(--canvas-soft); padding: 64px 32px; }
+  .section-gray .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 6px; overflow: hidden; background: var(--canvas); box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; letter-spacing: 0; color: var(--ink); }
+  .color-swatch-hex { font-size: 13px; color: var(--body-text); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .color-swatch-role { font-size: 12px; color: var(--body-text); margin-top: 3px; }
+  .color-group-label { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: 0; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid #e5e5e5; }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--body-text); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 400; color: var(--body-text); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--canvas); color: var(--ink);
+    padding: 12px 24px; border-radius: 60px; border: 1px solid var(--ink);
+    font-family: var(--font-text); font-size: 18px; font-weight: 400;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: var(--canvas-soft); color: var(--ink);
+    padding: 4px 12px; border-radius: 32px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 700;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 9999px;
+    background: var(--canvas); color: var(--ink); border: 1px solid var(--canvas);
+    font-size: 16px; cursor: pointer; box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--canvas-soft); border-radius: 6px; padding: 16px; transition: background 0.3s; }
+  .card h3 { font-family: var(--font-display); font-size: 32px; font-weight: 700; letter-spacing: 0; line-height: 1.25; margin-bottom: 8px; color: var(--ink); }
+  .card p { font-size: 18px; color: var(--body-text); line-height: 1.56; letter-spacing: 0; }
+  .card-link { font-size: 16px; color: var(--primary); text-decoration: none; margin-top: 12px; display: inline-block; font-weight: 700; }
+  .card-link:hover { text-decoration: underline; }
+
+  .card-dark { background: var(--ink); color: var(--on-dark); }
+  .card-dark h3 { color: var(--on-dark); }
+  .card-dark p { color: rgba(255,255,255,0.75); }
+  .card-dark .card-link { color: var(--on-primary); }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: 0; }
+  .form-input {
+    width: 100%; background: var(--canvas); color: var(--ink);
+    border: 1px solid var(--ink); padding: 12px 16px; border-radius: 6px;
+    font-family: var(--font-text); font-size: 16px; outline: none;
+    letter-spacing: 0; transition: border-color 0.15s;
+  }
+  .form-input::placeholder { color: var(--mute); }
+  .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(230,0,0,0.2); }
+  .form-input--focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(230,0,0,0.2); }
+  .form-input--error { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(230,0,0,0.2); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--canvas); color: var(--ink);
+    border: 1px solid var(--ink); padding: 12px 16px; border-radius: 6px;
+    font-family: var(--font-text); font-size: 16px; resize: vertical; outline: none;
+    letter-spacing: 0;
+  }
+  .form-textarea::placeholder { color: var(--mute); }
+  .form-state-label { font-size: 11px; color: var(--body-text); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--primary); border-radius: 1px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--body-text); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); margin-bottom: 6px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--body-text); }
+  .radius-context { font-size: 10px; color: var(--body-text); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: var(--canvas); border-radius: 6px; padding: 24px; text-align: center; }
+  .elevation-label { font-size: 14px; font-weight: 700; letter-spacing: 0; margin-bottom: 4px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--body-text); }
+
+  /* FOOTER */
+  .footer { padding: 32px; text-align: center; background: var(--ink); font-size: 16px; color: var(--on-dark); letter-spacing: 0; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 56px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">Vodafone</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Shop Now</a>
+</nav>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by Vodafone</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value — visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Discover more</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand &amp; Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e60000"></div><div class="color-swatch-info"><div class="color-swatch-name">Vodafone Red</div><div class="color-swatch-hex">#e60000</div><div class="color-swatch-role">Primary CTA, speechmark orb</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid #e5e5e5"></div><div class="color-swatch-info"><div class="color-swatch-name">On Primary</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Text on red CTAs</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid #e5e5e5"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Default light content</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f2f2; border-bottom:1px solid #e5e5e5"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Soft</div><div class="color-swatch-hex">#f2f2f2</div><div class="color-swatch-role">Chip &amp; card tint</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#25282b"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink</div><div class="color-swatch-hex">#25282b</div><div class="color-swatch-role">Dark hero, nav, footer</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#25282b"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink</div><div class="color-swatch-hex">#25282b</div><div class="color-swatch-role">Headings, body on light</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#7e7e7e"></div><div class="color-swatch-info"><div class="color-swatch-name">Body</div><div class="color-swatch-hex">#7e7e7e</div><div class="color-swatch-role">Secondary text, captions</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#bebebe"></div><div class="color-swatch-info"><div class="color-swatch-name">Mute</div><div class="color-swatch-hex">#bebebe</div><div class="color-swatch-role">Placeholder, low-key links</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid #e5e5e5"></div><div class="color-swatch-info"><div class="color-swatch-name">On Dark</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Text on ink surfaces</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e60000"></div><div class="color-swatch-info"><div class="color-swatch-name">Validation</div><div class="color-swatch-hex">#e60000</div><div class="color-swatch-role">Primary red doubles as error</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f2f2; border-bottom:1px solid #e5e5e5"></div><div class="color-swatch-info"><div class="color-swatch-name">Neutral Fill</div><div class="color-swatch-hex">#f2f2f2</div><div class="color-swatch-role">Inert / disabled surface</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:96px; font-weight:800; line-height:0.79; letter-spacing:-1px; text-transform:uppercase;">Display Hero</div><div class="type-meta">Display Hero -- 144px / 800 / 114px / -1px / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:84px; font-weight:800; line-height:0.9; letter-spacing:-1px; text-transform:uppercase;">Display XXL</div><div class="type-meta">Display XXL -- 126px / 800 / 113px / -1px / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:72px; font-weight:800; line-height:0.93; letter-spacing:0; text-transform:uppercase;">Display XL</div><div class="type-meta">Display XL -- 90px / 800 / 84px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:48px; font-weight:300; line-height:1.08; letter-spacing:0;">Display Large</div><div class="type-meta">Display Large -- 48px / 300 / 52px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:40px; font-weight:300; line-height:1.1; letter-spacing:0;">Display Medium</div><div class="type-meta">Display Medium -- 40px / 300 / 44px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:32px; font-weight:700; line-height:1.25; letter-spacing:0;">Display Small</div><div class="type-meta">Display Small -- 32px / 700 / 40px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:700; line-height:1; letter-spacing:0;">Display XS</div><div class="type-meta">Display XS -- 24px / 700 / 24px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:16px; font-weight:800; line-height:1.5; letter-spacing:0; text-transform:uppercase;">Eyebrow Uppercase</div><div class="type-meta">Eyebrow Uppercase -- 16px / 800 / 24px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:22px; font-weight:400; line-height:1.09; letter-spacing:0;">Body Large -- Lead paragraphs introduce the section with a calmer, lighter voice.</div><div class="type-meta">Body Large -- 22px / 400 / 24px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:400; line-height:1.56; letter-spacing:0;">Body Medium -- The default paragraph body carries every long-form passage across the marketing surface.</div><div class="type-meta">Body Medium -- 18px / 400 / 28px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:600; line-height:1.56; letter-spacing:0;">Body Medium Strong -- Bolded inline emphasis</div><div class="type-meta">Body Medium Strong -- 18px / 600 / 28px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:400; line-height:1.25; letter-spacing:0;">Body Small -- Secondary body text for supporting copy and nav links.</div><div class="type-meta">Body Small -- 16px / 400 / 20px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:700; line-height:1.38; letter-spacing:0;">Body Small Strong -- Bold short body</div><div class="type-meta">Body Small Strong -- 16px / 700 / 22px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:400; line-height:1.14; letter-spacing:0;">Caption -- Captions and fine print sit at the bottom of the hierarchy.</div><div class="type-meta">Caption -- 14px / 400 / 16px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:700; line-height:1.5; letter-spacing:0;">Caption Strong -- Bold captions and badge labels</div><div class="type-meta">Caption Strong -- 14px / 700 / 21px / normal / Vodafone</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:12px; font-weight:600; line-height:1.33; letter-spacing:0.57px; text-transform:uppercase;">Caption Uppercase</div><div class="type-meta">Caption Uppercase -- 12px / 600 / 16px / 0.57px / Vodafone</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Buy now</a><div class="button-label">Primary Red Pill</div></div>
+    <div class="button-item"><span style="display:inline-block; background:var(--canvas); color:var(--primary); padding:12px 24px; border-radius:60px; border:1px solid var(--primary); font-size:18px; font-weight:400;">Learn more</span><div class="button-label">Outline Red</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Explore</a><div class="button-label">Outline Dark</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Mobile</a><div class="button-label">Badge Chip</div></div>
+    <div class="button-item"><button class="btn-media">&#9654;</button><div class="button-label">Icon Circular</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Dark Background</h2>
+  <div class="card-grid">
+    <div class="card card-dark">
+      <h3>Stay Connected</h3>
+      <p>Fast, reliable network coverage that keeps you in touch wherever life takes you, on the devices you love.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+    <div class="card card-dark">
+      <h3>Gigabit Fibre</h3>
+      <p>Full-fibre broadband built for the whole household — stream, game, and work without the wait.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+    <div class="card card-dark">
+      <h3>Business Ready</h3>
+      <p>Secure connectivity and unified communications scaled for teams of every size, from startup to enterprise.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Light Background</h2>
+  <div class="card-grid">
+    <div class="card" style="background:#ffffff; box-shadow:0 0 0 1px rgba(0,0,0,0.08);">
+      <h3>Unlimited Plans</h3>
+      <p>Pick a plan with the data you need and the freedom to upgrade whenever you want, with no hidden extras.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+    <div class="card" style="background:#ffffff; box-shadow:0 0 0 1px rgba(0,0,0,0.08);">
+      <h3>5G Network</h3>
+      <p>Next-generation speeds across more places every month, designed for the way you stream and share today.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+    <div class="card" style="background:#ffffff; box-shadow:0 0 0 1px rgba(0,0,0,0.08);">
+      <h3>Smart Devices</h3>
+      <p>The latest phones, tablets, and accessories, paired with flexible trade-in and upgrade options.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email address</label><input class="form-input" type="text" placeholder="name@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Password</label><input class="form-input form-input--focus" type="password" value="mypassword123"><div class="form-state-label">Focus (red ring)</div></div>
+  <div class="form-group"><label class="form-label">Mobile number</label><input class="form-input form-input--error" type="text" value="0700"><div class="form-state-label">Error (red ring)</div></div>
+  <div class="form-group"><label class="form-label">How can we help?</label><textarea class="form-textarea" placeholder="Tell us about your experience..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:2px"></div><div class="spacing-value">2</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:20px"></div><div class="spacing-value">20</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:0px"></div><div class="radius-label">0px</div><div class="radius-context">Bands, footer</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:1px"></div><div class="radius-label">1px</div><div class="radius-context">Inline indicator</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:6px"></div><div class="radius-label">6px</div><div class="radius-context">Cards, inputs</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:32px"></div><div class="radius-label">32px</div><div class="radius-context">Badge pills</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:60px"></div><div class="radius-label">60px</div><div class="radius-context">CTA pills</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-label">9999px</div><div class="radius-context">Icon circular</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="background:#f2f2f2;"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No shadow, surface contrast</div></div>
+    <div class="elevation-card" style="border:1px solid #25282b;"><div class="elevation-label">Level 1: Hairline</div><div class="elevation-desc">1px solid Ink</div></div>
+    <div class="elevation-card" style="background:#25282b; color:#fff; border:1px solid #ffffff;"><div class="elevation-label" style="color:#fff;">Level 2: Border on Dark</div><div class="elevation-desc" style="color:rgba(255,255,255,0.6);">1px solid On Dark</div></div>
+    <div class="elevation-card" style="box-shadow:0 0 0 2px #e60000;"><div class="elevation-label">Focus Ring</div><div class="elevation-desc">2px Vodafone Red</div></div>
+    <div class="elevation-card" style="background:#25282b; color:#fff;"><div class="elevation-label" style="color:#fff;">Polarity Flip</div><div class="elevation-desc" style="color:rgba(255,255,255,0.6);">Ink #25282b band</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

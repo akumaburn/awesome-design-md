@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by PlayStation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #ffffff;
+    --canvas-light: #000000;
+    --surface-soft: #121314;
+    --surface-card: #181818;
+    --canvas-dark: #181818;
+    --surface-dark-elevated: #1f2024;
+    --surface-dark-card: #242528;
+    --ps-blue: #53b1ff;
+    --ps-blue-pressed: #2f97f0;
+    --ps-blue-active: #0070d1;
+    --commerce: #ff5a26;
+    --commerce-pressed: #d53b00;
+    --link-light: #53b1ff;
+    --link-dark: #53b1ff;
+    --warning: #ff5a72;
+    --on-primary: #000000;
+    --on-dark: #ffffff;
+    --on-dark-mute: #cccccc;
+    --body-light: rgba(255,255,255,0.7);
+    --mute-light: rgba(229,229,229,0.55);
+    --ash-light: rgba(229,229,229,0.2);
+    --body-dark: rgba(255,255,255,0.7);
+    --mute-dark: rgba(229,229,229,0.55);
+    --hairline-light: rgba(229,229,229,0.2);
+    --hairline-dark: rgba(229,229,229,0.2);
+    --nav-bg: #000000;
+    --shadow-active: 0 4px 12px rgba(0,0,0,0.5);
+    --gold-start: #ffce21;
+    --gold-mid: #f5a623;
+    --gold-end: #ee8e00;
+    --font-display: 'PlayStation SST', 'Inter', 'SST', Arial, Helvetica, sans-serif;
+    --font-text: 'PlayStation SST', 'Inter', 'SST', Arial, Helvetica, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas-light);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 18px; font-weight: 400; line-height: 1.5;
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 48px;
+    background: var(--nav-bg);
+  }
+  .nav-brand { font-size: 18px; font-weight: 500; color: #ffffff; text-decoration: none; letter-spacing: 0.4px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.85); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: #ffffff; }
+  .nav-cta {
+    display: inline-block; background: var(--ps-blue); color: #000000;
+    padding: 6px 18px; border-radius: 9999px; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.324px; text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--ps-blue-pressed); }
+
+  /* DARK MODE BADGE */
+  .dark-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: #ffffff; color: #000000;
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+  }
+
+  /* HERO */
+  .hero { padding: 96px 48px 80px; text-align: center; background: var(--canvas-light); color: var(--on-dark); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 54px; font-weight: 300; line-height: 1.25;
+    letter-spacing: -0.1px; color: var(--ink); margin-bottom: 16px;
+  }
+  .hero p { font-size: 18px; font-weight: 400; line-height: 1.5; letter-spacing: 0.1px; color: var(--body-dark); max-width: 600px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--ps-blue); color: #000000;
+    padding: 12px 28px; border-radius: 9999px; border: none;
+    font-family: var(--font-text); font-size: 18px; font-weight: 700; letter-spacing: 0.45px;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-blue:hover { background: var(--ps-blue-pressed); }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--on-dark);
+    padding: 12px 28px; border-radius: 9999px;
+    border: 1px solid var(--hairline-dark);
+    font-family: var(--font-text); font-size: 18px; font-weight: 700; letter-spacing: 0.45px;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
+  /* SECTIONS */
+  .section { padding: 96px 48px; max-width: 1280px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 12px; font-weight: 500; color: var(--mute-light); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .section-title { font-family: var(--font-display); font-size: 44px; font-weight: 300; line-height: 1.25; letter-spacing: 0.1px; margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 1px solid var(--hairline-dark); margin: 0; }
+
+  /* DARK SECTION (inverted = elevated surface) */
+  .section-dark { background: var(--surface-soft); color: var(--on-dark); padding: 96px 48px; }
+  .section-dark .section-inner { max-width: 1280px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--mute-dark); }
+  .section-dark .section-title { color: var(--on-dark); }
+
+  /* SOFT-SURFACE SECTION (slightly lifted) */
+  .section-gray { background: var(--surface-card); padding: 96px 48px; }
+  .section-gray .section-inner { max-width: 1280px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 8px; overflow: hidden; background: #181818; box-shadow: 0 0 0 1px rgba(255,255,255,0.1); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; letter-spacing: 0; color: var(--ink); }
+  .color-swatch-hex { font-size: 12px; color: var(--mute-light); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .color-swatch-role { font-size: 11px; color: var(--mute-light); margin-top: 3px; }
+  .color-group-label { font-size: 18px; font-weight: 600; color: var(--ink); letter-spacing: 0; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline-dark); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--mute-light); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 400; color: var(--mute-light); margin-top: 8px; }
+  .btn-commerce {
+    display: inline-block; background: var(--commerce); color: #000000;
+    padding: 12px 28px; border-radius: 9999px; border: none;
+    font-family: var(--font-text); font-size: 18px; font-weight: 700; letter-spacing: 0.45px;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-commerce:hover { background: var(--commerce-pressed); }
+  .btn-secondary {
+    display: inline-block; background: transparent; color: var(--ink);
+    padding: 12px 28px; border-radius: 9999px; border: 1px solid var(--hairline-dark);
+    font-family: var(--font-text); font-size: 18px; font-weight: 700; letter-spacing: 0.45px;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: rgba(255,255,255,0.08); color: var(--on-dark);
+    padding: 8px 16px; border-radius: 9999px; border: 1px solid var(--hairline-dark);
+    font-family: var(--font-text); font-size: 14px; font-weight: 700; letter-spacing: 0.324px;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 9999px;
+    background: rgba(255,255,255,0.16); color: var(--on-dark); border: none;
+    font-size: 16px; cursor: pointer;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card { background: var(--surface-dark-card); border-radius: 8px; padding: 24px; transition: box-shadow 0.2s; }
+  .card:active { box-shadow: var(--shadow-active); }
+  .card h3 { font-family: var(--font-display); font-size: 28px; font-weight: 300; letter-spacing: 0.1px; line-height: 1.25; margin-bottom: 8px; color: var(--on-dark); }
+  .card p { font-size: 16px; color: var(--body-dark); line-height: 1.5; letter-spacing: 0; }
+  .card-link { font-size: 18px; color: var(--link-dark); text-decoration: none; margin-top: 12px; display: inline-block; }
+  .card-link:hover { text-decoration: underline; }
+
+  .card-light { background: #242528; }
+  .card-elevated { background: #1f2024; }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 6px; letter-spacing: 0; }
+  .form-input {
+    width: 100%; background: #181818; color: var(--ink);
+    border: 1px solid var(--ash-light); padding: 12px 16px; border-radius: 4px;
+    font-family: var(--font-text); font-size: 18px; outline: none;
+    letter-spacing: 0.1px; transition: border-color 0.15s;
+  }
+  .form-input:focus { border: 2px solid var(--ps-blue); }
+  .form-input--focus { border: 2px solid var(--ps-blue); }
+  .form-input--error { border: 2px solid var(--warning); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: #181818; color: var(--ink);
+    border: 1px solid var(--ash-light); padding: 12px 16px; border-radius: 4px;
+    font-family: var(--font-text); font-size: 18px; resize: vertical; outline: none;
+    letter-spacing: 0.1px;
+  }
+  .form-state-label { font-size: 12px; color: var(--mute-light); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--ps-blue); border-radius: 4px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--mute-light); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); margin-bottom: 6px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--mute-light); }
+  .radius-context { font-size: 10px; color: var(--mute-light); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: #181818; border-radius: 8px; padding: 24px; text-align: center; }
+  .elevation-label { font-size: 16px; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--mute-light); }
+
+  /* FOOTER */
+  .footer { padding: 48px 32px; text-align: center; background: var(--ps-blue-active); font-size: 14px; color: #ffffff; letter-spacing: 0; border-top: 1px solid var(--hairline-dark); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">PlayStation</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Sign In</a>
+</nav>
+<div class="dark-badge">Dark Mode</div>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by PlayStation</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value — visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Learn more</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand &amp; Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#53b1ff"></div><div class="color-swatch-info"><div class="color-swatch-name">PlayStation Blue</div><div class="color-swatch-hex">#53b1ff</div><div class="color-swatch-role">Brightened primary CTA</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#2f97f0"></div><div class="color-swatch-info"><div class="color-swatch-name">Blue Pressed</div><div class="color-swatch-hex">#2f97f0</div><div class="color-swatch-role">Pressed pill state</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0070d1"></div><div class="color-swatch-info"><div class="color-swatch-name">Blue Base</div><div class="color-swatch-hex">#0070d1</div><div class="color-swatch-role">Core brand blue, footer</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ff5a26"></div><div class="color-swatch-info"><div class="color-swatch-name">Commerce Orange</div><div class="color-swatch-hex">#ff5a26</div><div class="color-swatch-role">Buy / pre-order CTA</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#d53b00"></div><div class="color-swatch-info"><div class="color-swatch-name">Commerce Pressed</div><div class="color-swatch-hex">#d53b00</div><div class="color-swatch-role">Pressed store button</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#000000; border-bottom:1px solid rgba(229,229,229,0.2)"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Dark</div><div class="color-swatch-hex">#000000</div><div class="color-swatch-role">Black hero band, nav</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#121314"></div><div class="color-swatch-info"><div class="color-swatch-name">Dark Elevated</div><div class="color-swatch-hex">#121314</div><div class="color-swatch-role">Inset dark panels</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#181818"></div><div class="color-swatch-info"><div class="color-swatch-name">Dark Card</div><div class="color-swatch-hex">#181818</div><div class="color-swatch-role">Game tile fill</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1f2024"></div><div class="color-swatch-info"><div class="color-swatch-name">Charcoal</div><div class="color-swatch-hex">#1f2024</div><div class="color-swatch-role">Elevated dark section</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#242528"></div><div class="color-swatch-info"><div class="color-swatch-name">Surface Card</div><div class="color-swatch-hex">#242528</div><div class="color-swatch-role">Lifted dark product card</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid rgba(229,229,229,0.2)"></div><div class="color-swatch-info"><div class="color-swatch-name">Pure White</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Inverted light canvas</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid rgba(229,229,229,0.2)"></div><div class="color-swatch-info"><div class="color-swatch-name">On Dark</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Primary text on dark</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(255,255,255,0.7)"></div><div class="color-swatch-info"><div class="color-swatch-name">Body Dark</div><div class="color-swatch-hex">rgba(255,255,255,0.7)</div><div class="color-swatch-role">Default paragraph color</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(229,229,229,0.55)"></div><div class="color-swatch-info"><div class="color-swatch-name">Mute Dark</div><div class="color-swatch-hex">rgba(229,229,229,0.55)</div><div class="color-swatch-role">Captions, metadata</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#cccccc; border-bottom:1px solid rgba(229,229,229,0.2)"></div><div class="color-swatch-info"><div class="color-swatch-name">On Dark Mute</div><div class="color-swatch-hex">#cccccc</div><div class="color-swatch-role">Secondary / disabled</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(229,229,229,0.2)"></div><div class="color-swatch-info"><div class="color-swatch-name">Ash Dark</div><div class="color-swatch-hex">rgba(229,229,229,0.2)</div><div class="color-swatch-role">Hairline, lowest emphasis</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ff5a72"></div><div class="color-swatch-info"><div class="color-swatch-name">Warning</div><div class="color-swatch-hex">#ff5a72</div><div class="color-swatch-role">Validation errors</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#53b1ff"></div><div class="color-swatch-info"><div class="color-swatch-name">Link Dark</div><div class="color-swatch-hex">#53b1ff</div><div class="color-swatch-role">Inline link on dark</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:linear-gradient(90deg,#ffce21,#f5a623,#ee8e00)"></div><div class="color-swatch-info"><div class="color-swatch-name">PS Plus Gold</div><div class="color-swatch-hex">#ffce21 &rarr; #ee8e00</div><div class="color-swatch-role">PS Plus banner only</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#deff20"></div><div class="color-swatch-info"><div class="color-swatch-name">Marathon Yellow</div><div class="color-swatch-hex">#deff20</div><div class="color-swatch-role">Game-page accent</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:54px; font-weight:300; line-height:1.25; letter-spacing:-0.1px;">Display XL</div><div class="type-meta">Display XL -- 54px / 300 / 1.25 / -0.1px / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:44px; font-weight:300; line-height:1.25; letter-spacing:0.1px;">Display Large</div><div class="type-meta">Display Large -- 44px / 300 / 1.25 / 0.1px / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:35px; font-weight:300; line-height:1.25; letter-spacing:0;">Display Medium</div><div class="type-meta">Display Medium -- 35px / 300 / 1.25 / 0 / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:28px; font-weight:300; line-height:1.25; letter-spacing:0.1px;">Heading XL</div><div class="type-meta">Heading XL -- 28px / 300 / 1.25 / 0.1px / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:22px; font-weight:300; line-height:1.25; letter-spacing:0.1px;">Heading Large</div><div class="type-meta">Heading Large -- 22px / 300 / 1.25 / 0.1px / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:600; line-height:1; letter-spacing:0;">Heading Medium -- Card label</div><div class="type-meta">Heading Medium -- 18px / 600 / 1 / 0 / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:400; line-height:1.5; letter-spacing:0.1px;">Body -- Discover all PS5 consoles and accessories. Body copy settles at a comfortable 1.5 line-height for long-form reading.</div><div class="type-meta">Body -- 18px / 400 / 1.5 / 0.1px / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:500; line-height:1.25; letter-spacing:0.4px;">Body Strong -- Primary nav link</div><div class="type-meta">Body Strong -- 18px / 500 / 1.25 / 0.4px / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:400; line-height:1.5; letter-spacing:0;">Body Small -- Card description and secondary body copy.</div><div class="type-meta">Body Small -- 16px / 400 / 1.5 / 0 / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:400; line-height:1.5; letter-spacing:0;">Caption Medium -- Footer link, metadata, sub-nav text</div><div class="type-meta">Caption Medium -- 14px / 400 / 1.5 / 0 / PlayStation SST</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:12px; font-weight:500; line-height:1.5; letter-spacing:0;">Caption Small -- smallest utility text, badge label</div><div class="type-meta">Caption Small -- 12px / 500 / 1.5 / 0 / PlayStation SST</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Sign up</a><div class="button-label">Primary Blue</div></div>
+    <div class="button-item"><a class="btn-commerce" href="#">Buy now</a><div class="button-label">Commerce Orange</div></div>
+    <div class="button-item"><a class="btn-secondary" href="#">Learn more</a><div class="button-label">Secondary Outline</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Coming Soon</a><div class="button-label">Filter Chip</div></div>
+    <div class="button-item"><button class="btn-media">&#9654;</button><div class="button-label">Carousel Paddle</div></div>
+    <div class="button-item"><span style="display:inline-block; background:#53b1ff; color:#000000; padding:4px 10px; border-radius:9999px; font-size:12px; font-weight:500; letter-spacing:0;">New</span><div class="button-label">Info Badge</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Dark Background</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>PlayStation 5</h3>
+      <p>Play has no limits. Experience lightning-fast loading, deeper immersion with haptic feedback, and a new generation of incredible games.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card card-elevated" style="box-shadow: var(--shadow-active);">
+      <h3>DualSense</h3>
+      <p>Discover a deeper, highly immersive gaming experience with adaptive triggers and immersive haptic feedback in the iconic controller.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card">
+      <h3>PS VR2</h3>
+      <p>Feel new realms of play. The next generation of virtual reality on PS5 with stunning visuals and intuitive control.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Lifted Background</h2>
+  <div class="card-grid">
+    <div class="card card-light">
+      <h3>PlayStation Plus</h3>
+      <p>Choose the membership that's right for you. Online multiplayer, a library of games, and exclusive member benefits.</p>
+      <a class="card-link" href="#">Discover Plus &gt;</a>
+    </div>
+    <div class="card card-light" style="box-shadow: var(--shadow-active);">
+      <h3>PlayStation Store</h3>
+      <p>The latest games, add-ons, and more. Browse deals and pre-order upcoming releases from the comfort of home.</p>
+      <a class="card-link" href="#">Shop now &gt;</a>
+    </div>
+    <div class="card card-light">
+      <h3>PlayStation Blog</h3>
+      <p>The official source for news on games, hardware, and everything happening across the PlayStation community.</p>
+      <a class="card-link" href="#">Read news &gt;</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Sign-In ID</label><input class="form-input" type="text" placeholder="name@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Password</label><input class="form-input form-input--focus" type="password" value="mypassword123"><div class="form-state-label">Focus (2px blue border)</div></div>
+  <div class="form-group"><label class="form-label">Email</label><input class="form-input form-input--error" type="text" value="invalid@"><div class="form-state-label">Error (warning border)</div></div>
+  <div class="form-group"><label class="form-label">Feedback</label><textarea class="form-textarea" placeholder="Tell us about your experience..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4 xxs</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8 xs</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12 sm</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16 md</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24 lg</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32 xl</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48 xxl</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:96px"></div><div class="spacing-value">96 section</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:0px"></div><div class="radius-label">0px</div><div class="radius-context">Bands, Nav, Footer</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><div class="radius-label">4px</div><div class="radius-context">Inputs</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><div class="radius-label">8px</div><div class="radius-context">Cards, Tiles</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:16px"></div><div class="radius-label">16px</div><div class="radius-context">Dialog cards</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-label">9999px</div><div class="radius-context">CTA pills, chips</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:1px solid rgba(229,229,229,0.2);"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No shadow, solid canvas</div></div>
+    <div class="elevation-card" style="border:1px solid rgba(229,229,229,0.2);"><div class="elevation-label">Level 1: Hairline</div><div class="elevation-desc">1px rgba(229,229,229,0.2)</div></div>
+    <div class="elevation-card" style="box-shadow:0 4px 12px rgba(0,0,0,0.5);"><div class="elevation-label">Level 2: Active Shadow</div><div class="elevation-desc">0 4px 12px rgba 0.5</div></div>
+    <div class="elevation-card" style="background:linear-gradient(180deg,#121314,#000000);"><div class="elevation-label">Level 3: Section Gradient</div><div class="elevation-desc">#121314 &rarr; #000000</div></div>
+    <div class="elevation-card" style="background:#242528;"><div class="elevation-label">Lifted Surface</div><div class="elevation-desc">#242528</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

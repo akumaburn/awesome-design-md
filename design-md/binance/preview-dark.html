@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by Binance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #fcd535;
+    --primary-active: #f0b90b;
+    --primary-disabled: #3a3a1f;
+    --ink: #eaecef;
+    --body-on-light: #eaecef;
+    --muted: #707a8a;
+    --muted-strong: #929aa5;
+    --hairline: #2b3139;
+    --border-strong: #474d57;
+    --canvas: #0b0e11;
+    --surface-soft: #1e2329;
+    --surface-strong: #2b3139;
+    --on-primary: #181a20;
+    --canvas-dark: #181a20;
+    --surface-card-dark: #1e2329;
+    --surface-elevated-dark: #2b3139;
+    --on-dark: #ffffff;
+    --body-dark: #eaecef;
+    --trading-up: #0ecb81;
+    --trading-down: #f6465d;
+    --info: #3b82f6;
+    --nav-bg: rgba(11,14,17,0.92);
+    --shadow-card: rgba(0,0,0,0.5) 0px 4px 24px 0px;
+    --font-display: 'BinanceNova', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-text: 'BinanceNova', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-number: 'BinancePlex', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 14px; font-weight: 400; line-height: 1.5;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 64px;
+    background: var(--nav-bg);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+  }
+  .nav-brand { font-size: 18px; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 0; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: rgba(234,236,239,0.85); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--primary); }
+  .nav-cta {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 8px 20px; border-radius: 6px; font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--primary-active); }
+
+  /* DARK MODE BADGE */
+  .dark-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: var(--primary); color: var(--on-primary);
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 4px;
+  }
+
+  /* HERO */
+  .hero { padding: 80px 32px; text-align: center; background: var(--canvas); border-bottom: 1px solid var(--hairline); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 64px; font-weight: 700; line-height: 1.1;
+    letter-spacing: -1px; color: var(--on-dark); margin-bottom: 16px;
+  }
+  .hero p { font-size: 16px; font-weight: 400; line-height: 1.5; letter-spacing: 0; color: var(--muted-strong); max-width: 620px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 12px 24px; border-radius: 6px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-blue:hover { background: var(--primary-active); }
+  .btn-outline {
+    display: inline-block; background: var(--surface-card-dark); color: var(--on-dark);
+    padding: 12px 24px; border-radius: 6px;
+    border: 1px solid var(--hairline);
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: border-color 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--border-strong); }
+
+  /* SECTIONS */
+  .section { padding: 80px 32px; max-width: 1080px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .section-title { font-family: var(--font-display); font-size: 40px; font-weight: 600; line-height: 1.15; letter-spacing: -0.3px; margin-bottom: 32px; color: var(--on-dark); }
+  .section-divider { border: none; border-top: 1px solid var(--hairline); margin: 0; }
+
+  /* DARK SECTION (inverted = elevated surface band) */
+  .section-dark { background: var(--canvas-dark); color: var(--on-dark); padding: 80px 32px; }
+  .section-dark .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--muted); }
+  .section-dark .section-title { color: var(--on-dark); }
+
+  /* SOFT SECTION (one step lighter) */
+  .section-gray { background: var(--surface-card-dark); padding: 80px 32px; }
+  .section-gray .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-gray .section-title { color: var(--on-dark); }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 8px; overflow: hidden; background: var(--surface-card-dark); box-shadow: 0 0 0 1px var(--hairline); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; letter-spacing: 0; color: var(--ink); }
+  .color-swatch-hex { font-size: 12px; color: var(--muted-strong); font-family: var(--font-number); }
+  .color-swatch-role { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .color-group-label { font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: 0; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: var(--font-number); font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 500; color: var(--muted); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 14px 32px; border-radius: 9999px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: var(--surface-elevated-dark); color: var(--ink);
+    padding: 12px 24px; border-radius: 6px; border: 1px solid var(--hairline);
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-up {
+    display: inline-block; background: var(--trading-up); color: var(--on-dark);
+    padding: 8px 20px; border-radius: 4px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-down {
+    display: inline-block; background: var(--trading-down); color: var(--on-dark);
+    padding: 8px 20px; border-radius: 4px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-disabled {
+    display: inline-block; background: var(--primary-disabled); color: var(--muted);
+    padding: 12px 24px; border-radius: 6px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: not-allowed;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card { background: var(--surface-card-dark); border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; transition: box-shadow 0.3s; }
+  .card:hover { box-shadow: var(--shadow-card); }
+  .card h3 { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: 0; line-height: 1.35; margin-bottom: 8px; color: var(--on-dark); }
+  .card p { font-size: 14px; color: var(--body-dark); line-height: 1.5; letter-spacing: 0; }
+  .card-stat { font-family: var(--font-number); font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: -0.3px; color: var(--primary); margin-bottom: 4px; }
+  .card-link { font-size: 14px; color: var(--primary); text-decoration: none; margin-top: 12px; display: inline-block; }
+  .card-link:hover { text-decoration: underline; }
+
+  .card-elevated { background: var(--surface-elevated-dark); border-color: var(--surface-elevated-dark); }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; letter-spacing: 0; }
+  .form-input {
+    width: 100%; background: var(--surface-card-dark); color: var(--ink);
+    border: 1px solid var(--hairline); padding: 10px 16px; border-radius: 6px;
+    font-family: var(--font-text); font-size: 14px; outline: none; height: 40px;
+    letter-spacing: 0; transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--info); box-shadow: 0 0 0 2px rgba(59,130,246,0.5); }
+  .form-input--focus { border-color: var(--info); box-shadow: 0 0 0 2px rgba(59,130,246,0.5); }
+  .form-input--error { border-color: var(--trading-down); box-shadow: 0 0 0 2px rgba(246,70,93,0.4); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--surface-card-dark); color: var(--ink);
+    border: 1px solid var(--hairline); padding: 10px 16px; border-radius: 6px;
+    font-family: var(--font-text); font-size: 14px; resize: vertical; outline: none;
+    letter-spacing: 0;
+  }
+  .form-state-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--primary); border-radius: 2px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: var(--font-number); font-size: 11px; font-weight: 500; color: var(--muted); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--surface-elevated-dark); margin-bottom: 6px; }
+  .radius-label { font-family: var(--font-number); font-size: 11px; font-weight: 500; color: var(--muted); }
+  .radius-context { font-size: 10px; color: var(--muted); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: var(--surface-card-dark); border-radius: 8px; padding: 24px; text-align: center; }
+  .elevation-label { font-size: 14px; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; color: var(--ink); }
+  .elevation-desc { font-family: var(--font-number); font-size: 11px; color: var(--muted); }
+
+  /* FOOTER */
+  .footer { padding: 64px 32px; text-align: center; background: var(--surface-soft); font-size: 13px; color: var(--muted); letter-spacing: 0; border-top: 1px solid var(--hairline); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 36px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">BINANCE</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Sign Up</a>
+</nav>
+<div class="dark-badge">Dark Mode</div>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by Binance</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value of the world's largest crypto exchange — visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Get Started</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand &amp; Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#fcd535"></div><div class="color-swatch-info"><div class="color-swatch-name">Binance Yellow</div><div class="color-swatch-hex">#fcd535</div><div class="color-swatch-role">Primary CTA, wordmark, headlines</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f0b90b"></div><div class="color-swatch-info"><div class="color-swatch-name">Yellow Active</div><div class="color-swatch-hex">#f0b90b</div><div class="color-swatch-role">Press / hover-darker state</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#3a3a1f"></div><div class="color-swatch-info"><div class="color-swatch-name">Yellow Disabled</div><div class="color-swatch-hex">#3a3a1f</div><div class="color-swatch-role">Disabled CTA on dark</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#2dbdb6"></div><div class="color-swatch-info"><div class="color-swatch-name">Accent Turquoise</div><div class="color-swatch-hex">#2dbdb6</div><div class="color-swatch-role">Smart Money single accent</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0b0e11"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Dark</div><div class="color-swatch-hex">#0b0e11</div><div class="color-swatch-role">Marketing page floor</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1e2329"></div><div class="color-swatch-info"><div class="color-swatch-name">Surface Card</div><div class="color-swatch-hex">#1e2329</div><div class="color-swatch-role">Cards, dropdowns, tables</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#2b3139"></div><div class="color-swatch-info"><div class="color-swatch-name">Surface Elevated</div><div class="color-swatch-hex">#2b3139</div><div class="color-swatch-role">Nested cards, chart panels</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid #2b3139"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Light</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Transactional page floor</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text &amp; Border</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid #2b3139"></div><div class="color-swatch-info"><div class="color-swatch-name">On Dark</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">High-contrast headlines</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#eaecef"></div><div class="color-swatch-info"><div class="color-swatch-name">Body on Dark</div><div class="color-swatch-hex">#eaecef</div><div class="color-swatch-role">Default running text</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#929aa5"></div><div class="color-swatch-info"><div class="color-swatch-name">Muted Strong</div><div class="color-swatch-hex">#929aa5</div><div class="color-swatch-role">Emphasized labels</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#707a8a"></div><div class="color-swatch-info"><div class="color-swatch-name">Muted</div><div class="color-swatch-hex">#707a8a</div><div class="color-swatch-role">Links, captions, headers</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#2b3139"></div><div class="color-swatch-info"><div class="color-swatch-name">Hairline on Dark</div><div class="color-swatch-hex">#2b3139</div><div class="color-swatch-role">1px borders on dark</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic (Trading &amp; Info)</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0ecb81"></div><div class="color-swatch-info"><div class="color-swatch-name">Trading Up</div><div class="color-swatch-hex">#0ecb81</div><div class="color-swatch-role">Price up, Buy / Long</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f6465d"></div><div class="color-swatch-info"><div class="color-swatch-name">Trading Down</div><div class="color-swatch-hex">#f6465d</div><div class="color-swatch-role">Price down, Sell / Short</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#3b82f6"></div><div class="color-swatch-info"><div class="color-swatch-name">Info</div><div class="color-swatch-hex">#3b82f6</div><div class="color-swatch-role">Info badges, focus ring</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:64px; font-weight:700; line-height:1.1; letter-spacing:-1px; color:var(--on-dark);">Hero Display</div><div class="type-meta">Hero Display -- 64px / 700 / 1.1 / -1px / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:48px; font-weight:700; line-height:1.1; letter-spacing:-0.5px; color:var(--on-dark);">Display Large</div><div class="type-meta">Display Large -- 48px / 700 / 1.1 / -0.5px / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:40px; font-weight:600; line-height:1.15; letter-spacing:-0.3px; color:var(--on-dark);">Display Medium</div><div class="type-meta">Display Medium -- 40px / 600 / 1.15 / -0.3px / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:32px; font-weight:600; line-height:1.2; letter-spacing:0; color:var(--on-dark);">Display Small</div><div class="type-meta">Display Small -- 32px / 600 / 1.2 / 0 / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:600; line-height:1.3; letter-spacing:0; color:var(--on-dark);">Title Large</div><div class="type-meta">Title Large -- 24px / 600 / 1.3 / 0 / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:20px; font-weight:600; line-height:1.35; letter-spacing:0; color:var(--on-dark);">Title Medium</div><div class="type-meta">Title Medium -- 20px / 600 / 1.35 / 0 / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:16px; font-weight:600; line-height:1.4; letter-spacing:0; color:var(--on-dark);">Title Small</div><div class="type-meta">Title Small -- 16px / 600 / 1.4 / 0 / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-number); font-size:40px; font-weight:700; line-height:1.1; letter-spacing:-0.3px; color:var(--primary);">$429,423,449</div><div class="type-meta">Number Display -- 40px / 700 / 1.1 / -0.3px / BinancePlex</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-number); font-size:16px; font-weight:500; line-height:1.4; letter-spacing:0; color:var(--ink);">BTC/USDT  79,065.04</div><div class="type-meta">Number MD -- 16px / 500 / 1.4 / 0 / BinancePlex</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-number); font-size:14px; font-weight:500; line-height:1.4; letter-spacing:0; color:var(--trading-up);">+0.45%  &middot;  24h change</div><div class="type-meta">Number SM -- 14px / 500 / 1.4 / 0 / BinancePlex</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:400; line-height:1.5; letter-spacing:0; color:var(--body-dark);">Body -- Buy, trade, and hold 350+ cryptocurrencies on the world's largest exchange. Default running text on every surface.</div><div class="type-meta">Body MD -- 14px / 400 / 1.5 / 0 / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:13px; font-weight:400; line-height:1.5; letter-spacing:0; color:var(--body-dark);">Body Small -- Cookie consent text, footer body, and dense supporting copy.</div><div class="type-meta">Body SM -- 13px / 400 / 1.5 / 0 / BinanceNova</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:12px; font-weight:500; line-height:1.4; letter-spacing:0; color:var(--muted-strong);">Caption -- small meta labels and column headers</div><div class="type-meta">Caption -- 12px / 500 / 1.4 / 0 / BinanceNova</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Sign Up</a><div class="button-label">Primary (6px)</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Join Now</a><div class="button-label">Primary Pill</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Log In</a><div class="button-label">Secondary</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Markets</a><div class="button-label">Filter</div></div>
+    <div class="button-item"><a class="btn-up" href="#">Buy / Long</a><div class="button-label">Trading Up</div></div>
+    <div class="button-item"><a class="btn-down" href="#">Sell / Short</a><div class="button-label">Trading Down</div></div>
+    <div class="button-item"><a class="btn-disabled" href="#">Continue</a><div class="button-label">Disabled</div></div>
+    <div class="button-item"><span style="display:inline-block; background:transparent; color:var(--primary); padding:8px 0; font-size:14px; font-weight:600;">Read More &gt;</span><div class="button-label">Text Link</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Dark Canvas</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-stat">316,258,026</div>
+      <h3>Users Trust Us</h3>
+      <p>The world's largest crypto exchange by trading volume, trusted by users across more than 180 countries.</p>
+      <a class="card-link" href="#">View metrics &gt;</a>
+    </div>
+    <div class="card card-elevated" style="box-shadow: var(--shadow-card);">
+      <div class="card-stat">$1.2T+</div>
+      <h3>FUNDS ARE SAFU</h3>
+      <p>The Secure Asset Fund for Users protects a portion of trading fees as an emergency insurance reserve.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card">
+      <div class="card-stat">350+</div>
+      <h3>Listed Assets</h3>
+      <p>Spot, futures, and margin markets across hundreds of cryptocurrencies with deep, reliable liquidity.</p>
+      <a class="card-link" href="#">Explore markets &gt;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Elevated)</div>
+  <h2 class="section-title">Cards on Elevated Surface</h2>
+  <div class="card-grid">
+    <div class="card card-elevated">
+      <h3>Buy Crypto</h3>
+      <p>Purchase Bitcoin, Ethereum, and 350+ assets in minutes using a card, bank transfer, or balance.</p>
+      <a class="card-link" href="#">Start now &gt;</a>
+    </div>
+    <div class="card card-elevated" style="box-shadow: var(--shadow-card);">
+      <h3>Low-Fee Trading</h3>
+      <p>Secure, low-fee spot and futures trading with industry-leading execution speed and uptime.</p>
+      <a class="card-link" href="#">Trade now &gt;</a>
+    </div>
+    <div class="card card-elevated">
+      <h3>Earn Rewards</h3>
+      <p>Grow your holdings with flexible and locked products, staking, and on-chain yield programs.</p>
+      <a class="card-link" href="#">Discover Earn &gt;</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email / Phone</label><input class="form-input" type="text" placeholder="name@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Password</label><input class="form-input form-input--focus" type="password" value="mypassword123"><div class="form-state-label">Focus (info ring)</div></div>
+  <div class="form-group"><label class="form-label">Amount (USDT)</label><input class="form-input form-input--error" type="text" value="0.00"><div class="form-state-label">Error (red ring)</div></div>
+  <div class="form-group"><label class="form-label">Support Message</label><textarea class="form-textarea" placeholder="Describe your issue..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:80px"></div><div class="spacing-value">80</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:2px"></div><div class="radius-label">2px</div><div class="radius-context">xs / micro badges</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><div class="radius-label">4px</div><div class="radius-context">sm / inline buttons</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:6px"></div><div class="radius-label">6px</div><div class="radius-context">md / primary buttons</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><div class="radius-label">8px</div><div class="radius-context">lg / inputs, cards</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><div class="radius-label">12px</div><div class="radius-context">xl / elevated cards</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-label">9999px</div><div class="radius-context">pill / full</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:1px solid var(--hairline);"><div class="elevation-label">Flat</div><div class="elevation-desc">No shadow, no border</div></div>
+    <div class="elevation-card" style="border:1px solid var(--hairline);"><div class="elevation-label">Soft Hairline</div><div class="elevation-desc">1px #2b3139 divider</div></div>
+    <div class="elevation-card" style="background:var(--surface-elevated-dark);"><div class="elevation-label">Card Surface</div><div class="elevation-desc">#2b3139 elevated</div></div>
+    <div class="elevation-card" style="box-shadow:rgba(0,0,0,0.5) 0px 4px 24px 0px;"><div class="elevation-label">Subtle Shadow</div><div class="elevation-desc">Card over imagery</div></div>
+    <div class="elevation-card" style="box-shadow:0 0 0 2px rgba(59,130,246,0.5);"><div class="elevation-label">Focus Ring</div><div class="elevation-desc">2px Info @ 50%</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

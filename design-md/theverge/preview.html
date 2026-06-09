@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by The Verge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #ffffff;
+    --ink: #131313;
+    --pure-black: #131313;
+    --light-gray: #f4f4f2;
+    --mint: #3cffd0;
+    --mint-border: #309875;
+    --ultraviolet: #5200ff;
+    --link-blue: #3860be;
+    --link-blue-dark: #5b86e8;
+    --focus-cyan: #1eaedb;
+    --purple-rule: #3d00bf;
+    --slate: #2d2d2d;
+    --gray-80: rgba(19,19,19,0.78);
+    --gray-48: rgba(19,19,19,0.50);
+    --button-active: #8c8c8c;
+    --filter-bg: #f4f4f2;
+    --dark-surface-1: #131313;
+    --dark-surface-2: #1d1d1d;
+    --dark-surface-3: #2d2d2d;
+    --overlay: rgba(19,19,19,0.08);
+    --shadow-card: rgba(0,0,0,0.10) 0px 0px 0px 1px;
+    --nav-bg: rgba(19,19,19,0.94);
+    --error: #5200ff;
+    --font-display: 'Manuka', 'Archivo Black', Impact, 'Helvetica Neue', Helvetica, sans-serif;
+    --font-text: 'PolySans', 'Space Grotesk', Helvetica, Arial, sans-serif;
+    --font-mono: 'PolySans Mono', 'Space Mono', 'Courier New', Courier, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 16px; font-weight: 400; line-height: 1.6;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 52px;
+    background: var(--nav-bg);
+    backdrop-filter: saturate(140%) blur(16px);
+    -webkit-backdrop-filter: saturate(140%) blur(16px);
+  }
+  .nav-brand { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: #ffffff; text-decoration: none; letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.78); text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--mint); }
+  .nav-cta {
+    display: inline-block; background: var(--mint); color: #000000;
+    padding: 6px 18px; border-radius: 24px; font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; transition: background 0.18s, box-shadow 0.18s;
+  }
+  .nav-cta:hover { background: rgba(255,255,255,0.92); box-shadow: 0 0 0 1px #c2c2c2; }
+
+  /* HERO */
+  .hero { padding: 96px 32px 80px; text-align: center; background: var(--light-gray); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 88px; font-weight: 400; line-height: 0.92;
+    letter-spacing: 1px; color: var(--ink); margin-bottom: 20px; text-transform: none;
+  }
+  .hero p { font-family: var(--font-text); font-size: 20px; font-weight: 300; line-height: 1.3; letter-spacing: 0.32px; color: var(--gray-80); max-width: 620px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--mint); color: #000000;
+    padding: 10px 24px; border-radius: 24px; border: none;
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    text-decoration: none; cursor: pointer; transition: background 0.18s, box-shadow 0.18s;
+  }
+  .btn-blue:hover { background: rgba(19,19,19,0.92); color: #ffffff; box-shadow: 0 0 0 1px #c2c2c2; }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--ultraviolet);
+    padding: 10px 24px; border-radius: 40px;
+    border: 1px solid var(--ultraviolet);
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    text-decoration: none; cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .btn-outline:hover { background: var(--ultraviolet); color: #ffffff; }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 980px; margin: 0 auto; }
+  .section-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--ultraviolet); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1.8px; }
+  .section-title { font-family: var(--font-display); font-size: 40px; font-weight: 400; line-height: 1.0; letter-spacing: 0.4px; margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 1px solid #e2e2de; margin: 0; }
+
+  /* DARK SECTION (full-width — The Verge's native canvas) */
+  .section-dark { background: var(--pure-black); color: #ffffff; padding: 64px 32px; }
+  .section-dark .section-inner { max-width: 980px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--mint); }
+  .section-dark .section-title { color: #ffffff; }
+
+  /* LIGHT-GRAY SECTION */
+  .section-gray { background: var(--light-gray); padding: 64px 32px; }
+  .section-gray .section-inner { max-width: 980px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 20px; overflow: hidden; background: #ffffff; box-shadow: 0 0 0 1px rgba(19,19,19,0.10); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 12px 14px; }
+  .color-swatch-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; letter-spacing: 0; color: var(--ink); }
+  .color-swatch-hex { font-family: var(--font-mono); font-size: 12px; color: var(--gray-48); }
+  .color-swatch-role { font-size: 11px; color: var(--gray-48); margin-top: 4px; line-height: 1.3; }
+  .color-group-label { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--gray-80); text-transform: uppercase; letter-spacing: 1.5px; margin: 28px 0 12px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid #e2e2de; }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: var(--font-mono); font-size: 12px; font-weight: 400; color: var(--gray-48); margin-top: 10px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--gray-48); text-transform: uppercase; letter-spacing: 1.1px; margin-top: 10px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--slate); color: #e9e9e9;
+    padding: 10px 24px; border-radius: 24px; border: none;
+    font-family: var(--font-text); font-size: 15px; font-weight: 400;
+    text-decoration: none; cursor: pointer; transition: background 0.18s, color 0.18s;
+  }
+  .btn-dark-fill:hover { background: rgba(19,19,19,0.92); color: #ffffff; }
+  .btn-filter {
+    display: inline-block; background: var(--filter-bg); color: var(--gray-80);
+    padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(19,19,19,0.12);
+    font-family: var(--font-mono); font-size: 12px; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--mint); color: #000000; border: none;
+    font-size: 14px; cursor: pointer;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: #ffffff; border-radius: 24px; padding: 28px 24px; border: 1px solid #e2e2de; transition: border-color 0.15s; }
+  .card:hover { border-color: var(--mint-border); }
+  .card .kicker { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--ultraviolet); text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 10px; }
+  .card h3 { font-family: var(--font-text); font-size: 24px; font-weight: 700; letter-spacing: 0; line-height: 1.0; margin-bottom: 10px; }
+  .card p { font-size: 14px; color: var(--gray-80); line-height: 1.5; letter-spacing: 0; }
+  .card-link { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--link-blue); text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; margin-top: 14px; display: inline-block; }
+  .card-link:hover { color: var(--link-blue); text-decoration: underline; }
+
+  .card-dark { background: var(--dark-surface-1); color: #ffffff; border: 1px solid #ffffff; }
+  .card-dark .kicker { color: var(--mint); }
+  .card-dark h3 { color: #ffffff; }
+  .card-dark p { color: rgba(255,255,255,0.72); }
+  .card-dark .card-link { color: var(--link-blue-dark); }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  .form-input {
+    width: 100%; background: #ffffff; color: var(--ink);
+    border: 1px solid #949494; padding: 11px 14px; border-radius: 2px;
+    font-family: var(--font-text); font-size: 15px; outline: none;
+    letter-spacing: 0.15px; transition: border-color 0.15s;
+  }
+  .form-input::placeholder { color: var(--gray-48); }
+  .form-input:focus { border-color: var(--mint-border); }
+  .form-input--focus { border-color: var(--mint-border); box-shadow: inset 0 0 0 1px var(--ultraviolet); }
+  .form-input--error { border-color: var(--ultraviolet); box-shadow: 0 0 0 1px var(--ultraviolet); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: #ffffff; color: var(--ink);
+    border: 1px solid #949494; padding: 11px 14px; border-radius: 2px;
+    font-family: var(--font-text); font-size: 15px; resize: vertical; outline: none;
+    letter-spacing: 0.15px;
+  }
+  .form-textarea::placeholder { color: var(--gray-48); }
+  .form-state-label { font-family: var(--font-mono); font-size: 10px; color: var(--gray-48); text-transform: uppercase; letter-spacing: 1.1px; margin-top: 6px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--mint); border-radius: 2px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gray-48); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); margin-bottom: 8px; }
+  .radius-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gray-48); }
+  .radius-context { font-family: var(--font-mono); font-size: 10px; color: var(--gray-48); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: #ffffff; border-radius: 20px; padding: 24px; text-align: center; }
+  .elevation-label { font-family: var(--font-text); font-size: 14px; font-weight: 700; letter-spacing: 0; margin-bottom: 4px; }
+  .elevation-desc { font-family: var(--font-mono); font-size: 11px; color: var(--gray-48); }
+
+  /* FOOTER */
+  .footer { padding: 40px 32px; text-align: center; background: var(--pure-black); font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1.5px; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 52px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">The Verge</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Type</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Subscribe</a>
+</nav>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by The Verge</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value visualized in hazard-tape mint and ultraviolet.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Join the Stream</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand Hazards</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#3cffd0"></div><div class="color-swatch-info"><div class="color-swatch-name">Jelly Mint</div><div class="color-swatch-hex">#3cffd0</div><div class="color-swatch-role">CTA fill, links, active borders</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#5200ff"></div><div class="color-swatch-info"><div class="color-swatch-name">Verge Ultraviolet</div><div class="color-swatch-hex">#5200ff</div><div class="color-swatch-role">Secondary tiles, outlines</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#309875"></div><div class="color-swatch-info"><div class="color-swatch-name">Console Mint Border</div><div class="color-swatch-hex">#309875</div><div class="color-swatch-role">Card / button outlines</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#3d00bf"></div><div class="color-swatch-info"><div class="color-swatch-name">Purple Rule</div><div class="color-swatch-hex">#3d00bf</div><div class="color-swatch-role">StoryStream rail border</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface & Background</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#131313"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Black</div><div class="color-swatch-hex">#131313</div><div class="color-swatch-role">Default dark canvas</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#2d2d2d"></div><div class="color-swatch-info"><div class="color-swatch-name">Surface Slate</div><div class="color-swatch-hex">#2d2d2d</div><div class="color-swatch-role">Secondary card background</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#313131"></div><div class="color-swatch-info"><div class="color-swatch-name">Image Frame</div><div class="color-swatch-hex">#313131</div><div class="color-swatch-role">1px imagery border</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid #e2e2de"></div><div class="color-swatch-info"><div class="color-swatch-name">Hazard White</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Spotlight tile, primary text</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text & Neutrals</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#131313"></div><div class="color-swatch-info"><div class="color-swatch-name">Primary Text</div><div class="color-swatch-hex">#131313</div><div class="color-swatch-role">Headlines on canvas</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#949494"></div><div class="color-swatch-info"><div class="color-swatch-name">Secondary Text</div><div class="color-swatch-hex">#949494</div><div class="color-swatch-role">Bylines, timestamps</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e9e9e9; border-bottom:1px solid #e2e2de"></div><div class="color-swatch-info"><div class="color-swatch-name">Muted Text</div><div class="color-swatch-hex">#e9e9e9</div><div class="color-swatch-role">Slate button text</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#8c8c8c"></div><div class="color-swatch-info"><div class="color-swatch-name">Dim Gray</div><div class="color-swatch-hex">#8c8c8c</div><div class="color-swatch-role">Pressed button state</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic & Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#3860be"></div><div class="color-swatch-info"><div class="color-swatch-name">Deep Link Blue</div><div class="color-swatch-hex">#3860be</div><div class="color-swatch-role">Universal link hover</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1eaedb"></div><div class="color-swatch-info"><div class="color-swatch-name">Focus Cyan</div><div class="color-swatch-hex">#1eaedb</div><div class="color-swatch-role">Keyboard focus ring</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#000000"></div><div class="color-swatch-info"><div class="color-swatch-name">Absolute Black</div><div class="color-swatch-hex">#000000</div><div class="color-swatch-role">Text on mint / white tiles</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(0,0,0,0.33)"></div><div class="color-swatch-info"><div class="color-swatch-name">Overlay Black</div><div class="color-swatch-hex">rgba(0,0,0,0.33)</div><div class="color-swatch-role">Quiet 1px stacked-card ring</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:88px; font-weight:400; line-height:0.92; letter-spacing:1.07px;">The Verge</div><div class="type-meta">Hero Wordmark / Display -- 107px / 900 / 0.80 / 1.07px / Manuka</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:72px; font-weight:400; line-height:0.92; letter-spacing:0.5px;">Feature Headline</div><div class="type-meta">Secondary Display -- 90px / 900 / 0.80 / normal / Manuka</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:54px; font-weight:400; line-height:0.92; letter-spacing:0.5px;">Inline Callout</div><div class="type-meta">Tertiary Display -- 60px / 900 / 0.80 / normal / Manuka</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:34px; font-weight:700; line-height:1.0; letter-spacing:0;">Large Headline</div><div class="type-meta">Large Headline -- 34px / 700 / 1.00 / normal / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:32px; font-weight:400; line-height:1.10; letter-spacing:0.32px;">Heading Wide Sub-Hero</div><div class="type-meta">Heading Wide -- 32px / 400 / 1.10 / 0.32px / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:24px; font-weight:700; line-height:1.0; letter-spacing:0;">Story Tile Headline</div><div class="type-meta">Heading Medium -- 24px / 700 / 1.00 / normal / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:20px; font-weight:700; line-height:1.0; letter-spacing:0;">Compact Tile Headline</div><div class="type-meta">Heading Small -- 20px / 700 / 1.00 / normal / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:19px; font-weight:300; line-height:1.2; letter-spacing:1.9px;">Light Capitalized Eyebrow</div><div class="type-meta">Light Capitalized Label -- 19px / 300 / 1.20 / 1.9px / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:400; line-height:1.1; letter-spacing:1.8px; text-transform:uppercase;">All-Caps Section Kicker</div><div class="type-meta">All-Caps Label XL -- 18px / 400 / 1.10 / 1.8px / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1.6; letter-spacing:0;">Body Relaxed -- The Verge covers the intersection of technology, science, art, and culture. Long-form reading body set at a comfortable measure.</div><div class="type-meta">Body Relaxed -- 16px / 500 / 1.60 / normal / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:700; line-height:1.0; letter-spacing:0;">Bold Body Emphasis</div><div class="type-meta">Bold Body -- 16px / 700 / 1.00 / normal / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:13px; font-weight:400; line-height:1.6; letter-spacing:0;">Body Compact -- secondary captions, decks, and supporting copy set slightly smaller for density.</div><div class="type-meta">Body Compact -- 13px / 400 / 1.60 / normal / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:12px; font-weight:400; line-height:1.3; letter-spacing:1.8px; text-transform:uppercase;">Eyebrow Kicker Above Headline</div><div class="type-meta">Eyebrow All-Caps -- 12px / 400 / 1.30 / 1.8px / PolySans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-mono); font-size:12px; font-weight:700; line-height:2.0; letter-spacing:1.5px; text-transform:uppercase;">Subscribe Now</div><div class="type-meta">Mono Button Label -- 12px / 600 / 2.00 / 1.5px / PolySans Mono</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-mono); font-size:11px; font-weight:500; line-height:1.2; letter-spacing:1.1px; text-transform:uppercase;">2:47 PM &middot; Updated 4 min ago</div><div class="type-meta">Mono Timestamp -- 11px / 500 / 1.20 / 1.1px / PolySans Mono</div></div>
+  <div class="type-sample"><div style="font-family:Georgia, 'Times New Roman', serif; font-size:20px; font-weight:400; line-height:1.2; letter-spacing:0;">Serif pull quote for print-voice review moments.</div><div class="type-meta">Serif Caption -- 20px / 400 / 1.20 / normal / FK Roman Standard</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Subscribe</a><div class="button-label">Jelly Mint Pill</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Read More</a><div class="button-label">Dark Slate Pill</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Join</a><div class="button-label">Outlined UV</div></div>
+    <div class="button-item"><span style="display:inline-block; background:transparent; color:var(--mint-border); padding:10px 20px; border-radius:40px; border:1px solid var(--mint); font-family:var(--font-mono); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;">Stream</span><div class="button-label">Outlined Mint</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Search</a><div class="button-label">Filter</div></div>
+    <div class="button-item"><button class="btn-media">&#9654;</button><div class="button-label">Media</div></div>
+    <div class="button-item"><span style="display:inline-block; background:var(--ultraviolet); color:#fff; padding:4px 10px; border-radius:20px; font-family:var(--font-mono); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.8px;">Tech</span><div class="button-label">Pill Tag</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">StoryStream on Dark Canvas</h2>
+  <div class="card-grid">
+    <div class="card card-dark">
+      <div class="kicker">Report</div>
+      <h3>The Chip Race Heats Up</h3>
+      <p>Inside the next generation of silicon, and why the foundries betting big on smaller nodes could reshape the entire industry.</p>
+      <a class="card-link" href="#">Read Story &rsaquo;</a>
+    </div>
+    <div class="card card-dark" style="box-shadow: var(--shadow-card);">
+      <div class="kicker">Review</div>
+      <h3>A Synth Worth Shouting About</h3>
+      <p>It pairs analog warmth with a console-grade sequencer. After two weeks on the bench, it earns its hazard-tape headline.</p>
+      <a class="card-link" href="#">Read Story &rsaquo;</a>
+    </div>
+    <div class="card card-dark">
+      <div class="kicker">Policy</div>
+      <h3>The Hearing Everyone Missed</h3>
+      <p>A congressional session on platform accountability quietly set precedent that will echo across the next decade of tech regulation.</p>
+      <a class="card-link" href="#">Read Story &rsaquo;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Light Surface</h2>
+  <div class="card-grid">
+    <div class="card" style="background:#ffffff;">
+      <div class="kicker">Science</div>
+      <h3>Signals From the Edge</h3>
+      <p>A new array picks up patterns nobody expected. Researchers are cautious, but the data keeps getting harder to ignore.</p>
+      <a class="card-link" href="#">Read Story &rsaquo;</a>
+    </div>
+    <div class="card" style="background:#3cffd0; border-color:#309875;">
+      <div class="kicker" style="color:#131313;">Feature</div>
+      <h3 style="color:#000000;">Mint Spotlight Tile</h3>
+      <p style="color:rgba(0,0,0,0.78);">A saturated accent block elevates the top story with color, not shadow. Black text keeps it legible against the hazard fill.</p>
+      <a class="card-link" href="#" style="color:#131313;">Read Story &rsaquo;</a>
+    </div>
+    <div class="card" style="background:#ffffff;">
+      <div class="kicker">Culture</div>
+      <h3>Club Night, Console Glow</h3>
+      <p>Where the rave flyer meets the developer terminal. A look at the visual language defining a new wave of independent media.</p>
+      <a class="card-link" href="#">Read Story &rsaquo;</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="text" placeholder="you@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Newsletter</label><input class="form-input form-input--focus" type="text" value="reader@theverge.com"><div class="form-state-label">Focus (mint border + UV ring)</div></div>
+  <div class="form-group"><label class="form-label">Username</label><input class="form-input form-input--error" type="text" value="invalid@"><div class="form-state-label">Error (ultraviolet border)</div></div>
+  <div class="form-group"><label class="form-label">Comment</label><textarea class="form-textarea" placeholder="Join the conversation..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:1px"></div><div class="spacing-value">1</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:2px"></div><div class="spacing-value">2</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:6px"></div><div class="spacing-value">6</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:10px"></div><div class="spacing-value">10</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:15px"></div><div class="spacing-value">15</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:20px"></div><div class="spacing-value">20</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:2px"></div><div class="radius-label">2px</div><div class="radius-context">Inputs</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:3px"></div><div class="radius-label">3px</div><div class="radius-context">Inline Img</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><div class="radius-label">4px</div><div class="radius-context">Nested Img</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:20px"></div><div class="radius-label">20px</div><div class="radius-context">Pill Cards</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:24px"></div><div class="radius-label">24px</div><div class="radius-context">Feature</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:30px"></div><div class="radius-label">30px</div><div class="radius-context">Promo Btn</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:40px"></div><div class="radius-label">40px</div><div class="radius-context">Outlined CTA</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:50%"></div><div class="radius-label">50%</div><div class="radius-context">Avatars</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Depth & Color-as-Elevation</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:1px solid #e2e2de;"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No border, no shadow</div></div>
+    <div class="elevation-card" style="box-shadow:0 0 0 1px #131313;"><div class="elevation-label">White Hairline</div><div class="elevation-desc">1px solid frame</div></div>
+    <div class="elevation-card" style="box-shadow:0 0 0 1px #3cffd0;"><div class="elevation-label">Mint Hairline</div><div class="elevation-desc">1px solid #3cffd0</div></div>
+    <div class="elevation-card" style="box-shadow:0 0 0 1px #5200ff;"><div class="elevation-label">UV Hairline</div><div class="elevation-desc">1px solid #5200ff</div></div>
+    <div class="elevation-card" style="box-shadow:rgba(0,0,0,0.33) 0px 0px 0px 1px;"><div class="elevation-label">Atmospheric Ring</div><div class="elevation-desc">rgba(0,0,0,0.33) 1px</div></div>
+    <div class="elevation-card" style="background:#3cffd0; box-shadow:0px -3px 0px 0px inset #131313;"><div class="elevation-label" style="color:#000;">Mint Fill + Inset</div><div class="elevation-desc" style="color:rgba(0,0,0,0.6);">Color-as-elevation</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

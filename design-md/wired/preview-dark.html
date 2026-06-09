@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by WIRED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #f5f5f5;
+    --ink-soft: #e6e6e6;
+    --on-primary: #000000;
+    --body: #9a9a9a;
+    --hairline: #333333;
+    --canvas: #0a0a0a;
+    --canvas-soft: #141414;
+    --link: #4db4ee;
+    --accent: #f5f5f5;
+    --nav-bg: rgba(10,10,10,0.92);
+    --font-display: 'WiredDisplay', 'Playfair Display', 'Times New Roman', Georgia, serif;
+    --font-serif: 'BreveText', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Apercu', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    letter-spacing: 0.09px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; height: 48px;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--ink);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+  .nav-brand { font-family: var(--font-display); font-size: 22px; font-weight: 900; color: var(--ink); text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-family: var(--font-sans); font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: 0.4px; transition: opacity 0.15s; }
+  .nav-links a:hover { opacity: 0.55; }
+  .nav-cta {
+    display: inline-block; background: var(--ink); color: var(--on-primary);
+    padding: 8px 18px; border-radius: 0; font-family: var(--font-sans);
+    font-size: 14px; font-weight: 700; letter-spacing: 0.3px;
+    text-decoration: none; text-transform: uppercase; transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.82; }
+
+  /* DARK MODE BADGE */
+  .dark-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: var(--ink); color: var(--on-primary);
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.4px;
+    padding: 4px 10px; border-radius: 0; text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero { padding: 96px 20px 80px; text-align: center; background: var(--canvas); border-bottom: 1px solid var(--ink); }
+  .hero .eyebrow { font-family: var(--font-sans); font-size: 14px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink); margin-bottom: 20px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 64px; font-weight: 400; line-height: 0.93;
+    letter-spacing: -0.5px; color: var(--ink); margin-bottom: 20px;
+  }
+  .hero p { font-family: var(--font-serif); font-size: 19px; font-weight: 400; line-height: 1.47; letter-spacing: 0.108px; color: var(--body); max-width: 600px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; background: var(--ink); color: var(--on-primary);
+    padding: 12px 20px; border-radius: 0; border: 1px solid var(--ink);
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
+    text-decoration: none; cursor: pointer; text-transform: uppercase; transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.82; }
+  .btn-outline {
+    display: inline-block; background: var(--canvas); color: var(--ink);
+    padding: 12px 20px; border-radius: 0;
+    border: 1px solid var(--ink);
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
+    text-decoration: none; cursor: pointer; text-transform: uppercase; transition: background 0.15s, color 0.15s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--on-primary); }
+
+  /* SECTIONS */
+  .section { padding: 64px 20px; max-width: 1000px; margin: 0 auto; }
+  .section-label { font-family: var(--font-sans); font-size: 14px; font-weight: 700; color: var(--ink); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.2px; }
+  .section-title { font-family: var(--font-display); font-size: 48px; font-weight: 400; line-height: 1.05; letter-spacing: -0.4px; margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 1px solid var(--hairline); margin: 0; }
+
+  /* DARK SECTION (inverted -> lighter band) */
+  .section-dark { background: #f5f5f5; color: #000000; padding: 64px 20px; }
+  .section-dark .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-dark .section-label { color: rgba(0,0,0,0.62); }
+  .section-dark .section-title { color: #000000; }
+
+  /* SOFT-CANVAS SECTION */
+  .section-gray { background: var(--canvas-soft); padding: 64px 20px; }
+  .section-gray .section-inner { max-width: 1000px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 0; overflow: hidden; background: var(--canvas-soft); box-shadow: 0 0 0 1px var(--hairline); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-family: var(--font-sans); font-size: 13px; font-weight: 700; margin-bottom: 2px; letter-spacing: 0.2px; color: var(--ink); }
+  .color-swatch-hex { font-size: 12px; color: var(--body); font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
+  .color-swatch-role { font-family: var(--font-sans); font-size: 11px; color: var(--body); margin-top: 3px; }
+  .color-group-label { font-family: var(--font-sans); font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: 0.8px; text-transform: uppercase; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--body); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-family: var(--font-sans); font-size: 12px; font-weight: 400; color: var(--body); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--ink); color: var(--on-primary);
+    padding: 12px 20px; border-radius: 0; border: none;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
+    text-decoration: none; cursor: pointer; text-transform: uppercase;
+  }
+  .btn-filter {
+    display: inline-block; background: var(--canvas-soft); color: var(--ink);
+    padding: 11px 16px; border-radius: 0; border: 1px solid var(--hairline);
+    font-family: var(--font-sans); font-size: 14px; font-weight: 700; letter-spacing: 0.4px;
+    text-decoration: none; cursor: pointer; text-transform: uppercase;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 9999px;
+    background: var(--canvas); color: var(--ink); border: 1px solid var(--ink);
+    font-size: 14px; cursor: pointer;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--canvas-soft); border-radius: 0; padding: 24px; border: 1px solid var(--hairline); transition: border-color 0.2s; }
+  .card:hover { border-color: var(--ink); }
+  .card .eyebrow { font-family: var(--font-sans); font-size: 14px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; display: block; }
+  .card h3 { font-family: var(--font-display); font-size: 32px; font-weight: 400; letter-spacing: -0.3px; line-height: 1.1; margin-bottom: 8px; color: var(--ink); }
+  .card p { font-family: var(--font-serif); font-size: 16px; color: var(--ink-soft); line-height: 1.5; letter-spacing: 0.09px; }
+  .card-link { font-family: var(--font-sans); font-size: 14px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--ink); text-decoration: none; margin-top: 12px; display: inline-block; border-bottom: 1px solid var(--ink); }
+  .card-link:hover { opacity: 0.6; }
+
+  /* card on the inverted (light) band */
+  .card-light { background: #ffffff; color: #000000; border-color: #e0e0e0; }
+  .card-light .eyebrow { color: #000000; }
+  .card-light h3 { color: #000000; }
+  .card-light p { color: #1a1a1a; }
+  .card-light .card-link { color: #000000; border-bottom-color: #000000; }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-family: var(--font-sans); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: 0.4px; text-transform: uppercase; }
+  .form-input {
+    width: 100%; background: var(--canvas-soft); color: var(--ink);
+    border: 1px solid var(--ink); padding: 12px 16px; border-radius: 0;
+    font-family: var(--font-sans); font-size: 17px; outline: none;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(77,180,238,0.4); }
+  .form-input--focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(77,180,238,0.4); }
+  .form-input--error { border-color: #ff5a5a; box-shadow: 0 0 0 3px rgba(255,90,90,0.3); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--canvas-soft); color: var(--ink);
+    border: 1px solid var(--ink); padding: 12px 16px; border-radius: 0;
+    font-family: var(--font-sans); font-size: 17px; resize: vertical; outline: none;
+  }
+  .form-state-label { font-family: var(--font-sans); font-size: 11px; color: var(--body); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--ink); border-radius: 0; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--body); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); margin-bottom: 6px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--body); }
+  .radius-context { font-family: var(--font-sans); font-size: 10px; color: var(--body); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: var(--canvas-soft); border-radius: 0; padding: 24px; text-align: center; }
+  .elevation-label { font-family: var(--font-sans); font-size: 14px; font-weight: 700; letter-spacing: 0.4px; margin-bottom: 4px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--body); }
+
+  /* FOOTER */
+  .footer { padding: 48px 20px; text-align: center; background: #f5f5f5; font-family: var(--font-sans); font-size: 14px; color: #757575; letter-spacing: 0.4px; border-top: 1px solid var(--hairline); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 40px; }
+    .section-title { font-size: 34px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">WIRED</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Subscribe</a>
+</nav>
+<div class="dark-badge">Dark Mode</div>
+
+<section class="hero">
+  <div class="eyebrow">The Design Issue</div>
+  <h1>Design System<br>Inspired by WIRED</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, typeface, component, and spacing value — set like a printed magazine.</p>
+  <div class="hero-buttons">
+    <a class="btn-primary" href="#">Read more</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand & Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f5f5f5"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink (inverted)</div><div class="color-swatch-hex">#f5f5f5</div><div class="color-swatch-role">Wordmark, headlines, CTAs</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#4db4ee"></div><div class="color-swatch-info"><div class="color-swatch-name">Link Blue</div><div class="color-swatch-hex">#4db4ee</div><div class="color-swatch-role">Inline links, brightened for dark</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0a0a0a; border-bottom:1px solid #333333"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas</div><div class="color-swatch-hex">#0a0a0a</div><div class="color-swatch-role">Default page background</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#141414; border-bottom:1px solid #333333"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas Soft</div><div class="color-swatch-hex">#141414</div><div class="color-swatch-role">Card & input surfaces</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#333333"></div><div class="color-swatch-info"><div class="color-swatch-name">Hairline</div><div class="color-swatch-hex">#333333</div><div class="color-swatch-role">1px dividers on dark</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f5f5f5"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink</div><div class="color-swatch-hex">#f5f5f5</div><div class="color-swatch-role">Headlines & body copy</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e6e6e6"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink Soft</div><div class="color-swatch-hex">#e6e6e6</div><div class="color-swatch-role">Caption-strong emphasis</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#9a9a9a"></div><div class="color-swatch-info"><div class="color-swatch-name">Body</div><div class="color-swatch-hex">#9a9a9a</div><div class="color-swatch-role">Bylines, timestamps, metadata</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#4db4ee"></div><div class="color-swatch-info"><div class="color-swatch-name">Link</div><div class="color-swatch-hex">#4db4ee</div><div class="color-swatch-role">Inline body links</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#000000"></div><div class="color-swatch-info"><div class="color-swatch-name">On Primary</div><div class="color-swatch-hex">#000000</div><div class="color-swatch-role">Text on light fills</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:64px; font-weight:400; line-height:59.52px; letter-spacing:-0.5px;">Cover Story</div><div class="type-meta">Display Hero -- 64px / 400 / 59.52px / -0.5px / WiredDisplay</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:48px; font-weight:400; line-height:50.4px; letter-spacing:-0.4px;">Feature Headline</div><div class="type-meta">Display Large -- 48px / 400 / 50.4px / -0.4px / WiredDisplay</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:32px; font-weight:400; line-height:35.2px; letter-spacing:-0.3px;">Story Card Large</div><div class="type-meta">Display Medium -- 32px / 400 / 35.2px / -0.3px / WiredDisplay</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:26px; font-weight:400; line-height:28.08px; letter-spacing:normal;">Sub-display Heading</div><div class="type-meta">Display Small -- 26px / 400 / 28.08px / normal / WiredDisplay</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:20px; font-weight:700; line-height:24px; letter-spacing:-0.28px;">CATEGORY CALLOUT</div><div class="type-meta">Display XS -- 20px / 700 / 24px / -0.28px / Apercu</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-serif); font-size:19px; font-weight:400; line-height:27.93px; letter-spacing:0.108px;">Lead paragraph -- The brand reads as a printed magazine ported to the web, set in a humanist serif for comfortable long-form reading.</div><div class="type-meta">Body Serif Large -- 19px / 400 / 27.93px / 0.108px / BreveText</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-serif); font-size:16px; font-weight:400; line-height:24px; letter-spacing:0.09px;">Default article body -- Three families ladder the system: a display serif for headlines, a humanist serif for narrative, and a sans for structure.</div><div class="type-meta">Body Serif Medium -- 16px / 400 / 24px / 0.09px / BreveText</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:17px; font-weight:400; line-height:20px; letter-spacing:normal;">Sans body -- navigation and metadata are set in the humanist sans face.</div><div class="type-meta">Body Medium -- 17px / 400 / 20px / normal / Apercu</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:17px; font-weight:700; line-height:22px; letter-spacing:-0.144px;">Bold sans body -- story-row headings.</div><div class="type-meta">Body Medium Strong -- 17px / 700 / 22px / -0.144px / Apercu</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:14px; font-weight:400; line-height:18px; letter-spacing:0.4px;">Secondary sans body -- supporting metadata and fine structural labels.</div><div class="type-meta">Body Small -- 14px / 400 / 18px / 0.4px / Apercu</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:14px; font-weight:700; line-height:18px; letter-spacing:0.4px;">BOLD CAPTION / NAV LINK</div><div class="type-meta">Body Small Strong -- 14px / 700 / 18px / 0.4px / Apercu</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-serif); font-size:12.73px; font-weight:700; line-height:28px; letter-spacing:0.108px;">By A. Reporter / June 9, 2026</div><div class="type-meta">Byline -- 12.73px / 700 / 28px / 0.108px / BreveText</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:12px; font-weight:400; line-height:16px; letter-spacing:normal;">Fine print, image captions, and footnotes.</div><div class="type-meta">Caption -- 12px / 400 / 16px / normal / Apercu</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-sans); font-size:16px; font-weight:700; line-height:20px; letter-spacing:0.3px; text-transform:uppercase;">Button Label</div><div class="type-meta">Button Medium -- 16px / 700 / 20px / 0.3px / Apercu</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-primary" href="#">Subscribe</a><div class="button-label">Primary (square)</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Read more</a><div class="button-label">Outline (square)</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Sign Up</a><div class="button-label">Light Fill</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Filter</a><div class="button-label">Soft Filter</div></div>
+    <div class="button-item"><button class="btn-media">&#9654;</button><div class="button-label">Icon (circular)</div></div>
+    <div class="button-item"><span style="display:inline-block; background:transparent; color:var(--link); padding:6px 0; border-bottom:1px solid var(--link); font-family:var(--font-serif); font-size:16px; font-weight:400; letter-spacing:0.09px;">inline body link</span><div class="button-label">Article Link</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Light Band</h2>
+  <div class="card-grid">
+    <div class="card card-light">
+      <span class="eyebrow">Science</span>
+      <h3>The Long Read</h3>
+      <p>A cover story headline set in the display serif, with a humanist-serif lead paragraph beneath. No gradient, no chrome — type does the work.</p>
+      <a class="card-link" href="#">Read more</a>
+    </div>
+    <div class="card card-light">
+      <span class="eyebrow">Gear</span>
+      <h3>Field Notes</h3>
+      <p>Secondary story cards stack into a magazine grid. Surface contrast and hairlines carry the hierarchy, never drop-shadows.</p>
+      <a class="card-link" href="#">Read more</a>
+    </div>
+    <div class="card card-light">
+      <span class="eyebrow">Culture</span>
+      <h3>Dispatch</h3>
+      <p>Square corners across the board. The editorial voice stays consistent from cover story down to the smallest byline row.</p>
+      <a class="card-link" href="#">Read more</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Soft Canvas</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="eyebrow">Security</span>
+      <h3>Investigations</h3>
+      <p>Bylined feature cards live on the canvas with a hairline frame. The headline serif pairs with a humanist-serif deck.</p>
+      <a class="card-link" href="#">Read more</a>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Business</span>
+      <h3>Backstory</h3>
+      <p>Metadata, eyebrows, and the link label all use the sans face — structure and labels stay distinct from narrative.</p>
+      <a class="card-link" href="#">Read more</a>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Ideas</span>
+      <h3>Perspective</h3>
+      <p>Hover sharpens the hairline border to full ink. The brand never softens a corner or floats a shadow.</p>
+      <a class="card-link" href="#">Read more</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="text" placeholder="you@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Password</label><input class="form-input form-input--focus" type="password" value="subscriber123"><div class="form-state-label">Focus (link-blue ring)</div></div>
+  <div class="form-group"><label class="form-label">Confirm Email</label><input class="form-input form-input--error" type="text" value="invalid@"><div class="form-state-label">Error</div></div>
+  <div class="form-group"><label class="form-label">Letter to the Editor</label><textarea class="form-textarea" placeholder="Write your note..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:2px"></div><div class="spacing-value">2 · xxs</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4 · xs</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8 · sm</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12 · md</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16 · lg</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:20px"></div><div class="spacing-value">20 · xl</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24 · 2xl</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32 · 3xl</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48 · 4xl</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:0px"></div><div class="radius-label">0px</div><div class="radius-context">none · buttons, inputs, cards</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-label">9999px</div><div class="radius-context">full · icon containers, avatars</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation & Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="background:#0a0a0a;"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No shadow, no border</div></div>
+    <div class="elevation-card" style="border:1px solid #333333;"><div class="elevation-label">Level 1: Hairline</div><div class="elevation-desc">1px solid #333333</div></div>
+    <div class="elevation-card" style="border:2px solid #f5f5f5;"><div class="elevation-label">Level 2: Heavy Border</div><div class="elevation-desc">2px solid #f5f5f5</div></div>
+    <div class="elevation-card" style="background:#f5f5f5; color:#000000;"><div class="elevation-label" style="color:#000;">Ink Fill (inverted)</div><div class="elevation-desc" style="color:rgba(0,0,0,0.6);">Footer / CTA surface</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

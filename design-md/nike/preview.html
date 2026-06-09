@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by Nike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111111;
+    --canvas: #ffffff;
+    --soft-cloud: #f5f5f5;
+    --charcoal: #39393b;
+    --ash: #4b4b4d;
+    --mute: #707072;
+    --stone: #9e9ea0;
+    --hairline: #cacacb;
+    --hairline-soft: #e5e5e5;
+    --sale: #d30005;
+    --sale-deep: #780700;
+    --success: #007d48;
+    --info: #1151ff;
+    --accent: #111111;
+    --shadow-card: none;
+    --nav-bg: rgba(255,255,255,0.92);
+    --font-display: 'Bebas Neue', 'Nike Futura ND', 'Anton', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-text: 'Inter', 'Helvetica Now Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 56px;
+    background: var(--nav-bg);
+    box-shadow: inset 0 -1px 0 var(--hairline-soft);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+  .nav-brand { font-size: 15px; font-weight: 600; color: var(--ink); text-decoration: none; letter-spacing: 0; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: opacity 0.15s; }
+  .nav-links a:hover { opacity: 0.55; }
+  .nav-cta {
+    display: inline-block; background: var(--ink); color: #ffffff;
+    padding: 8px 20px; border-radius: 9999px; font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero { padding: 96px 32px 80px; text-align: center; background: var(--soft-cloud); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 96px; font-weight: 400; line-height: 0.9;
+    letter-spacing: 0; text-transform: uppercase; color: var(--ink); margin-bottom: 20px;
+  }
+  .hero p { font-family: var(--font-text); font-size: 18px; font-weight: 400; line-height: 1.5; letter-spacing: 0; color: var(--charcoal); max-width: 600px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--ink); color: #ffffff;
+    padding: 16px 32px; border-radius: 30px; border: none;
+    font-family: var(--font-text); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: opacity 0.15s;
+  }
+  .btn-blue:hover { opacity: 0.85; }
+  .btn-outline {
+    display: inline-block; background: var(--soft-cloud); color: var(--ink);
+    padding: 16px 32px; border-radius: 30px;
+    border: none;
+    font-family: var(--font-text); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-outline:hover { background: var(--hairline-soft); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 980px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 12px; font-weight: 500; color: var(--mute); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+  .section-title { font-family: var(--font-display); font-size: 48px; font-weight: 400; line-height: 1.0; letter-spacing: 0; text-transform: uppercase; margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 1px solid var(--hairline); margin: 0; }
+
+  /* DARK SECTION (full-width) */
+  .section-dark { background: var(--ink); color: #ffffff; padding: 64px 32px; }
+  .section-dark .section-inner { max-width: 980px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--stone); }
+  .section-dark .section-title { color: #ffffff; }
+
+  /* SOFT-CLOUD SECTION */
+  .section-gray { background: var(--soft-cloud); padding: 64px 32px; }
+  .section-gray .section-inner { max-width: 980px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 0px; overflow: hidden; background: var(--canvas); box-shadow: 0 0 0 1px var(--hairline); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; letter-spacing: 0; color: var(--ink); }
+  .color-swatch-hex { font-size: 12px; color: var(--mute); font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
+  .color-swatch-role { font-size: 11px; color: var(--mute); margin-top: 3px; }
+  .color-group-label { font-size: 14px; font-weight: 600; color: var(--charcoal); letter-spacing: 0; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--mute); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 400; color: var(--mute); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--soft-cloud); color: var(--ink);
+    padding: 16px 32px; border-radius: 30px; border: none;
+    font-family: var(--font-text); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: var(--canvas); color: var(--ink);
+    padding: 8px 16px; border-radius: 30px; border: 1px solid var(--hairline);
+    font-family: var(--font-text); font-size: 14px; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter-active {
+    display: inline-block; background: var(--ink); color: #ffffff;
+    padding: 8px 16px; border-radius: 30px; border: 1px solid var(--ink);
+    font-family: var(--font-text); font-size: 14px; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 9999px;
+    background: var(--soft-cloud); color: var(--ink); border: none;
+    font-size: 14px; cursor: pointer;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--soft-cloud); border-radius: 0px; padding: 24px; transition: opacity 0.3s; }
+  .card h3 { font-family: var(--font-display); font-size: 32px; font-weight: 400; letter-spacing: 0; line-height: 1.0; text-transform: uppercase; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--charcoal); line-height: 1.5; letter-spacing: 0; }
+  .card-link { font-size: 14px; color: var(--ink); text-decoration: underline; margin-top: 12px; display: inline-block; font-weight: 500; }
+  .card-link:hover { opacity: 0.6; }
+
+  .card-dark { background: var(--ink); color: #ffffff; }
+  .card-dark h3 { color: #ffffff; }
+  .card-dark p { color: var(--stone); }
+  .card-dark .card-link { color: #ffffff; }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; letter-spacing: 0; }
+  .form-input {
+    width: 100%; background: var(--soft-cloud); color: var(--ink);
+    border: 1px solid transparent; padding: 12px 16px; border-radius: 24px;
+    font-family: var(--font-text); font-size: 16px; outline: none;
+    letter-spacing: 0; transition: border-color 0.15s;
+  }
+  .form-input:focus { background: var(--canvas); border-color: var(--ink); box-shadow: 0 0 0 4px var(--soft-cloud); }
+  .form-input--focus { background: var(--canvas); border-color: var(--ink); box-shadow: 0 0 0 4px var(--soft-cloud); }
+  .form-input--error { background: var(--canvas); border-color: var(--sale); box-shadow: 0 0 0 4px rgba(211,0,5,0.12); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--soft-cloud); color: var(--ink);
+    border: 1px solid transparent; padding: 12px 16px; border-radius: 24px;
+    font-family: var(--font-text); font-size: 16px; resize: vertical; outline: none;
+    letter-spacing: 0;
+  }
+  .form-textarea:focus { background: var(--canvas); border-color: var(--ink); box-shadow: 0 0 0 4px var(--soft-cloud); }
+  .form-state-label { font-size: 11px; color: var(--mute); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--ink); border-radius: 0px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--mute); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); margin-bottom: 6px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--mute); }
+  .radius-context { font-size: 10px; color: var(--mute); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: var(--canvas); border-radius: 0px; padding: 24px; text-align: center; }
+  .elevation-label { font-size: 14px; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--mute); }
+
+  /* FOOTER */
+  .footer { padding: 32px; text-align: center; background: var(--canvas); font-size: 12px; color: var(--mute); letter-spacing: 0; border-top: 1px solid var(--hairline); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 64px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">Nike</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Shop Now</a>
+</nav>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by Nike</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value — visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Shop Now</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand &amp; Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#111111"></div><div class="color-swatch-info"><div class="color-swatch-name">Nike Black</div><div class="color-swatch-hex">#111111</div><div class="color-swatch-role">Primary CTA, ink, swatch dot</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid var(--hairline)"></div><div class="color-swatch-info"><div class="color-swatch-name">Pure White</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Canvas, on-primary text</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f5f5f5; border-bottom:1px solid var(--hairline)"></div><div class="color-swatch-info"><div class="color-swatch-name">Soft Cloud</div><div class="color-swatch-hex">#f5f5f5</div><div class="color-swatch-role">Product studio, search pill</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#cacacb"></div><div class="color-swatch-info"><div class="color-swatch-name">Hairline</div><div class="color-swatch-hex">#cacacb</div><div class="color-swatch-role">1px dividers</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#e5e5e5"></div><div class="color-swatch-info"><div class="color-swatch-name">Hairline Soft</div><div class="color-swatch-hex">#e5e5e5</div><div class="color-swatch-role">Inset bottom-line on sticky bars</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#111111"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink</div><div class="color-swatch-hex">#111111</div><div class="color-swatch-role">Headlines, product names, prices</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#39393b"></div><div class="color-swatch-info"><div class="color-swatch-name">Charcoal</div><div class="color-swatch-hex">#39393b</div><div class="color-swatch-role">Softer body copy</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#4b4b4d"></div><div class="color-swatch-info"><div class="color-swatch-name">Ash</div><div class="color-swatch-hex">#4b4b4d</div><div class="color-swatch-role">Low-emphasis utility text</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#707072"></div><div class="color-swatch-info"><div class="color-swatch-name">Mute</div><div class="color-swatch-hex">#707072</div><div class="color-swatch-role">Subtitles, footer links</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#9e9ea0"></div><div class="color-swatch-info"><div class="color-swatch-name">Stone</div><div class="color-swatch-hex">#9e9ea0</div><div class="color-swatch-role">Inverse secondary text</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#d30005"></div><div class="color-swatch-info"><div class="color-swatch-name">Sale</div><div class="color-swatch-hex">#d30005</div><div class="color-swatch-role">Discount price, % off copy</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#780700"></div><div class="color-swatch-info"><div class="color-swatch-name">Sale Deep</div><div class="color-swatch-hex">#780700</div><div class="color-swatch-role">Sale pressed state</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#007d48"></div><div class="color-swatch-info"><div class="color-swatch-name">Success</div><div class="color-swatch-hex">#007d48</div><div class="color-swatch-role">In-stock, eligibility ticks</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1eaa52"></div><div class="color-swatch-info"><div class="color-swatch-name">Success Bright</div><div class="color-swatch-hex">#1eaa52</div><div class="color-swatch-role">Inverse success on dark</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1151ff"></div><div class="color-swatch-info"><div class="color-swatch-name">Info</div><div class="color-swatch-hex">#1151ff</div><div class="color-swatch-role">Member-experience link accent</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0034e3"></div><div class="color-swatch-info"><div class="color-swatch-name">Info Deep</div><div class="color-swatch-hex">#0034e3</div><div class="color-swatch-role">Info pressed state</div></div></div>
+  </div>
+
+  <div class="color-group-label">Category Accents</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ed1aa0"></div><div class="color-swatch-info"><div class="color-swatch-name">Accent Pink</div><div class="color-swatch-hex">#ed1aa0</div><div class="color-swatch-role">Women's collection chips</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffb0dd"></div><div class="color-swatch-info"><div class="color-swatch-name">Pink Soft</div><div class="color-swatch-hex">#ffb0dd</div><div class="color-swatch-role">Member-tile tinting</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#beaffd"></div><div class="color-swatch-info"><div class="color-swatch-name">Purple Soft</div><div class="color-swatch-hex">#beaffd</div><div class="color-swatch-role">Editorial swatch dot</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#d6d1ff"></div><div class="color-swatch-info"><div class="color-swatch-name">Purple Pale</div><div class="color-swatch-hex">#d6d1ff</div><div class="color-swatch-role">Lightest soft-tile fill</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0a7281"></div><div class="color-swatch-info"><div class="color-swatch-name">Accent Teal</div><div class="color-swatch-hex">#0a7281</div><div class="color-swatch-role">Trail / ACG editorial accent</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#4c012d"></div><div class="color-swatch-info"><div class="color-swatch-name">Pink Deep</div><div class="color-swatch-hex">#4c012d</div><div class="color-swatch-role">Heritage / Jordan overlay wash</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:96px; font-weight:400; line-height:0.9; letter-spacing:0; text-transform:uppercase;">Just Do It</div><div class="type-meta">Display Campaign -- 96px / 500 / 0.9 / 0 / Nike Futura ND</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:32px; font-weight:500; line-height:1.2; letter-spacing:0;">Featured Footwear</div><div class="type-meta">Heading XL -- 32px / 500 / 1.2 / 0 / Helvetica Now Display Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:24px; font-weight:500; line-height:1.2; letter-spacing:0;">Member Benefit Title</div><div class="type-meta">Heading LG -- 24px / 500 / 1.2 / 0 / Helvetica Now Display Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1.75; letter-spacing:0;">Card Title / FAQ Row Label</div><div class="type-meta">Heading MD -- 16px / 500 / 1.75 / 0 / Helvetica Now Display Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:400; line-height:1.5; letter-spacing:0;">Body -- Bringing inspiration and innovation to every athlete in the world. If you have a body, you are an athlete.</div><div class="type-meta">Body MD -- 16px / 400 / 1.5 / 0 / Helvetica Now Text</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1.5; letter-spacing:0;">Body Strong -- Nike Air Zoom Pegasus 41</div><div class="type-meta">Body Strong -- 16px / 500 / 1.5 / 0 / Helvetica Now Text Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1.5; letter-spacing:0;">Button MD -- Notify Me</div><div class="type-meta">Button MD -- 16px / 500 / 1.5 / 0 / Helvetica Now Text Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1.75; letter-spacing:0; text-decoration:underline;">View Product Details</div><div class="type-meta">Link MD -- 16px / 500 / 1.75 / 0 / Helvetica Now Text</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:500; line-height:1.5; letter-spacing:0; color:var(--mute);">Caption -- Men's Trail Running Shoes</div><div class="type-meta">Caption MD -- 14px / 500 / 1.5 / 0 / Helvetica Now Text Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:12px; font-weight:500; line-height:1.5; letter-spacing:0; color:var(--mute);">Caption Small -- 6 Colors</div><div class="type-meta">Caption SM -- 12px / 500 / 1.5 / 0 / Helvetica Now Text Medium</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:9px; font-weight:500; line-height:1.75; letter-spacing:0; color:var(--mute);">Utility -- 2026 Nike, Inc. All rights reserved. Terms · Privacy</div><div class="type-meta">Utility XS -- 9px / 500 / 1.75 / 0 / Helvetica Neue</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Buy</a><div class="button-label">Primary (Ink Pill)</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Discover More</a><div class="button-label">Secondary (Soft Cloud)</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Shop the Look</a><div class="button-label">Outline on Image</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Trail</a><div class="button-label">Filter Chip</div></div>
+    <div class="button-item"><a class="btn-filter-active" href="#">Running</a><div class="button-label">Filter Chip Active</div></div>
+    <div class="button-item"><button class="btn-media">&#9829;</button><div class="button-label">Icon Circular</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Dark Background</h2>
+  <div class="card-grid">
+    <div class="card card-dark">
+      <h3>Air Max</h3>
+      <p>Visible Air cushioning that changed everything. Bold lines, big impact, all-day comfort built for the street.</p>
+      <a class="card-link" href="#">Shop Air Max</a>
+    </div>
+    <div class="card card-dark">
+      <h3>Pegasus</h3>
+      <p>The workhorse with wings. Responsive Zoom Air keeps every mile springy, from easy runs to race day.</p>
+      <a class="card-link" href="#">Shop Pegasus</a>
+    </div>
+    <div class="card card-dark">
+      <h3>Jordan</h3>
+      <p>A legacy that defined the game. Iconic silhouettes and heritage colorways made for the court and beyond.</p>
+      <a class="card-link" href="#">Shop Jordan</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Light Background</h2>
+  <div class="card-grid">
+    <div class="card" style="background:#ffffff; box-shadow:0 0 0 1px var(--hairline);">
+      <h3>Trail</h3>
+      <p>Built for the unknown. Aggressive traction and rugged support to take your run off-road and onto the mountain.</p>
+      <a class="card-link" href="#">Shop Trail</a>
+    </div>
+    <div class="card" style="background:#ffffff; box-shadow:0 0 0 1px var(--hairline);">
+      <h3>Training</h3>
+      <p>Stability for every lift, sprint, and circuit. A grounded platform engineered for the gym floor.</p>
+      <a class="card-link" href="#">Shop Training</a>
+    </div>
+    <div class="card" style="background:#ffffff; box-shadow:0 0 0 1px var(--hairline);">
+      <h3>Sportswear</h3>
+      <p>Heritage style for everyday wear. Soft fleece, clean lines, and the swoosh that started it all.</p>
+      <a class="card-link" href="#">Shop Sportswear</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Search</label><input class="form-input" type="text" placeholder="Search for shoes, gear, and more"><div class="form-state-label">Default (soft cloud pill)</div></div>
+  <div class="form-group"><label class="form-label">Email</label><input class="form-input form-input--focus" type="email" value="athlete@nike.com"><div class="form-state-label">Focus (ink border + cloud halo)</div></div>
+  <div class="form-group"><label class="form-label">Promo Code</label><input class="form-input form-input--error" type="text" value="EXPIRED25"><div class="form-state-label">Error (sale red ring)</div></div>
+  <div class="form-group"><label class="form-label">Feedback</label><textarea class="form-textarea" placeholder="Tell us about your experience..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:2px"></div><div class="spacing-value">2</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:18px"></div><div class="spacing-value">18</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:30px"></div><div class="spacing-value">30</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:0px"></div><div class="radius-label">0px</div><div class="radius-context">None: cards, tiles, nav</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:18px"></div><div class="radius-label">18px</div><div class="radius-context">SM: icon containers</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:24px"></div><div class="radius-label">24px</div><div class="radius-context">MD: search pill</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:30px"></div><div class="radius-label">30px</div><div class="radius-context">LG: CTA pills, chips</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-label">9999px</div><div class="radius-context">Full: swatch dots, icons</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="background:var(--soft-cloud);"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No shadow, no border</div></div>
+    <div class="elevation-card" style="border-bottom:1px solid var(--hairline);"><div class="elevation-label">Hairline Divider</div><div class="elevation-desc">1px solid #cacacb</div></div>
+    <div class="elevation-card" style="box-shadow:inset 0 -1px 0 var(--hairline-soft); background:var(--soft-cloud);"><div class="elevation-label">Inset Bottom-Line</div><div class="elevation-desc">inset 0 -1px 0 #e5e5e5</div></div>
+    <div class="elevation-card" style="box-shadow:0 0 0 2px var(--ink);"><div class="elevation-label">Focus Halo</div><div class="elevation-desc">2px solid ink + cloud glove</div></div>
+    <div class="elevation-card" style="background:var(--ink); color:#fff;"><div class="elevation-label" style="color:#fff;">Editorial Tile</div><div class="elevation-desc" style="color:var(--stone);">Depth from photography only</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

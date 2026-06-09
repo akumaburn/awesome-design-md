@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by HP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #f2f2f2;            /* inverted: light text on dark */
+    --ink-deep: #ffffff;
+    --ink-soft: #e2e2e2;
+    --on-ink: #1a1a1a;
+    --canvas: #0d0d0f;         /* inverted: dark canvas */
+    --cloud: #161618;          /* lightest dark band */
+    --fog: #1f1f22;            /* slightly lighter dark band */
+    --steel: #4a4a4f;
+    --graphite: #9a9a9f;
+    --charcoal: #c2c2c4;
+    --hairline: #2a2a2e;
+    --primary: #296ef9;        /* brightened accent for dark */
+    --primary-bright: #5a91ff;
+    --primary-deep: #024ad8;
+    --primary-soft: #1b2c52;
+    --on-primary: #ffffff;
+    --link: #5a91ff;
+    --link-pressed: #296ef9;
+    --coral: #ff6b6b;
+    --error: #ff6b66;
+    --shadow-lift: 0 2px 8px rgba(0,0,0,0.5);
+    --shadow-modal: 0 8px 24px rgba(0,0,0,0.6);
+    --font-display: 'Forma DJR Micro', 'Manrope', Arial, system-ui, sans-serif;
+    --font-text: 'Forma DJR Micro', 'Manrope', Arial, system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-text);
+    font-size: 16px; font-weight: 400; line-height: 1.38;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 64px;
+    background: rgba(13,13,15,0.9);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .nav-brand { font-size: 16px; font-weight: 800; color: var(--ink); text-decoration: none; letter-spacing: 0; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 16px; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--primary-bright); }
+  .nav-cta {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 8px 18px; border-radius: 4px; font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.7px;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-cta:hover { background: var(--primary-bright); }
+
+  /* DARK MODE BADGE */
+  .dark-badge {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: var(--ink); color: var(--canvas);
+    font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
+  }
+
+  /* HERO */
+  .hero { padding: 96px 32px 80px; text-align: center; background: var(--cloud); position: relative; overflow: hidden; }
+  .hero::before, .hero::after {
+    content: ""; position: absolute; top: -10%; width: 90px; height: 130%;
+    background: var(--primary); transform: skewX(-18deg); opacity: 0.9;
+  }
+  .hero::before { left: -30px; }
+  .hero::after { right: -30px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 72px; font-weight: 500; line-height: 1.0;
+    letter-spacing: 0; color: var(--ink); margin-bottom: 20px; position: relative;
+  }
+  .hero p { font-size: 18px; font-weight: 400; line-height: 1.33; letter-spacing: 0; color: var(--charcoal); max-width: 600px; margin: 0 auto 32px; position: relative; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-blue {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    padding: 12px 24px; border-radius: 4px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.7px;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-blue:hover { background: var(--primary-bright); }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--primary-bright);
+    padding: 12px 24px; border-radius: 4px;
+    border: 1px solid var(--primary-bright);
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.7px;
+    text-decoration: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-outline:hover { background: rgba(41,110,249,0.12); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 980px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 12px; font-weight: 700; color: var(--graphite); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.7px; }
+  .section-title { font-family: var(--font-display); font-size: 44px; font-weight: 500; line-height: 1.0; letter-spacing: 0; margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 1px solid var(--hairline); margin: 0; }
+
+  /* DARK SECTION (inverted = lighter contrast band) */
+  .section-dark { background: var(--fog); color: var(--ink); padding: 64px 32px; }
+  .section-dark .section-inner { max-width: 980px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--graphite); }
+  .section-dark .section-title { color: var(--ink); }
+
+  /* CLOUD SECTION */
+  .section-gray { background: var(--cloud); padding: 64px 32px; }
+  .section-gray .section-inner { max-width: 980px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 8px; overflow: hidden; background: var(--fog); box-shadow: 0 0 0 1px rgba(255,255,255,0.1); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; letter-spacing: 0; color: var(--ink); }
+  .color-swatch-hex { font-size: 12px; color: var(--graphite); font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
+  .color-swatch-role { font-size: 11px; color: var(--graphite); margin-top: 3px; }
+  .color-group-label { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: 0; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--graphite); margin-top: 8px; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 400; color: var(--graphite); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--ink); color: var(--on-ink);
+    padding: 12px 24px; border-radius: 4px; border: none;
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.7px;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-filter {
+    display: inline-block; background: transparent; color: var(--ink);
+    padding: 8px 20px; border-radius: 9999px; border: 1px solid var(--steel);
+    font-family: var(--font-text); font-size: 16px; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: 9999px;
+    background: var(--ink); color: var(--on-ink); border: none;
+    font-size: 16px; font-weight: 500; cursor: pointer;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--cloud); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-lift); transition: box-shadow 0.3s; }
+  .card:hover { box-shadow: var(--shadow-modal); }
+  .card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: 0; line-height: 1.17; margin-bottom: 8px; color: var(--ink); }
+  .card p { font-size: 16px; color: var(--charcoal); line-height: 1.38; letter-spacing: 0; }
+  .card-link { font-size: 16px; font-weight: 500; color: var(--link); text-decoration: none; margin-top: 12px; display: inline-block; }
+  .card-link:hover { text-decoration: underline; }
+
+  .card-dark { background: var(--canvas); }
+  .card-elevated { background: var(--fog); }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; letter-spacing: 0; }
+  .form-input {
+    width: 100%; background: var(--fog); color: var(--ink);
+    border: 1px solid var(--steel); padding: 12px 16px; border-radius: 4px;
+    font-family: var(--font-text); font-size: 16px; outline: none;
+    letter-spacing: 0; transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--primary-bright); box-shadow: 0 0 0 3px rgba(90,145,255,0.25); }
+  .form-input--focus { border-color: var(--primary-bright); box-shadow: 0 0 0 3px rgba(90,145,255,0.25); }
+  .form-input--error { border-color: var(--error); box-shadow: 0 0 0 3px rgba(255,107,102,0.25); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--fog); color: var(--ink);
+    border: 1px solid var(--steel); padding: 12px 16px; border-radius: 4px;
+    font-family: var(--font-text); font-size: 16px; resize: vertical; outline: none;
+    letter-spacing: 0;
+  }
+  .form-state-label { font-size: 11px; color: var(--graphite); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--primary); border-radius: 3px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--graphite); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--ink); margin-bottom: 6px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--graphite); }
+  .radius-context { font-size: 10px; color: var(--graphite); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: var(--fog); border-radius: 16px; padding: 24px; text-align: center; }
+  .elevation-label { font-size: 14px; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--graphite); }
+
+  /* FOOTER */
+  .footer { padding: 32px; text-align: center; background: var(--fog); font-size: 12px; color: var(--graphite); letter-spacing: 0; border-top: 1px solid var(--hairline); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 44px; }
+    .hero::before, .hero::after { display: none; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">HP</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards-dark">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Shop Now</a>
+</nav>
+<div class="dark-badge">Dark Mode</div>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by HP</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value -- visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">Shop Now</a>
+    <a class="btn-outline" href="#">View Documentation</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand &amp; Accent</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#296ef9"></div><div class="color-swatch-info"><div class="color-swatch-name">HP Electric Blue</div><div class="color-swatch-hex">#296ef9</div><div class="color-swatch-role">Lone CTA fill, link, chevron</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#5a91ff"></div><div class="color-swatch-info"><div class="color-swatch-name">Bright Blue</div><div class="color-swatch-hex">#5a91ff</div><div class="color-swatch-role">Links / accents on dark</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#024ad8"></div><div class="color-swatch-info"><div class="color-swatch-name">Deep Blue</div><div class="color-swatch-hex">#024ad8</div><div class="color-swatch-role">Pressed CTA, base brand</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1b2c52"></div><div class="color-swatch-info"><div class="color-swatch-name">Soft Blue</div><div class="color-swatch-hex">#1b2c52</div><div class="color-swatch-role">Story cards, selection chips</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#0d0d0f"></div><div class="color-swatch-info"><div class="color-swatch-name">Canvas</div><div class="color-swatch-hex">#0d0d0f</div><div class="color-swatch-role">Universal dark background</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#161618"></div><div class="color-swatch-info"><div class="color-swatch-name">Cloud</div><div class="color-swatch-hex">#161618</div><div class="color-swatch-role">Alternating section bands</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1f1f22"></div><div class="color-swatch-info"><div class="color-swatch-name">Fog</div><div class="color-swatch-hex">#1f1f22</div><div class="color-swatch-role">Cards, inputs, panels</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#4a4a4f"></div><div class="color-swatch-info"><div class="color-swatch-name">Steel</div><div class="color-swatch-hex">#4a4a4f</div><div class="color-swatch-role">Hairline, input border</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f2f2"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink</div><div class="color-swatch-hex">#f2f2f2</div><div class="color-swatch-role">Universal text on dark</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid var(--hairline)"></div><div class="color-swatch-info"><div class="color-swatch-name">Ink Deep</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Wordmark, max-contrast</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#c2c2c4"></div><div class="color-swatch-info"><div class="color-swatch-name">Charcoal</div><div class="color-swatch-hex">#c2c2c4</div><div class="color-swatch-role">Secondary descriptions</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#9a9a9f"></div><div class="color-swatch-info"><div class="color-swatch-name">Graphite</div><div class="color-swatch-hex">#9a9a9f</div><div class="color-swatch-role">Legal lines, metadata</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ff6b6b"></div><div class="color-swatch-info"><div class="color-swatch-name">Bloom Coral</div><div class="color-swatch-hex">#ff6b6b</div><div class="color-swatch-role">Sale-tag chip</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ff6b66"></div><div class="color-swatch-info"><div class="color-swatch-name">Error</div><div class="color-swatch-hex">#ff6b66</div><div class="color-swatch-role">Error / destructive</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#b3262b"></div><div class="color-swatch-info"><div class="color-swatch-name">Bloom Deep</div><div class="color-swatch-hex">#b3262b</div><div class="color-swatch-role">Discount emphasis</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#7fadbe"></div><div class="color-swatch-info"><div class="color-swatch-name">Storm Sea</div><div class="color-swatch-hex">#7fadbe</div><div class="color-swatch-role">Neutral status accent</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:72px; font-weight:500; line-height:1.0; letter-spacing:0;">Display XXL</div><div class="type-meta">Display XXL -- 72px / 500 / 1.0 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:56px; font-weight:500; line-height:1.0; letter-spacing:0;">Display XL</div><div class="type-meta">Display XL -- 56px / 500 / 1.0 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:44px; font-weight:500; line-height:1.0; letter-spacing:0;">Display LG</div><div class="type-meta">Display LG -- 44px / 500 / 1.0 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:32px; font-weight:500; line-height:1.0; letter-spacing:0;">Display MD</div><div class="type-meta">Display MD -- 32px / 500 / 1.0 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:500; line-height:1.17; letter-spacing:0;">Display SM -- Card titles, pricing-tier names</div><div class="type-meta">Display SM -- 24px / 500 / 1.17 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:20px; font-weight:500; line-height:1.0; letter-spacing:0;">Display XS -- Accordion labels</div><div class="type-meta">Display XS -- 20px / 500 / 1.0 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:18px; font-weight:400; line-height:1.33; letter-spacing:0;">Body LG -- Lead paragraphs introduce a section with a little more presence than default body copy.</div><div class="type-meta">Body LG -- 18px / 400 / 1.33 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:400; line-height:1.38; letter-spacing:0;">Body MD -- Default body. HP reads like a long-running catalog crossed with an enterprise product page.</div><div class="type-meta">Body MD -- 16px / 400 / 1.38 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:500; line-height:1.38; letter-spacing:0;">Body Emphasis -- Bolded run-in copy for in-line highlights</div><div class="type-meta">Body Emphasis -- 16px / 500 / 1.38 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:400; line-height:1.5; letter-spacing:0;">Caption MD -- Specs, metadata, model numbers, and captions</div><div class="type-meta">Caption MD -- 14px / 400 / 1.5 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:700; line-height:1.3; letter-spacing:0;">Caption Bold -- Sale tags, in-card highlights</div><div class="type-meta">Caption Bold -- 14px / 700 / 1.3 / 0 / Forma DJR Micro</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:600; line-height:1.4; letter-spacing:0.7px; text-transform:uppercase;">Button MD -- Primary Labels</div><div class="type-meta">Button MD -- 14px / 600 / 1.4 / 0.7px / Forma DJR Micro (uppercase)</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:12px; font-weight:400; line-height:1.33; letter-spacing:0;">Caption SM -- Footnotes, legal lines, and fine print</div><div class="type-meta">Caption SM -- 12px / 400 / 1.33 / 0 / Forma DJR Micro</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Buy Now</a><div class="button-label">Primary Blue</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Compare</a><div class="button-label">Outline (blue)</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Get a Printer</a><div class="button-label">Light Fill</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Trending</a><div class="button-label">Pill Tab</div></div>
+    <div class="button-item"><button class="btn-media">On Sale</button><div class="button-label">Tab Active</div></div>
+    <div class="button-item"><span style="display:inline-block; background:transparent; color:var(--link); padding:4px 0; font-size:16px; font-weight:500; text-decoration:underline;">See details</span><div class="button-label">Text Link</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on Ink Slab</h2>
+  <div class="card-grid">
+    <div class="card card-dark">
+      <h3>Laptops</h3>
+      <p>Thin, powerful, and built for the way you work. Long battery life, bright displays, and the performance to keep up all day.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card card-elevated" style="box-shadow: var(--shadow-modal);">
+      <h3>Desktops</h3>
+      <p>From compact all-in-ones to expandable towers, configure the machine your workspace actually needs.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card card-dark">
+      <h3>Printers</h3>
+      <p>Reliable printing for home and office, with subscription ink plans that arrive before you run out.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Cloud Band</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Accessories</h3>
+      <p>Monitors, docks, mice, and keyboards engineered to pair seamlessly with your setup and extend what it can do.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card" style="box-shadow: var(--shadow-modal);">
+      <h3>Solutions</h3>
+      <p>Enterprise services and security built to scale, from fleet management to managed print and device-as-a-service.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+    <div class="card">
+      <h3>Support</h3>
+      <p>Diagnostics, drivers, and live help in one place. Get answers fast and keep every device running its best.</p>
+      <a class="card-link" href="#">Learn more &gt;</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="text" placeholder="name@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Password</label><input class="form-input form-input--focus" type="password" value="mypassword123"><div class="form-state-label">Focus (blue ring)</div></div>
+  <div class="form-group"><label class="form-label">Order Number</label><input class="form-input form-input--error" type="text" value="invalid#"><div class="form-state-label">Error (red ring)</div></div>
+  <div class="form-group"><label class="form-label">Feedback</label><textarea class="form-textarea" placeholder="Tell us about your experience..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:12px"></div><div class="spacing-value">12</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:20px"></div><div class="spacing-value">20</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:80px"></div><div class="spacing-value">80</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:0px"></div><div class="radius-label">0px</div><div class="radius-context">Chevrons, heroes</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:2px"></div><div class="radius-label">2px</div><div class="radius-context">Sale-tag pills</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:3px"></div><div class="radius-label">3px</div><div class="radius-context">Small secondary CTA</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><div class="radius-label">4px</div><div class="radius-context">Buttons, inputs</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><div class="radius-label">8px</div><div class="radius-context">Badges, icon cards, FAQ</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:16px"></div><div class="radius-label">16px</div><div class="radius-context">Cards, photo frames</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-label">9999px</div><div class="radius-context">Tabs, search pill</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation &amp; Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:1px solid var(--hairline);"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No border, no shadow</div></div>
+    <div class="elevation-card" style="border:1px solid var(--steel);"><div class="elevation-label">Level 1: Hairline</div><div class="elevation-desc">1px solid steel</div></div>
+    <div class="elevation-card" style="box-shadow:0 2px 8px rgba(0,0,0,0.5);"><div class="elevation-label">Level 2: Soft Lift</div><div class="elevation-desc">0 2px 8px rgba 0.5</div></div>
+    <div class="elevation-card" style="box-shadow:0 8px 24px rgba(0,0,0,0.6);"><div class="elevation-label">Level 3: Floating</div><div class="elevation-desc">0 8px 24px rgba 0.6</div></div>
+    <div class="elevation-card" style="background:var(--canvas); border:1px solid var(--hairline);"><div class="elevation-label">Canvas Tone</div><div class="elevation-desc">#0d0d0f deepest band</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

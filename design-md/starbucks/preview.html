@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Inspired by Starbucks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --starbucks-green: #006241;
+    --green-accent: #00754A;
+    --house-green: #1E3932;
+    --green-uplift: #2b5148;
+    --green-light: #d4e9e2;
+    --gold: #cba258;
+    --gold-light: #dfc49d;
+    --gold-lightest: #faf6ee;
+    --white: #ffffff;
+    --neutral-cool: #f9f9f9;
+    --neutral-warm: #f2f0eb;
+    --ceramic: #edebe9;
+    --pure-black: #000000;
+    --text-black: rgba(0,0,0,0.87);
+    --text-black-soft: rgba(0,0,0,0.58);
+    --rewards-green: #33433d;
+    --red: #c82014;
+    --yellow: #fbbc05;
+    --input-border: #d6dbde;
+    --card-shadow: 0px 0px .5px 0px rgba(0,0,0,0.14), 0px 1px 1px 0px rgba(0,0,0,0.24);
+    --nav-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.06), 0 0 2px rgba(0,0,0,0.07);
+    --nav-bg: rgba(255,255,255,0.94);
+    --font-display: 'SoDoSans', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-text: 'SoDoSans', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--neutral-warm);
+    color: var(--text-black);
+    font-family: var(--font-text);
+    font-size: 16px; font-weight: 400; line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 64px;
+    background: var(--nav-bg);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    box-shadow: var(--nav-shadow);
+  }
+  .nav-brand { font-size: 15px; font-weight: 700; color: var(--starbucks-green); text-decoration: none; letter-spacing: -0.16px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-black); text-decoration: none; transition: color 0.2s ease; }
+  .nav-links a:hover { color: var(--green-accent); }
+  .nav-cta {
+    display: inline-block; background: var(--pure-black); color: #ffffff;
+    padding: 7px 16px; border-radius: 50px; font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: transform 0.2s ease;
+  }
+  .nav-cta:active { transform: scale(0.95); }
+
+  /* HERO */
+  .hero { padding: 96px 32px 80px; text-align: center; background: var(--neutral-warm); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 58px; font-weight: 600; line-height: 1.2;
+    letter-spacing: -0.16px; color: var(--starbucks-green); margin-bottom: 16px;
+  }
+  .hero p { font-size: 19px; font-weight: 400; line-height: 1.75; letter-spacing: -0.16px; color: var(--text-black-soft); max-width: 600px; margin: 0 auto 32px; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-blue {
+    display: inline-block; background: var(--green-accent); color: #ffffff;
+    padding: 8px 22px; border-radius: 50px; border: 1px solid var(--green-accent);
+    font-family: var(--font-text); font-size: 16px; font-weight: 600;
+    letter-spacing: -0.01em; text-decoration: none; cursor: pointer; transition: all 0.2s ease;
+  }
+  .btn-blue:active { transform: scale(0.95); }
+  .btn-outline {
+    display: inline-block; background: transparent; color: var(--green-accent);
+    padding: 8px 22px; border-radius: 50px;
+    border: 1px solid var(--green-accent);
+    font-family: var(--font-text); font-size: 16px; font-weight: 600;
+    letter-spacing: -0.01em; text-decoration: none; cursor: pointer; transition: all 0.2s ease;
+  }
+  .btn-outline:active { transform: scale(0.95); }
+
+  /* SECTIONS */
+  .section { padding: 64px 32px; max-width: 980px; margin: 0 auto; }
+  .section-label { font-family: var(--font-text); font-size: 13px; font-weight: 600; color: var(--green-accent); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.15em; }
+  .section-title { font-family: var(--font-display); font-size: 36px; font-weight: 600; line-height: 1.2; letter-spacing: -0.16px; color: var(--starbucks-green); margin-bottom: 32px; }
+  .section-divider { border: none; border-top: 1px solid var(--ceramic); margin: 0; }
+
+  /* DARK SECTION (full-width House Green feature band) */
+  .section-dark { background: var(--house-green); color: #ffffff; padding: 64px 32px; }
+  .section-dark .section-inner { max-width: 980px; margin: 0 auto; }
+  .section-dark .section-label { color: var(--gold); }
+  .section-dark .section-title { color: #ffffff; }
+
+  /* CREAM SECTION */
+  .section-gray { background: var(--ceramic); padding: 64px 32px; }
+  .section-gray .section-inner { max-width: 980px; margin: 0 auto; }
+
+  /* COLORS */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .color-swatch { border-radius: 12px; overflow: hidden; background: var(--white); box-shadow: var(--card-shadow); }
+  .color-swatch-block { height: 72px; width: 100%; }
+  .color-swatch-info { padding: 10px 12px; }
+  .color-swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; letter-spacing: -0.16px; color: var(--text-black); }
+  .color-swatch-hex { font-size: 12px; color: var(--text-black-soft); font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; }
+  .color-swatch-role { font-size: 11px; color: var(--text-black-soft); margin-top: 3px; }
+  .color-group-label { font-size: 14px; font-weight: 600; color: var(--text-black); letter-spacing: -0.16px; margin: 24px 0 10px; }
+
+  /* TYPOGRAPHY */
+  .type-sample { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--ceramic); }
+  .type-sample:last-child { border-bottom: none; }
+  .type-meta { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 12px; font-weight: 400; color: var(--text-black-soft); margin-top: 8px; }
+  .type-serif { font-family: 'Lander Tall', 'Iowan Old Style', Georgia, serif; }
+
+  /* BUTTONS */
+  .button-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .button-item { text-align: center; }
+  .button-label { font-size: 12px; font-weight: 400; color: var(--text-black-soft); margin-top: 8px; }
+  .btn-dark-fill {
+    display: inline-block; background: var(--pure-black); color: #ffffff;
+    padding: 7px 16px; border-radius: 50px; border: 1px solid var(--pure-black);
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    letter-spacing: -0.01em; text-decoration: none; cursor: pointer; transition: transform 0.2s ease;
+  }
+  .btn-dark-fill:active { transform: scale(0.95); }
+  .btn-filter {
+    display: inline-block; background: transparent; color: var(--text-black);
+    padding: 7px 16px; border-radius: 50px; border: 1px solid var(--text-black);
+    font-family: var(--font-text); font-size: 14px; font-weight: 600;
+    letter-spacing: -0.01em; text-decoration: none; cursor: pointer; transition: transform 0.2s ease;
+  }
+  .btn-filter:active { transform: scale(0.95); }
+  .btn-media {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--green-accent); color: #ffffff; border: none;
+    font-size: 20px; cursor: pointer; transition: all 0.2s ease;
+    box-shadow: 0 0 6px rgba(0,0,0,0.24), 0 8px 12px rgba(0,0,0,0.14);
+  }
+  .btn-media:active { transform: scale(0.95); box-shadow: 0 0 6px rgba(0,0,0,0.24), 0 8px 12px rgba(0,0,0,0); }
+  .btn-gold-pill {
+    display: inline-block; background: transparent; color: var(--gold);
+    padding: 4px 12px; border-radius: 50px; border: 1px solid var(--gold);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--white); border-radius: 12px; padding: 32px 24px; box-shadow: var(--card-shadow); transition: box-shadow 0.3s; }
+  .card:hover { box-shadow: 0 0 6px rgba(0,0,0,0.16), 0 8px 12px rgba(0,0,0,0.12); }
+  .card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.16px; line-height: 1.2; margin-bottom: 8px; color: var(--starbucks-green); }
+  .card p { font-size: 14px; color: var(--text-black-soft); line-height: 1.5; letter-spacing: -0.01em; }
+  .card-link { font-size: 14px; font-weight: 600; color: var(--green-accent); text-decoration: none; margin-top: 12px; display: inline-block; }
+  .card-link:hover { text-decoration: underline; }
+
+  .card-dark { background: var(--house-green); color: #ffffff; box-shadow: none; }
+  .card-dark h3 { color: #ffffff; }
+  .card-dark p { color: rgba(255,255,255,0.7); }
+  .card-dark .card-link { color: var(--gold); }
+
+  /* FORMS */
+  .form-group { margin-bottom: 20px; max-width: 400px; }
+  .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--text-black); margin-bottom: 6px; letter-spacing: -0.01em; }
+  .form-input {
+    width: 100%; background: var(--white); color: var(--text-black);
+    border: 1px solid var(--input-border); padding: 12px; border-radius: 4px;
+    font-family: var(--font-text); font-size: 16px; outline: none;
+    letter-spacing: -0.01em; transition: border-color 0.2s ease;
+  }
+  .form-input:focus { border-color: var(--green-accent); box-shadow: 0 0 0 3px rgba(0,117,74,0.2); }
+  .form-input--focus { border-color: var(--green-accent); box-shadow: 0 0 0 3px rgba(0,117,74,0.2); background: hsl(160 32% 87% / 33%); }
+  .form-input--error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,32,20,0.15); background: hsl(4 82% 43% / 5%); }
+  .form-textarea {
+    width: 100%; min-height: 80px; background: var(--white); color: var(--text-black);
+    border: 1px solid var(--input-border); padding: 12px; border-radius: 4px;
+    font-family: var(--font-text); font-size: 16px; resize: vertical; outline: none;
+    letter-spacing: -0.01em;
+  }
+  .form-state-label { font-size: 11px; color: var(--text-black-soft); margin-top: 4px; }
+
+  /* SPACING */
+  .spacing-row { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .spacing-item { text-align: center; }
+  .spacing-block { background: var(--green-accent); border-radius: 3px; margin-bottom: 6px; height: 28px; }
+  .spacing-value { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--text-black-soft); }
+
+  /* RADIUS */
+  .radius-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .radius-item { text-align: center; }
+  .radius-box { width: 64px; height: 64px; background: var(--house-green); margin-bottom: 6px; }
+  .radius-label { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; font-weight: 500; color: var(--text-black-soft); }
+  .radius-context { font-size: 10px; color: var(--text-black-soft); }
+
+  /* ELEVATION */
+  .elevation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .elevation-card { background: var(--white); border-radius: 12px; padding: 24px; text-align: center; }
+  .elevation-label { font-size: 14px; font-weight: 600; letter-spacing: -0.16px; margin-bottom: 4px; }
+  .elevation-desc { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--text-black-soft); }
+
+  /* FOOTER */
+  .footer { padding: 32px; text-align: center; background: var(--house-green); font-size: 12px; color: rgba(255,255,255,0.70); letter-spacing: -0.01em; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 40px; }
+    .nav-links { display: none; }
+    .section { padding: 48px 20px; }
+    .section-dark { padding: 48px 20px; }
+    .section-gray { padding: 48px 20px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">Starbucks</span>
+  <ul class="nav-links">
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Join now</a>
+</nav>
+
+<section class="hero">
+  <h1>Design System<br>Inspired by Starbucks</h1>
+  <p>A design token catalog generated from DESIGN.md. Every color, font, component, and spacing value — visualized.</p>
+  <div class="hero-buttons">
+    <a class="btn-blue" href="#">See the spring menu</a>
+    <a class="btn-outline" href="#">Start an order</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="colors">
+  <div class="section-label">01 / Colors</div>
+  <h2 class="section-title">Color Palette</h2>
+
+  <div class="color-group-label">Brand & Accent (Four-Tier Green)</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#006241"></div><div class="color-swatch-info"><div class="color-swatch-name">Starbucks Green</div><div class="color-swatch-hex">#006241</div><div class="color-swatch-role">H1 headings, brand signal</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#00754A"></div><div class="color-swatch-info"><div class="color-swatch-name">Green Accent</div><div class="color-swatch-hex">#00754A</div><div class="color-swatch-role">Primary CTA, Frap fill</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#1E3932"></div><div class="color-swatch-info"><div class="color-swatch-name">House Green</div><div class="color-swatch-hex">#1E3932</div><div class="color-swatch-role">Feature bands, footer</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#2b5148"></div><div class="color-swatch-info"><div class="color-swatch-name">Green Uplift</div><div class="color-swatch-hex">#2b5148</div><div class="color-swatch-role">Decorative accents</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#d4e9e2"></div><div class="color-swatch-info"><div class="color-swatch-name">Green Light</div><div class="color-swatch-hex">#d4e9e2</div><div class="color-swatch-role">Valid-state tint</div></div></div>
+  </div>
+
+  <div class="color-group-label">Rewards Gold (Ceremony Only)</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#cba258"></div><div class="color-swatch-info"><div class="color-swatch-name">Gold</div><div class="color-swatch-hex">#cba258</div><div class="color-swatch-role">Rewards-status callouts</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#dfc49d"></div><div class="color-swatch-info"><div class="color-swatch-name">Gold Light</div><div class="color-swatch-hex">#dfc49d</div><div class="color-swatch-role">Gold-tier washes</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#faf6ee; border-bottom:1px solid var(--ceramic)"></div><div class="color-swatch-info"><div class="color-swatch-name">Gold Lightest</div><div class="color-swatch-hex">#faf6ee</div><div class="color-swatch-role">Partnership band surface</div></div></div>
+  </div>
+
+  <div class="color-group-label">Surface & Background</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#ffffff; border-bottom:1px solid var(--ceramic)"></div><div class="color-swatch-info"><div class="color-swatch-name">White</div><div class="color-swatch-hex">#ffffff</div><div class="color-swatch-role">Card & modal surface</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f9f9f9; border-bottom:1px solid var(--ceramic)"></div><div class="color-swatch-info"><div class="color-swatch-name">Neutral Cool</div><div class="color-swatch-hex">#f9f9f9</div><div class="color-swatch-role">Dropdowns, form wraps</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#f2f0eb; border-bottom:1px solid var(--ceramic)"></div><div class="color-swatch-info"><div class="color-swatch-name">Neutral Warm</div><div class="color-swatch-hex">#f2f0eb</div><div class="color-swatch-role">Primary page canvas</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#edebe9; border-bottom:1px solid #e0ddd9"></div><div class="color-swatch-info"><div class="color-swatch-name">Ceramic</div><div class="color-swatch-hex">#edebe9</div><div class="color-swatch-role">Zone separators</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#000000"></div><div class="color-swatch-info"><div class="color-swatch-name">Black</div><div class="color-swatch-hex">#000000</div><div class="color-swatch-role">Join-now CTA strip</div></div></div>
+  </div>
+
+  <div class="color-group-label">Text</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(0,0,0,0.87)"></div><div class="color-swatch-info"><div class="color-swatch-name">Text Black</div><div class="color-swatch-hex">rgba(0,0,0,0.87)</div><div class="color-swatch-role">Headings & body on light</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(0,0,0,0.58)"></div><div class="color-swatch-info"><div class="color-swatch-name">Text Black Soft</div><div class="color-swatch-hex">rgba(0,0,0,0.58)</div><div class="color-swatch-role">Secondary/metadata text</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#33433d"></div><div class="color-swatch-info"><div class="color-swatch-name">Rewards Green</div><div class="color-swatch-hex">#33433d</div><div class="color-swatch-role">Rewards-page text blocks</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:rgba(255,255,255,0.70); border-bottom:1px solid var(--ceramic)"></div><div class="color-swatch-info"><div class="color-swatch-name">Text White Soft</div><div class="color-swatch-hex">rgba(255,255,255,0.70)</div><div class="color-swatch-role">Secondary text on dark</div></div></div>
+  </div>
+
+  <div class="color-group-label">Semantic</div>
+  <div class="color-grid">
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#c82014"></div><div class="color-swatch-info"><div class="color-swatch-name">Red</div><div class="color-swatch-hex">#c82014</div><div class="color-swatch-role">Error & destructive</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#fbbc05"></div><div class="color-swatch-info"><div class="color-swatch-name">Yellow</div><div class="color-swatch-hex">#fbbc05</div><div class="color-swatch-role">Warning state</div></div></div>
+    <div class="color-swatch"><div class="color-swatch-block" style="background:#d4e9e2"></div><div class="color-swatch-info"><div class="color-swatch-name">Green Light</div><div class="color-swatch-hex">#d4e9e2</div><div class="color-swatch-role">Valid-field tint</div></div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="typography">
+  <div class="section-label">02 / Typography</div>
+  <h2 class="section-title">Typography Scale</h2>
+
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:80px; font-weight:600; line-height:1.2; letter-spacing:-0.16px; color:var(--starbucks-green);">Display</div><div class="type-meta">Display (text-10) -- 80px / 600 / 1.2 / -0.16px / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:58px; font-weight:600; line-height:1.2; letter-spacing:-0.16px;">Jumbo Heading</div><div class="type-meta">Jumbo (text-9) -- 58px / 600 / 1.2 / -0.16px / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:45px; font-weight:600; line-height:1.2; letter-spacing:-0.16px;">Hero Large</div><div class="type-meta">Hero Large (text-8) -- 45px / 600 / 1.2 / -0.16px / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:600; line-height:1.5; letter-spacing:-0.16px; color:var(--starbucks-green);">H1 -- Free coffee is just the beginning</div><div class="type-meta">H1 -- 24px / 600 / 36px / -0.16px / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-display); font-size:24px; font-weight:400; line-height:1.5; letter-spacing:-0.16px;">H2 -- Explore the season's menu</div><div class="type-meta">H2 -- 24px / 400 / 36px / -0.16px / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:19px; font-weight:400; line-height:1.75; letter-spacing:-0.16px;">Body Large -- Order ahead and earn Stars on every handcrafted favorite, then redeem for free drinks and food.</div><div class="type-meta">Body Large -- 19px / 400 / 33.25px / -0.16px / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:16px; font-weight:400; line-height:1.5; letter-spacing:-0.01em;">Body -- Warm, confident retail flagship copy that reads slightly compressed yet inviting, the way clean café signage should.</div><div class="type-meta">Body (text-3) -- 16px / 400 / 1.5 / -0.01em / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:14px; font-weight:600; line-height:1.5; letter-spacing:-0.01em;">Small -- Button labels, metadata, and form labels</div><div class="type-meta">Small (text-2) -- 14px / 600 / 1.5 / -0.01em / SoDoSans</div></div>
+  <div class="type-sample"><div style="font-family:var(--font-text); font-size:13px; font-weight:400; line-height:1.5; letter-spacing:-0.01em;">Micro -- Active float-label state and caption micro-copy</div><div class="type-meta">Micro (text-1) -- 13px / 400 / 1.5 / -0.01em / SoDoSans</div></div>
+  <div class="type-sample"><div class="type-serif" style="font-size:36px; font-weight:400; line-height:1.2; letter-spacing:-0.16px; color:var(--rewards-green);">Rewards Serif -- A little warmer</div><div class="type-meta">Rewards Serif -- 36px / 400 / 1.2 / -0.16px / Lander Tall (Iowan Old Style)</div></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="buttons">
+  <div class="section-label">03 / Buttons</div>
+  <h2 class="section-title">Button Variants</h2>
+  <div class="button-row">
+    <div class="button-item"><a class="btn-blue" href="#">Sign up for free</a><div class="button-label">Primary Filled</div></div>
+    <div class="button-item"><a class="btn-outline" href="#">Give them a try</a><div class="button-label">Primary Outlined</div></div>
+    <div class="button-item"><a class="btn-dark-fill" href="#">Join now</a><div class="button-label">Black Filled</div></div>
+    <div class="button-item"><a class="btn-filter" href="#">Sign in</a><div class="button-label">Dark Outlined</div></div>
+    <div class="button-item"><button class="btn-media" aria-label="Order">&#9826;</button><div class="button-label">Frap (Floating)</div></div>
+    <div class="button-item"><span class="btn-gold-pill">200&#9733; item</span><div class="button-label">Rewards Cost Pill</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<div class="section-dark">
+<section class="section-inner" id="cards-dark">
+  <div class="section-label">04 / Cards (Dark)</div>
+  <h2 class="section-title">Cards on House Green Band</h2>
+  <div class="card-grid">
+    <div class="card card-dark">
+      <h3>Bronze Tier</h3>
+      <p>Start earning Stars on every order. Two Stars for every dollar when you scan and pay with the app.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+    <div class="card card-dark">
+      <h3>Gold Tier</h3>
+      <p>Unlock free handcrafted drinks, birthday rewards, and members-only offers as your Stars add up.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+    <div class="card card-dark">
+      <h3>Rewards</h3>
+      <p>Redeem Stars for what you love — from an extra espresso shot to a packaged coffee to take home.</p>
+      <a class="card-link" href="#">Learn more ></a>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="section-gray">
+<div class="section-inner" id="cards-light">
+  <div class="section-label">04 / Cards (Light)</div>
+  <h2 class="section-title">Cards on Cream Canvas</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Spring Menu</h3>
+      <p>Bright, refreshing handcrafted beverages arrive for the season. Find your new warm-weather favorite.</p>
+      <a class="card-link" href="#">Explore the menu ></a>
+    </div>
+    <div class="card">
+      <h3>Gift Cards</h3>
+      <p>Send a little warmth. Each illustrated card feels like a physical gift laid on the café counter.</p>
+      <a class="card-link" href="#">Send a card ></a>
+    </div>
+    <div class="card">
+      <h3>Order Ahead</h3>
+      <p>Skip the line. Order from the app and pick up your handcrafted drink the moment it's ready.</p>
+      <a class="card-link" href="#">Start an order ></a>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="forms">
+  <div class="section-label">05 / Forms</div>
+  <h2 class="section-title">Form Elements</h2>
+  <div class="form-group"><label class="form-label">Email address</label><input class="form-input" type="text" placeholder="name@example.com"><div class="form-state-label">Default</div></div>
+  <div class="form-group"><label class="form-label">Password</label><input class="form-input form-input--focus" type="password" value="mypassword123"><div class="form-state-label">Focus (green ring, valid tint)</div></div>
+  <div class="form-group"><label class="form-label">Card number</label><input class="form-input form-input--error" type="text" value="0000 0000"><div class="form-state-label">Error (red ring, invalid tint)</div></div>
+  <div class="form-group"><label class="form-label">Tell us about your visit</label><textarea class="form-textarea" placeholder="Share your experience..."></textarea></div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="spacing">
+  <div class="section-label">06 / Spacing</div>
+  <h2 class="section-title">Spacing Scale</h2>
+  <div class="spacing-row">
+    <div class="spacing-item"><div class="spacing-block" style="width:4px"></div><div class="spacing-value">4</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:8px"></div><div class="spacing-value">8</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:16px"></div><div class="spacing-value">16</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:24px"></div><div class="spacing-value">24</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:32px"></div><div class="spacing-value">32</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:40px"></div><div class="spacing-value">40</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:48px"></div><div class="spacing-value">48</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:56px"></div><div class="spacing-value">56</div></div>
+    <div class="spacing-item"><div class="spacing-block" style="width:64px"></div><div class="spacing-value">64</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="radius">
+  <div class="section-label">07 / Radius</div>
+  <h2 class="section-title">Border Radius Scale</h2>
+  <div class="radius-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><div class="radius-label">4px</div><div class="radius-context">Inputs, add-in rows</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><div class="radius-label">12px</div><div class="radius-context">Cards, modals, tiles</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:12px 12px 0 0"></div><div class="radius-label">12px 12 0 0</div><div class="radius-context">Feedback tab</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:50px"></div><div class="radius-label">50px</div><div class="radius-context">All buttons (pill)</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:50%"></div><div class="radius-label">50%</div><div class="radius-context">Frap, avatars</div></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="elevation">
+  <div class="section-label">08 / Elevation</div>
+  <h2 class="section-title">Elevation & Depth</h2>
+  <div class="elevation-grid">
+    <div class="elevation-card" style="border:1px solid var(--ceramic);"><div class="elevation-label">Level 0: Flat</div><div class="elevation-desc">No shadow, solid color-block</div></div>
+    <div class="elevation-card" style="box-shadow: var(--card-shadow);"><div class="elevation-label">Card</div><div class="elevation-desc">0 0 .5px /14 + 0 1px 1px /24</div></div>
+    <div class="elevation-card" style="box-shadow: var(--nav-shadow);"><div class="elevation-label">Global Nav</div><div class="elevation-desc">Triple-layer soft lift</div></div>
+    <div class="elevation-card" style="box-shadow: 0 0 6px rgba(0,0,0,0.24), 0 8px 12px rgba(0,0,0,0.14);"><div class="elevation-label">Frap Floating</div><div class="elevation-desc">Base halo + ambient stack</div></div>
+    <div class="elevation-card" style="background:var(--house-green); color:#fff;"><div class="elevation-label" style="color:#fff;">Feature Band</div><div class="elevation-desc" style="color:rgba(255,255,255,0.6);">Recessed House Green zone</div></div>
+  </div>
+</section>
+
+<footer class="footer">Design token catalog generated from DESIGN.md</footer>
+
+</body>
+</html>

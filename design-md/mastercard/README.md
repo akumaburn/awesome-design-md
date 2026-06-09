@@ -7,5 +7,14 @@
 | File | Description |
 |------|-------------|
 | `DESIGN.md` | Complete design system documentation (9 sections) |
+| `preview.html` | Interactive design token catalog (light) |
+| `preview-dark.html` | Interactive design token catalog (dark) |
 
 Use [DESIGN.md](./DESIGN.md) to use as a reference for AI agents (Claude, Cursor, Stitch) to generate UI that looks like the Mastercard design language.
+
+## Preview
+
+A sample landing page built with DESIGN.md. It shows the actual colors, typography, buttons, cards, spacing, and elevation, all in one page.
+
+- [Light preview](./preview.html)
+- [Dark preview](./preview-dark.html)
