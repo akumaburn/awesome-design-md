@@ -1,5 +1,11 @@
-# Binance Inspired Design System Analysis
+# Binance Inspired Design System
 
-Design system details have been moved to: https://getdesign.md/binance/design-md
+[DESIGN.md](./DESIGN.md) extracted from the public Binance website. This is not the official design system. Colors, fonts, and spacing may not be 100% accurate. But it's a good starting point for building something similar.
 
-You can also view previews, dark mode examples, and download options on getdesign.md.
+## Files
+
+| File | Description |
+|------|-------------|
+| `DESIGN.md` | Complete design system documentation (9 sections) |
+
+Use [DESIGN.md](./DESIGN.md) to use as a reference for AI agents (Claude, Cursor, Stitch) to generate UI that looks like the Binance design language.

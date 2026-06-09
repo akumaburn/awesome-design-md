@@ -1,27 +1,8 @@
-
-<a href="https://github.com/VoltAgent/voltagent">
-     <img width="1500"  alt="claude-skills" src="https://cdn.voltagent.dev/awesome-repo/logo.json.svg" />
-</a>
-
-
-<br/>
-<br/>
-
 <div align="center">
     <strong>Curated collection of DESIGN.md analysis by developer focused websites.</strong>
     <br />
     <br />
 
-</div>
-
-<div align="center">
-
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-![DESIGN.md Count](https://img.shields.io/badge/DESIGN.md%20count-73-10b981?style=classic)
-[![Last Update](https://img.shields.io/github/last-commit/VoltAgent/awesome-design-md?label=Last%20update&style=classic)](https://github.com/VoltAgent/awesome-design-md)
-[![Discord](https://img.shields.io/discord/1361559153780195478.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://s.voltagent.dev/discord)
-
-</div>
 </div>
 
 # Awesome DESIGN.md
@@ -30,10 +11,9 @@ Copy a DESIGN.md into your project, tell your AI agent “build me a page that l
 
 Built with real design depth — including analyzed patterns, tokens, and rules — for high-quality UI generation, not surface-level outputs.
 
-
 ## What is DESIGN.md?
 
-[DESIGN.md](https://stitch.withgoogle.com/docs/design-md/overview/) is a new concept introduced by Google Stitch. A plain-text design system document that AI agents read to generate consistent UI.
+DESIGN.md is a new concept introduced by Google Stitch. A plain-text design system document that AI agents read to generate consistent UI.
 
 It's just a markdown file. No Figma exports, no JSON schemas, no special tooling. Drop it into your project root and any AI coding agent or Google Stitch instantly understands how your UI should look. Markdown is the format LLMs read best, so there's nothing to parse or configure.
 
@@ -44,158 +24,116 @@ It's just a markdown file. No Figma exports, no JSON schemas, no special tooling
 
 **This repo provides ready-to-use DESIGN.md files** extracted from real websites. 
 
-## Request a DESIGN.md
-
-You can [request a DESIGN.md](https://getdesign.md/request) for specific website, including private requests delivered exclusively to you.
-
-## AI Design + Build Ecosystem Tools
-
-Tools, platforms, and services for designing and shipping web apps with AI.
-
- - If you're building AI agents in TypeScript, VoltAgent gives you tool use, memory, and multi-agent coordination out of the box.
-
-    <a href="https://github.com/VoltAgent/voltagent">
-    <img height="80" alt="voltagent-banner" src="https://github.com/user-attachments/assets/7196f50b-ca98-494c-8aa0-11e111c49f96" />
-    </a>
-
- 
-<br/>
-
-<div align="center">
-
-<table>
-<tr>
-<td align="center" width="100%">
-
-<h4>👉 Feature your product alongside the developers, designers, and vibecoders shipping UI with AI coding agents and web builders.</h4>
-
-<sub>Ranked #150 globally on GitHub. A community resource used by developers, designers, and vibecoders.</sub>
-
-<a href="https://sponsors.voltagent.dev/#awesome-design-md"><img src="https://img.shields.io/badge/📩_Become_a_Sponsor-Contact_Us-blue?style=for-the-badge&logoColor=white" alt="Become a Sponsor" /></a>
-
-
-</td>
-</tr>
-</table>
-
-</div>
-
-
-
-
-
-
 ## Collection
 
 ### AI & LLM Platforms
 
-- [**Claude**](https://getdesign.md/claude/design-md) - Anthropic's AI assistant. Warm terracotta accent, clean editorial layout
-- [**Cohere**](https://getdesign.md/cohere/design-md) - Enterprise AI platform. Vibrant gradients, data-rich dashboard aesthetic
-- [**ElevenLabs**](https://getdesign.md/elevenlabs/design-md) - AI voice platform. Dark cinematic UI, audio-waveform aesthetics
-- [**Minimax**](https://getdesign.md/minimax/design-md) - AI model provider. Bold dark interface with neon accents
-- [**Mistral AI**](https://getdesign.md/mistral.ai/design-md) - Open-weight LLM provider. French-engineered minimalism, purple-toned
-- [**Ollama**](https://getdesign.md/ollama/design-md) - Run LLMs locally. Terminal-first, monochrome simplicity
-- [**OpenCode AI**](https://getdesign.md/opencode.ai/design-md) - AI coding platform. Developer-centric dark theme
-- [**Replicate**](https://getdesign.md/replicate/design-md) - Run ML models via API. Clean white canvas, code-forward
-- [**Runway**](https://getdesign.md/runwayml/design-md) - AI creative-tools platform with an editorial film-festival aesthetic — cinematic dark heroes, paper-white reading bands, single proprietary sans, and pure black pill CTAs.
-- [**Together AI**](https://getdesign.md/together.ai/design-md) - Open-source AI infrastructure. Technical, blueprint-style design
-- [**VoltAgent**](https://getdesign.md/voltagent/design-md) - AI agent framework. Void-black canvas, emerald accent, terminal-native
-- [**xAI**](https://getdesign.md/x.ai/design-md) - Elon Musk's AI lab. Stark monochrome, futuristic minimalism
+- [**Claude**](design-md/claude/) - Anthropic's AI assistant. Warm terracotta accent, clean editorial layout
+- [**Cohere**](design-md/cohere/) - Enterprise AI platform. Vibrant gradients, data-rich dashboard aesthetic
+- [**ElevenLabs**](design-md/elevenlabs/) - AI voice platform. Dark cinematic UI, audio-waveform aesthetics
+- [**Minimax**](design-md/minimax/) - AI model provider. Bold dark interface with neon accents
+- [**Mistral AI**](design-md/mistral.ai/) - Open-weight LLM provider. French-engineered minimalism, purple-toned
+- [**Ollama**](design-md/ollama/) - Run LLMs locally. Terminal-first, monochrome simplicity
+- [**OpenCode AI**](design-md/opencode.ai/) - AI coding platform. Developer-centric dark theme
+- [**Replicate**](design-md/replicate/) - Run ML models via API. Clean white canvas, code-forward
+- [**Runway**](design-md/runwayml/) - AI creative-tools platform with an editorial film-festival aesthetic — cinematic dark heroes, paper-white reading bands, single proprietary sans, and pure black pill CTAs.
+- [**Together AI**](design-md/together.ai/) - Open-source AI infrastructure. Technical, blueprint-style design
+- [**VoltAgent**](design-md/voltagent/) - AI agent framework. Void-black canvas, emerald accent, terminal-native
+- [**xAI**](design-md/x.ai/) - Elon Musk's AI lab. Stark monochrome, futuristic minimalism
 
 ### Developer Tools & IDEs
 
-- [**Cursor**](https://getdesign.md/cursor/design-md) - AI-first code editor. Sleek dark interface, gradient accents
-- [**Expo**](https://getdesign.md/expo/design-md) - React Native platform. Dark theme, tight letter-spacing, code-centric
-- [**Lovable**](https://getdesign.md/lovable/design-md) - AI full-stack builder. Playful gradients, friendly dev aesthetic
-- [**Raycast**](https://getdesign.md/raycast/design-md) - Productivity launcher. Sleek dark chrome, vibrant gradient accents
-- [**Superhuman**](https://getdesign.md/superhuman/design-md) - Fast email client. Premium dark UI, keyboard-first, purple glow
-- [**Vercel**](https://getdesign.md/vercel/design-md) - Frontend deployment platform. Black and white precision, Geist font
-- [**Warp**](https://getdesign.md/warp/design-md) - Modern terminal. Dark IDE-like interface, block-based command UI
+- [**Cursor**](design-md/cursor/) - AI-first code editor. Sleek dark interface, gradient accents
+- [**Expo**](design-md/expo/) - React Native platform. Dark theme, tight letter-spacing, code-centric
+- [**Lovable**](design-md/lovable/) - AI full-stack builder. Playful gradients, friendly dev aesthetic
+- [**Raycast**](design-md/raycast/) - Productivity launcher. Sleek dark chrome, vibrant gradient accents
+- [**Superhuman**](design-md/superhuman/) - Fast email client. Premium dark UI, keyboard-first, purple glow
+- [**Vercel**](design-md/vercel/) - Frontend deployment platform. Black and white precision, Geist font
+- [**Warp**](design-md/warp/) - Modern terminal. Dark IDE-like interface, block-based command UI
 
 ### Backend, Database & DevOps
 
-- [**ClickHouse**](https://getdesign.md/clickhouse/design-md) - Fast analytics database. Yellow-accented, technical documentation style
-- [**Composio**](https://getdesign.md/composio/design-md) - Tool integration platform. Modern dark with colorful integration icons
-- [**HashiCorp**](https://getdesign.md/hashicorp/design-md) - Infrastructure automation. Enterprise-clean, black and white
-- [**MongoDB**](https://getdesign.md/mongodb/design-md) - Document database. Green leaf branding, developer documentation focus
-- [**PostHog**](https://getdesign.md/posthog/design-md) - Product analytics. Playful hedgehog branding, developer-friendly dark UI
-- [**Sanity**](https://getdesign.md/sanity/design-md) - Headless content platform with a dark-first editorial marketing surface — 112px display type, IBM Plex Mono technical eyebrows, and a single coral-red accent reserved for the highest-priority CTA.
-- [**Sentry**](https://getdesign.md/sentry/design-md) - Error monitoring. Dark dashboard, data-dense, pink-purple accent
-- [**Supabase**](https://getdesign.md/supabase/design-md) - Open-source Firebase alternative. Dark emerald theme, code-first
+- [**ClickHouse**](design-md/clickhouse/) - Fast analytics database. Yellow-accented, technical documentation style
+- [**Composio**](design-md/composio/) - Tool integration platform. Modern dark with colorful integration icons
+- [**HashiCorp**](design-md/hashicorp/) - Infrastructure automation. Enterprise-clean, black and white
+- [**MongoDB**](design-md/mongodb/) - Document database. Green leaf branding, developer documentation focus
+- [**PostHog**](design-md/posthog/) - Product analytics. Playful hedgehog branding, developer-friendly dark UI
+- [**Sanity**](design-md/sanity/) - Headless content platform with a dark-first editorial marketing surface — 112px display type, IBM Plex Mono technical eyebrows, and a single coral-red accent reserved for the highest-priority CTA.
+- [**Sentry**](design-md/sentry/) - Error monitoring. Dark dashboard, data-dense, pink-purple accent
+- [**Supabase**](design-md/supabase/) - Open-source Firebase alternative. Dark emerald theme, code-first
 
 ### Productivity & SaaS
 
-- [**Cal.com**](https://getdesign.md/cal/design-md) - Open-source scheduling. Clean neutral UI, developer-oriented simplicity
-- [**Intercom**](https://getdesign.md/intercom/design-md) - Customer messaging. Friendly blue palette, conversational UI patterns
-- [**Linear**](https://getdesign.md/linear.app/design-md) - Project management for engineers. Ultra-minimal, precise, purple accent
-- [**Mintlify**](https://getdesign.md/mintlify/design-md) - Documentation platform. Clean, green-accented, reading-optimized
-- [**Notion**](https://getdesign.md/notion/design-md) - All-in-one workspace. Warm minimalism, serif headings, soft surfaces
-- [**Resend**](https://getdesign.md/resend/design-md) - Email API for developers. Minimal dark theme, monospace accents
-- [**Zapier**](https://getdesign.md/zapier/design-md) - Automation platform. Warm orange, friendly illustration-driven
+- [**Cal.com**](design-md/cal/) - Open-source scheduling. Clean neutral UI, developer-oriented simplicity
+- [**Intercom**](design-md/intercom/) - Customer messaging. Friendly blue palette, conversational UI patterns
+- [**Linear**](design-md/linear.app/) - Project management for engineers. Ultra-minimal, precise, purple accent
+- [**Mintlify**](design-md/mintlify/) - Documentation platform. Clean, green-accented, reading-optimized
+- [**Notion**](design-md/notion/) - All-in-one workspace. Warm minimalism, serif headings, soft surfaces
+- [**Resend**](design-md/resend/) - Email API for developers. Minimal dark theme, monospace accents
+- [**Zapier**](design-md/zapier/) - Automation platform. Warm orange, friendly illustration-driven
 
 ### Design & Creative Tools
 
-- [**Airtable**](https://getdesign.md/airtable/design-md) - Spreadsheet-database hybrid. Colorful, friendly, structured data aesthetic
-- [**Clay**](https://getdesign.md/clay/design-md) - Creative agency. Organic shapes, soft gradients, art-directed layout
-- [**Figma**](https://getdesign.md/figma/design-md) - Collaborative design tool. Vibrant multi-color, playful yet professional
-- [**Framer**](https://getdesign.md/framer/design-md) - Website builder. Bold black and blue, motion-first, design-forward
-- [**Miro**](https://getdesign.md/miro/design-md) - Visual collaboration. Bright yellow accent, infinite canvas aesthetic
-- [**Webflow**](https://getdesign.md/webflow/design-md) - Visual web builder. Blue-accented, polished marketing site aesthetic
+- [**Airtable**](design-md/airtable/) - Spreadsheet-database hybrid. Colorful, friendly, structured data aesthetic
+- [**Clay**](design-md/clay/) - Creative agency. Organic shapes, soft gradients, art-directed layout
+- [**Figma**](design-md/figma/) - Collaborative design tool. Vibrant multi-color, playful yet professional
+- [**Framer**](design-md/framer/) - Website builder. Bold black and blue, motion-first, design-forward
+- [**Miro**](design-md/miro/) - Visual collaboration. Bright yellow accent, infinite canvas aesthetic
+- [**Webflow**](design-md/webflow/) - Visual web builder. Blue-accented, polished marketing site aesthetic
 
 ### Fintech & Crypto
 
-- [**Binance**](https://getdesign.md/binance/design-md) - Crypto exchange. Bold Binance Yellow on monochrome, trading-floor urgency
-- [**Coinbase**](https://getdesign.md/coinbase/design-md) - Crypto exchange. Clean blue identity, trust-focused, institutional feel
-- [**Kraken**](https://getdesign.md/kraken/design-md) - Crypto trading platform. Purple-accented dark UI, data-dense dashboards
-- [**Mastercard**](https://getdesign.md/mastercard/design-md) - Global payments network. Warm cream canvas, orbital pill shapes, editorial warmth
-- [**Revolut**](https://getdesign.md/revolut/design-md) - Digital banking. Sleek dark interface, gradient cards, fintech precision
-- [**Stripe**](https://getdesign.md/stripe/design-md) - Payment infrastructure. Signature purple gradients, weight-300 elegance
-- [**Wise**](https://getdesign.md/wise/design-md) - International money transfer. Bright green accent, friendly and clear
+- [**Binance**](design-md/binance/) - Crypto exchange. Bold Binance Yellow on monochrome, trading-floor urgency
+- [**Coinbase**](design-md/coinbase/) - Crypto exchange. Clean blue identity, trust-focused, institutional feel
+- [**Kraken**](design-md/kraken/) - Crypto trading platform. Purple-accented dark UI, data-dense dashboards
+- [**Mastercard**](design-md/mastercard/) - Global payments network. Warm cream canvas, orbital pill shapes, editorial warmth
+- [**Revolut**](design-md/revolut/) - Digital banking. Sleek dark interface, gradient cards, fintech precision
+- [**Stripe**](design-md/stripe/) - Payment infrastructure. Signature purple gradients, weight-300 elegance
+- [**Wise**](design-md/wise/) - International money transfer. Bright green accent, friendly and clear
 
 ### E-commerce & Retail
 
-- [**Airbnb**](https://getdesign.md/airbnb/design-md) - Travel marketplace. Warm coral accent, photography-driven, rounded UI
-- [**Meta**](https://getdesign.md/meta/design-md) - Tech retail store. Photography-first, binary light/dark surfaces, Meta Blue CTAs
-- [**Nike**](https://getdesign.md/nike/design-md) - Athletic retail. Monochrome UI, massive uppercase Futura, full-bleed photography
-- [**Shopify**](https://getdesign.md/shopify/design-md) - E-commerce platform. Dark-first cinematic, neon green accent, ultra-light display type
-- [**Starbucks**](https://getdesign.md/starbucks/design-md) - Coffee retail flagship. Four-tier earth-green system, warm cream canvas, proprietary SoDoSans typography
+- [**Airbnb**](design-md/airbnb/) - Travel marketplace. Warm coral accent, photography-driven, rounded UI
+- [**Meta**](design-md/meta/) - Tech retail store. Photography-first, binary light/dark surfaces, Meta Blue CTAs
+- [**Nike**](design-md/nike/) - Athletic retail. Monochrome UI, massive uppercase Futura, full-bleed photography
+- [**Shopify**](design-md/shopify/) - E-commerce platform. Dark-first cinematic, neon green accent, ultra-light display type
+- [**Starbucks**](design-md/starbucks/) - Coffee retail flagship. Four-tier earth-green system, warm cream canvas, proprietary SoDoSans typography
 
 ### Media & Consumer Tech
 
-- [**Apple**](https://getdesign.md/apple/design-md) - Consumer electronics. Premium white space, SF Pro, cinematic imagery
-- [**HP**](https://getdesign.md/hp/design-md) - PC and printer maker. Pure white canvas, HP Electric Blue signal CTA, geometric Forma DJR Micro, blue chevron decorations
-- [**IBM**](https://getdesign.md/ibm/design-md) - Enterprise technology. Carbon design system, structured blue palette
-- [**NVIDIA**](https://getdesign.md/nvidia/design-md) - GPU computing. Green-black energy, technical power aesthetic
-- [**Pinterest**](https://getdesign.md/pinterest/design-md) - Visual discovery platform. Red accent, masonry grid, image-first
-- [**PlayStation**](https://getdesign.md/playstation/design-md) - Gaming console retail. Three-surface channel layout, cyan hover-scale interaction
-- [**SpaceX**](https://getdesign.md/spacex/design-md) - Space technology. Stark black and white, full-bleed imagery, futuristic
-- [**Spotify**](https://getdesign.md/spotify/design-md) - Music streaming. Vibrant green on dark, bold type, album-art-driven
-- [**The Verge**](https://getdesign.md/theverge/design-md) - Tech editorial media. Acid-mint and ultraviolet accents, Manuka display type
-- [**Uber**](https://getdesign.md/uber/design-md) - Mobility platform. Bold black and white, tight type, urban energy
-- [**Vodafone**](https://getdesign.md/vodafone/design-md) - Global telecom brand. Monumental uppercase display, Vodafone Red chapter bands
-- [**WIRED**](https://getdesign.md/wired/design-md) - Tech magazine. Paper-white broadsheet density, custom serif, ink-blue links
+- [**Apple**](design-md/apple/) - Consumer electronics. Premium white space, SF Pro, cinematic imagery
+- [**HP**](design-md/hp/) - PC and printer maker. Pure white canvas, HP Electric Blue signal CTA, geometric Forma DJR Micro, blue chevron decorations
+- [**IBM**](design-md/ibm/) - Enterprise technology. Carbon design system, structured blue palette
+- [**NVIDIA**](design-md/nvidia/) - GPU computing. Green-black energy, technical power aesthetic
+- [**Pinterest**](design-md/pinterest/) - Visual discovery platform. Red accent, masonry grid, image-first
+- [**PlayStation**](design-md/playstation/) - Gaming console retail. Three-surface channel layout, cyan hover-scale interaction
+- [**SpaceX**](design-md/spacex/) - Space technology. Stark black and white, full-bleed imagery, futuristic
+- [**Spotify**](design-md/spotify/) - Music streaming. Vibrant green on dark, bold type, album-art-driven
+- [**The Verge**](design-md/theverge/) - Tech editorial media. Acid-mint and ultraviolet accents, Manuka display type
+- [**Uber**](design-md/uber/) - Mobility platform. Bold black and white, tight type, urban energy
+- [**Vodafone**](design-md/vodafone/) - Global telecom brand. Monumental uppercase display, Vodafone Red chapter bands
+- [**WIRED**](design-md/wired/) - Tech magazine. Paper-white broadsheet density, custom serif, ink-blue links
 
 ### Automotive
 
-- [**BMW**](https://getdesign.md/bmw/design-md) - Luxury automotive. Dark premium surfaces, precise German engineering aesthetic
-- [**BMW M**](https://getdesign.md/bmw-m/design-md) - Performance automotive. Motorsport-inspired contrast, M color accents, precision-driven layout
-- [**Bugatti**](https://getdesign.md/bugatti/design-md) - Luxury hypercar. Cinema-black canvas, monochrome austerity, monumental display type
-- [**Ferrari**](https://getdesign.md/ferrari/design-md) - Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness
-- [**Lamborghini**](https://getdesign.md/lamborghini/design-md) - Luxury automotive. True black cathedral, gold accent, LamboType custom Neo-Grotesk
-- [**Renault**](https://getdesign.md/renault/design-md) - French automotive. Vivid aurora gradients, NouvelR proprietary typeface, zero-radius buttons
-- [**Tesla**](https://getdesign.md/tesla/design-md) - Electric vehicles. Radical subtraction, cinematic full-viewport photography, Universal Sans
+- [**BMW**](design-md/bmw/) - Luxury automotive. Dark premium surfaces, precise German engineering aesthetic
+- [**BMW M**](design-md/bmw-m/) - Performance automotive. Motorsport-inspired contrast, M color accents, precision-driven layout
+- [**Bugatti**](design-md/bugatti/) - Luxury hypercar. Cinema-black canvas, monochrome austerity, monumental display type
+- [**Ferrari**](design-md/ferrari/) - Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness
+- [**Lamborghini**](design-md/lamborghini/) - Luxury automotive. True black cathedral, gold accent, LamboType custom Neo-Grotesk
+- [**Renault**](design-md/renault/) - French automotive. Vivid aurora gradients, NouvelR proprietary typeface, zero-radius buttons
+- [**Tesla**](design-md/tesla/) - Electric vehicles. Radical subtraction, cinematic full-viewport photography, Universal Sans
 
 ### Retro Web · DESIGN.md Nostalgia
 
 A Saturday series — DESIGN.md files extracted from the web of the 1990s. Drop one in and tell your AI agent to build a period-accurate vintage UI.
 
-- [**Dell (1996)**](https://getdesign.md/dell-1996/design-md) - Catalog-era enterprise web. Literal black page frame, flat color-block "ribbon cards", chunky Helvetica-Black titles over Times Roman body, and hand-cut GIF stickers (NEW! bursts, award seals, beveled product photos).
-- [**Nintendo.com (2001)**](https://getdesign.md/nintendo-2001/design-md) - Y2K "console chrome" web. Brushed-periwinkle beveled metal panels, a halftone-dotted carbon nav glowing amber, outlined Arial-Black box-art wordmarks over circuit-board hero fields, and a pixel Mario welcome bubble.
-
+- [**Dell (1996)**](design-md/dell-1996/) - Catalog-era enterprise web. Literal black page frame, flat color-block "ribbon cards", chunky Helvetica-Black titles over Times Roman body, and hand-cut GIF stickers (NEW! bursts, award seals, beveled product photos).
+- [**Nintendo.com (2001)**](design-md/nintendo-2001/) - Y2K "console chrome" web. Brushed-periwinkle beveled metal panels, a halftone-dotted carbon nav glowing amber, outlined Arial-Black box-art wordmarks over circuit-board hero fields, and a pixel Mario welcome bubble.
 
 ## What's Inside Each DESIGN.md
 
-Every file follows the [Stitch DESIGN.md format](https://stitch.withgoogle.com/docs/design-md/specification/) with extended sections:
+Every file follows the Stitch DESIGN.md format with extended sections:
 
 | # | Section | What it captures |
 |---|---------|-----------------|
@@ -219,10 +157,8 @@ Each site includes:
 
 ### How to Use
 
-
 1. Copy a site's `DESIGN.md` into your project root
 2. Tell your AI agent to use it.
-
 
 ## Contributing
 
@@ -231,8 +167,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 - **Improve existing files**: Fix wrong colors, missing tokens, weak descriptions
 - **Report issues**: Let us know if something looks off
 
-Before opening a PR, please [open an issue](https://github.com/VoltAgent/awesome-design-md/issues) first to discuss your idea and get feedback from maintainers.
-
+Before opening a PR, please open an issue first to discuss your idea and get feedback from maintainers.
 
 ## License
 

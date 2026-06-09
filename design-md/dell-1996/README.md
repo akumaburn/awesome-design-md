@@ -1,5 +1,11 @@
-# Dell (1996) Inspired Design System Analysis
+# Dell (1996) Inspired Design System
 
-Design system details have been moved to: https://getdesign.md/dell-1996/design-md
+[DESIGN.md](./DESIGN.md) extracted from the public Dell (1996) website. This is not the official design system. Colors, fonts, and spacing may not be 100% accurate. But it's a good starting point for building something similar.
 
-You can also view previews, dark mode examples, and download options on getdesign.md.
+## Files
+
+| File | Description |
+|------|-------------|
+| `DESIGN.md` | Complete design system documentation (9 sections) |
+
+Use [DESIGN.md](./DESIGN.md) to use as a reference for AI agents (Claude, Cursor, Stitch) to generate UI that looks like the Dell (1996) design language.

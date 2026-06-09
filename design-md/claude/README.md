@@ -1,5 +1,21 @@
-# Claude Inspired Design System Analysis
+# Claude Inspired Design System
 
-Design system details have been moved to: https://getdesign.md/claude/design-md
+[DESIGN.md](./DESIGN.md) extracted from the public Claude website. This is not the official design system. Colors, fonts, and spacing may not be 100% accurate. But it's a good starting point for building something similar.
 
-You can also view previews, dark mode examples, and download options on getdesign.md.
+## Files
+
+| File | Description |
+|------|-------------|
+| `DESIGN.md` | Complete design system documentation (9 sections) |
+| `preview.html` | Interactive design token catalog (light) |
+| `preview-dark.html` | Interactive design token catalog (dark) |
+
+
+Use [DESIGN.md](./DESIGN.md) to use as a reference for AI agents (Claude, Cursor, Stitch) to generate UI that looks like the Claude design language.
+
+## Preview
+
+A sample landing page built with DESIGN.md. It shows the actual colors, typography, buttons, cards, spacing, and elevation, all in one page.
+
+- [Light preview](./preview.html)
+- [Dark preview](./preview-dark.html)
