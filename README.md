@@ -70,6 +70,7 @@ It's just a markdown file. No Figma exports, no JSON schemas, no special tooling
 - [**Mintlify**](design-md/mintlify/) - Documentation platform. Clean, green-accented, reading-optimized
 - [**Notion**](design-md/notion/) - All-in-one workspace. Warm minimalism, serif headings, soft surfaces
 - [**Resend**](design-md/resend/) - Email API for developers. Minimal dark theme, monospace accents
+- [**Slack**](design-md/slack/) - Team messaging platform. Deep aubergine accent, cream-lavender gradients, friendly pill UI
 - [**Zapier**](design-md/zapier/) - Automation platform. Warm orange, friendly illustration-driven
 
 ### Design & Creative Tools
